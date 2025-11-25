@@ -1,0 +1,554 @@
+.calendarioCinpro {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  width: 100%;
+  height: calc(100dvh - var(--topbar-height, 64px));
+  max-height: calc(100dvh - var(--topbar-height, 64px));
+  overflow: hidden;
+  margin: -24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.calendarContainer {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.calendarHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--white);
+  padding-bottom: 16px;
+}
+
+.viewModeSelector {
+  display: flex;
+  background: var(--gray-100);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+}
+
+.viewModeBtn {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewModeBtn.active {
+  background: var(--white);
+  color: var(--midnight);
+  box-shadow: var(--shadow-sm);
+}
+
+.monthNavigation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--gray-700);
+}
+
+.navButton:hover {
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.monthTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--midnight);
+  margin: 0;
+  min-width: 200px;
+  text-align: center;
+}
+
+.calendarGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.weekdayHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  padding: 8px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+}
+
+.calendarDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendarDay {
+  aspect-ratio: 1 / 1;
+  min-height: 100px;
+  padding: 8px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calendarDay:hover {
+  background: var(--gray-50);
+  border-color: var(--azure);
+}
+
+.calendarDay.today {
+  background: var(--azure-light);
+  border-color: var(--azure);
+}
+
+.dayNumber {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--midnight);
+}
+
+.dayEvents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.eventDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.eventDot.taxDeadline {
+  background: #ef4444;
+}
+
+.eventDot.billingCycle {
+  background: #10b981;
+}
+
+.eventDot.internal {
+  background: #3b82f6;
+}
+
+.moreEvents {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.upcomingEvents {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.sidebarTitle {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--midnight);
+  margin: 0 0 16px 0;
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eventItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--gray-50);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.eventItem:hover {
+  background: var(--gray-100);
+}
+
+.eventTypeIndicator {
+  width: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.eventTypeIndicator.taxDeadline {
+  background: #ef4444;
+}
+
+.eventTypeIndicator.billingCycle {
+  background: #10b981;
+}
+
+.eventTypeIndicator.internal {
+  background: #3b82f6;
+}
+
+.eventDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eventTitle {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--midnight);
+  line-height: 1.4;
+}
+
+.eventDate {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.emptyState {
+  padding: 20px;
+  text-align: center;
+  color: var(--gray-500);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.eventModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modalTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--midnight);
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: var(--gray-100);
+  color: var(--midnight);
+}
+
+.modalBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalEventType {
+  display: flex;
+  align-items: center;
+}
+
+.typeBadge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.typeBadge.taxDeadline {
+  background: #ef4444;
+}
+
+.typeBadge.billingCycle {
+  background: #10b981;
+}
+
+.typeBadge.internal {
+  background: #3b82f6;
+}
+
+.modalDate {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.modalDescription {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--midnight);
+  line-height: 1.6;
+}
+
+.rescheduleButton {
+  padding: 8px 16px;
+  border: 1px solid var(--azure);
+  background: var(--white);
+  color: var(--azure);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.rescheduleButton:hover {
+  background: var(--azure);
+  color: var(--white);
+}
+
+.weekView {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.weekDay {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  max-height: 400px;
+}
+
+.weekDay.today {
+  background: var(--azure-light);
+  border-color: var(--azure);
+}
+
+.weekDayHeader {
+  padding: 12px;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.dayName {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.weekDay.today .dayName,
+.weekDay.today .dayNumber {
+  color: var(--white);
+}
+
+.weekDayEvents {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.emptyDay {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.weekDay.today .emptyDay {
+  color: var(--white);
+}
+
+.weekEventItem {
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid;
+}
+
+.weekEventItem.taxDeadline {
+  background: #fee2e2;
+  border-left-color: #ef4444;
+  color: #991b1b;
+}
+
+.weekEventItem.billingCycle {
+  background: #d1fae5;
+  border-left-color: #10b981;
+  color: #065f46;
+}
+
+.weekEventItem.internal {
+  background: #dbeafe;
+  border-left-color: #3b82f6;
+  color: #1e40af;
+}
+
+.weekEventItem:hover {
+  opacity: 0.8;
+  transform: translateX(2px);
+}
+
+.weekEventTime {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+
+.weekEventTitle {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .calendarioCinpro {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: -1;
+  }
+
+  .weekDays {
+    grid-template-columns: 1fr;
+  }
+
+  .weekDay {
+    height: auto;
+    max-height: none;
+    min-height: 200px;
+  }
+}
+

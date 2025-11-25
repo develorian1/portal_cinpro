@@ -1,0 +1,26 @@
+.pageHeader {
+  margin-bottom: 28px;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pageSubtitle {
+  color: var(--text-tertiary);
+  font-size: 0.95rem;
+}
+
+.placeholder {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  color: var(--text-tertiary);
+}

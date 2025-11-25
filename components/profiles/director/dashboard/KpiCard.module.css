@@ -1,0 +1,68 @@
+.kpiCard {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  animation: fadeInUp 0.5s ease-out backwards;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpiLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.kpiLabel.smallLabel {
+  font-size: 0.75rem;
+}
+
+.kpiValue {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.1;
+  height: 2.5rem;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.kpiValue.positive {
+  color: var(--success);
+}
+
+.kpiValue.negative {
+  color: var(--danger);
+}
+
+.kpiChange {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.kpiChange.up {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.kpiChange.down {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+

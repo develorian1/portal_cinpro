@@ -1,0 +1,30 @@
+.finanzas {
+  width: 100%;
+  height: calc(100dvh - var(--topbar-height, 64px));
+  max-height: calc(100dvh - var(--topbar-height, 64px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: -24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.finanzasContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  gap: 0;
+  overflow: hidden;
+}
+
+.tabContent {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+

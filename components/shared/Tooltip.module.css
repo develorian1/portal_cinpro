@@ -1,0 +1,84 @@
+.container {
+    display: inline-flex;
+    /* No relative positioning needed for container anymore */
+}
+
+.tooltip {
+    position: fixed;
+    /* Changed to fixed for Portal */
+    background-color: #1f2937;
+    /* gray-800 */
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 9999;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+/* Positioning adjustments for fixed positioning */
+/* We use transform to center/align based on the top/left coordinates set in JS */
+
+.right {
+    transform: translateY(-50%);
+}
+
+.left {
+    transform: translateY(-50%) translateX(-100%);
+    /* Move back by 100% of own width */
+}
+
+.top {
+    transform: translateX(-50%) translateY(-100%);
+    /* Move up by 100% of own height */
+}
+
+.bottom {
+    transform: translateX(-50%);
+}
+
+/* Arrow */
+.tooltip::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+}
+
+.right::after {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right-color: #1f2937;
+}
+
+.left::after {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left-color: #1f2937;
+}
+
+.top::after {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: #1f2937;
+}
+
+.bottom::after {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: #1f2937;
+}
