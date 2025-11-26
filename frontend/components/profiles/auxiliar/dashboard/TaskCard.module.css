@@ -1,0 +1,85 @@
+.taskCard {
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.2s ease;
+}
+
+.taskCard:hover {
+  background-color: var(--bg-hover);
+}
+
+.taskRow {
+  display: grid;
+  grid-template-columns: 100px 200px 1fr 150px 100px;
+  gap: 16px;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+.taskCell {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.priorityBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.priorityBadge.danger {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.priorityBadge.warning {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.priorityBadge.success {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.clientName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.taskDescription {
+  color: var(--text-secondary);
+}
+
+.dueDate {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.startButton {
+  padding: 8px 16px;
+  background-color: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.startButton:hover {
+  background-color: var(--azure-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.startButton:active {
+  transform: translateY(0);
+}
+

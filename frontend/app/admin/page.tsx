@@ -6,6 +6,7 @@ import { Finanzas } from '@/components/profiles/administrador/finanzas';
 import { Estadisticas } from '@/components/profiles/administrador/estadisticas';
 import { Comunicacion } from '@/components/profiles/administrador/comunicacion';
 import { Calendario } from '@/components/profiles/administrador/calendario';
+import { Mensajes } from '@/components/profiles/administrador/mensajes';
 import Home from '@/components/profiles/administrador/home';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
@@ -84,6 +85,15 @@ export default function AdminPage() {
     return (
       <SectionErrorBoundary sectionName="Calendario">
         <Calendario />
+      </SectionErrorBoundary>
+    );
+  }
+
+  // Render Mensajes section
+  if (activeItem === 'mensajes') {
+    return (
+      <SectionErrorBoundary sectionName="Mensajes">
+        <Mensajes />
       </SectionErrorBoundary>
     );
   }

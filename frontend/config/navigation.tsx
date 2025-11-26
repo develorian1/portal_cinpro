@@ -179,6 +179,16 @@ export const administradorNavItems: NavItem[] = [
       </svg>
     ),
   },
+  {
+    id: 'mensajes',
+    label: 'Mensajes',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    ),
+  },
 ];
 
 // Navigation items for Gerente profile
@@ -225,9 +235,19 @@ export const gerenteNavItems: NavItem[] = [
       </svg>
     ),
   },
+  {
+    id: 'mensajes',
+    label: 'Mensajes',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    ),
+  },
 ];
 
-// Navigation items for Auxiliar profile
+// Navigation items for Auxiliar profile (Accountant)
 export const auxiliarNavItems: NavItem[] = [
   {
     id: 'home',
@@ -236,16 +256,6 @@ export const auxiliarNavItems: NavItem[] = [
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
         <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-  },
-  {
-    id: 'tareas',
-    label: 'Tareas',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <polyline points="9 11 12 14 22 4" />
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
       </svg>
     ),
   },
@@ -259,6 +269,16 @@ export const auxiliarNavItems: NavItem[] = [
         <path d="M9 7h6" />
         <path d="M9 11h6" />
         <path d="M9 15h4" />
+      </svg>
+    ),
+  },
+  {
+    id: 'mensajes',
+    label: 'Mensajes',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
       </svg>
     ),
   },

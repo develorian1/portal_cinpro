@@ -1,0 +1,91 @@
+.clientDetailView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.clientListContainer {
+  padding: 24px;
+}
+
+.contextBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 16px 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.contextInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.backButton {
+  padding: 8px 16px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.backButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.clientName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.rfc {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  flex: 1;
+  text-align: center;
+}
+
+.balance {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  flex: 1;
+  text-align: right;
+}
+
+.workspaceContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tabContent {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.placeholderContent {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+

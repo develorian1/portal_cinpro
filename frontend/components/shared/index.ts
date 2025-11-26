@@ -12,6 +12,7 @@ export { default as AdminFinanzasDropdown } from './AdminFinanzasDropdown';
 export { default as AdminClientesDropdown } from './AdminClientesDropdown';
 export { default as ClientContabilidadesDropdown } from './ClientContabilidadesDropdown';
 export { default as ClientConfiguracionDropdown } from './ClientConfiguracionDropdown';
+export { default as AuxiliarClientesDropdown } from './AuxiliarClientesDropdown';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as SectionErrorBoundary } from './SectionErrorBoundary';
 export { default as ToastContainer } from './ToastContainer';

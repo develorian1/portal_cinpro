@@ -1,0 +1,10 @@
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dataGridContainer {
+  margin-top: 8px;
+}
+

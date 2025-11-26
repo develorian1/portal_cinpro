@@ -5,7 +5,8 @@ import { ProfileType } from '@/types/profile';
 import { PROFILE_TYPES } from '@/types/profile';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown, ClientContabilidadesDropdown, ClientConfiguracionDropdown } from '@/components/shared';
+import { useClient } from '@/contexts/ClientContext';
+import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown, ClientContabilidadesDropdown, ClientConfiguracionDropdown, AuxiliarClientesDropdown } from '@/components/shared';
 import styles from './Topbar.module.css';
 
 type UserStatus = 'activo' | 'ausente' | 'inactivo';
@@ -23,6 +24,7 @@ export default function Topbar({
 }: TopbarProps) {
   const { activeItem } = useNavigation();
   const { theme, toggleTheme } = useTheme();
+  const { selectedClientId } = useClient();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
@@ -115,14 +117,33 @@ export default function Topbar({
     activeItem === 'client-config-documents' || 
     activeItem === 'client-config-profile';
 
+  // Check if we're on an accountant (auxiliar) page
+  const isAccountantPage = profile === 'auxiliar' && (
+    activeItem === 'home' ||
+    activeItem === 'clientes'
+  );
+
+  // Check if we're viewing a client detail (auxiliar profile with selected client)
+  const isAuxiliarClientPage = profile === 'auxiliar' && 
+    activeItem === 'clientes' && 
+    selectedClientId !== undefined;
+
   // Get display name and initials based on profile
   const profileInfo = PROFILE_TYPES[profile];
   const displayName = userName || `${profileInfo.displayName} Usuario`;
   const initials = userInitials || profileInfo.displayName.substring(0, 2).toUpperCase();
 
+  // Get context label based on profile and active item
+  const getContextLabel = () => {
+    return null;
+  };
+
+  const contextLabel = getContextLabel();
+
   return (
     <header className={styles.topbar}>
       <div className={styles.topbarCenter}>
+        {isAuxiliarClientPage && <AuxiliarClientesDropdown />}
         {isAdminClientesPage && <AdminClientesDropdown />}
         {isAdminFinanzasPage && <AdminFinanzasDropdown />}
         {isFinanzasPage && !isAdminFinanzasPage && <FinanzasDropdown />}
@@ -131,6 +152,11 @@ export default function Topbar({
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
         {isClientContabilidadesPage && profile === 'cliente' && <ClientContabilidadesDropdown />}
         {isClientConfiguracionPage && profile === 'cliente' && <ClientConfiguracionDropdown />}
+        {contextLabel && (
+          <div className={styles.contextLabel}>
+            {contextLabel}
+          </div>
+        )}
         <div className={styles.searchContainer}>
           <svg className={styles.searchIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8" />
@@ -139,7 +165,7 @@ export default function Topbar({
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Buscar..."
+            placeholder={isAccountantPage ? "Invoice UUID, Client Name, Amount" : "Buscar..."}
           />
         </div>
       </div>

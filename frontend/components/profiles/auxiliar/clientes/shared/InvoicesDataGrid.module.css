@@ -1,0 +1,94 @@
+.dataGrid {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  overflow: hidden;
+}
+
+.gridHeader {
+  display: grid;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.headerCell {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.gridBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.gridRow {
+  display: grid;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.gridRow:hover {
+  background-color: var(--bg-hover);
+}
+
+.gridRow:last-child {
+  border-bottom: none;
+}
+
+.gridCell {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusBadge.paid {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.statusBadge.pending {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.statusBadge.cancelled {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.ppdPueBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.emptyState {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
