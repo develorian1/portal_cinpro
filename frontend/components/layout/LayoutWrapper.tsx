@@ -26,7 +26,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         />
         {children}
       </div>
-      <AIAssistant />
+      {profile !== 'cliente' && <AIAssistant />}
     </>
   );
 }

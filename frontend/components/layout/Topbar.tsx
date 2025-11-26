@@ -5,7 +5,7 @@ import { ProfileType } from '@/types/profile';
 import { PROFILE_TYPES } from '@/types/profile';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown } from '@/components/shared';
+import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown, ClientContabilidadesDropdown, ClientConfiguracionDropdown } from '@/components/shared';
 import styles from './Topbar.module.css';
 
 type UserStatus = 'activo' | 'ausente' | 'inactivo';
@@ -104,6 +104,17 @@ export default function Topbar({
     activeItem === 'finanzas-cobranza' ||
     activeItem === 'finanzas-certificados') && profile === 'administrador';
 
+  // Check if we're on a client contabilidades page
+  const isClientContabilidadesPage = activeItem === 'client-contabilidades' || 
+    activeItem === 'client-contabilidades-progress' || 
+    activeItem === 'client-contabilidades-overview';
+
+  // Check if we're on a client configuracion page
+  const isClientConfiguracionPage = activeItem === 'client-configuracion' || 
+    activeItem === 'client-config-certificates' || 
+    activeItem === 'client-config-documents' || 
+    activeItem === 'client-config-profile';
+
   // Get display name and initials based on profile
   const profileInfo = PROFILE_TYPES[profile];
   const displayName = userName || `${profileInfo.displayName} Usuario`;
@@ -118,6 +129,8 @@ export default function Topbar({
         {isEstadisticasPage && <EstadisticasDropdown profile={profile} />}
         {isAdminUsuariosPage && profile === 'administrador' && <AdminUsuariosDropdown />}
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
+        {isClientContabilidadesPage && profile === 'cliente' && <ClientContabilidadesDropdown />}
+        {isClientConfiguracionPage && profile === 'cliente' && <ClientConfiguracionDropdown />}
         <div className={styles.searchContainer}>
           <svg className={styles.searchIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8" />

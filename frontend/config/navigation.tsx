@@ -267,8 +267,8 @@ export const auxiliarNavItems: NavItem[] = [
 // Navigation items for Cliente profile
 export const clienteNavItems: NavItem[] = [
   {
-    id: 'home',
-    label: 'Inicio',
+    id: 'client-home',
+    label: 'Home',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -277,17 +277,8 @@ export const clienteNavItems: NavItem[] = [
     ),
   },
   {
-    id: 'proyectos',
-    label: 'Mis Proyectos',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-      </svg>
-    ),
-  },
-  {
-    id: 'facturas',
-    label: 'Facturas',
+    id: 'client-pagos',
+    label: 'Pagos a CINPRO',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="1" y="4" width="22" height="16" rx="2" />
@@ -296,11 +287,32 @@ export const clienteNavItems: NavItem[] = [
     ),
   },
   {
-    id: 'soporte',
-    label: 'Soporte',
+    id: 'client-contabilidades',
+    label: 'Mis Contabilidades',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    id: 'client-comunicacion',
+    label: 'Comunicacion',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'client-configuracion',
+    label: 'Configuracion',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
       </svg>
     ),
   },

@@ -79,6 +79,17 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
         activeItem === 'usuarios-admins' ||
         activeItem === 'usuarios-jefes';
     }
+    // Special case: mark client-contabilidades as active when any contabilidades sub-page is active
+    if (itemId === 'client-contabilidades') {
+      return activeItem === 'client-contabilidades-progress' ||
+        activeItem === 'client-contabilidades-overview';
+    }
+    // Special case: mark client-configuracion as active when any configuracion sub-page is active
+    if (itemId === 'client-configuracion') {
+      return activeItem === 'client-config-certificates' ||
+        activeItem === 'client-config-documents' ||
+        activeItem === 'client-config-profile';
+    }
     return false;
   };
 

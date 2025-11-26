@@ -1,0 +1,460 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.sectionHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Tab Navigation */
+.tabNav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-primary);
+  margin-bottom: 24px;
+}
+
+.tabButton {
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+}
+
+.tabButton.active {
+  color: var(--azure);
+  border-bottom-color: var(--azure);
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Certificates Tab */
+.certificatesTab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.certificatesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.certificatesColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.expiryAlert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+}
+
+.expiryAlert svg {
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.expiryAlertText {
+  font-size: 0.8125rem;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.certificatesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.certificateCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.certificateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.certificateTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.certificateDetail {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.certificateStatus {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.certificateStatus.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+}
+
+.certificateStatus.expiring {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.certificateStatus.expired {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.updateForm {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.formTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+}
+
+.formField {
+  margin-bottom: 12px;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.required {
+  color: var(--danger);
+}
+
+.fileInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.fileInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.fileInputLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px dashed var(--border-secondary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fileInputLabel:hover {
+  border-color: var(--azure);
+  background: rgba(24, 128, 234, 0.04);
+  color: var(--azure);
+}
+
+.fileInputLabel:active {
+  transform: scale(0.98);
+}
+
+.fileInputLabel svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.fileInputLabel:hover svg {
+  color: var(--azure);
+}
+
+.fileName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+}
+
+.fileName svg {
+  width: 16px;
+  height: 16px;
+  color: var(--azure);
+  flex-shrink: 0;
+}
+
+.fileNameText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fieldInput {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-family: inherit;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.fieldInput:focus {
+  outline: none;
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(24, 128, 234, 0.1);
+}
+
+.btnSubmit {
+  padding: 10px 24px;
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btnSubmit:hover {
+  background: var(--azure-dark);
+}
+
+/* Documents Tab */
+.documentsTab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.documentList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.documentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+}
+
+.documentInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.documentIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--azure);
+  flex-shrink: 0;
+}
+
+.documentName {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.documentDate {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.documentActions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnUpload {
+  padding: 8px 16px;
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnUpload:hover {
+  background: var(--azure-dark);
+}
+
+/* Profile Tab */
+.profileTab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profileSection {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.profileField {
+  margin-bottom: 24px;
+}
+
+.profileField:last-child {
+  margin-bottom: 0;
+}
+
+.profileLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.profileValue {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.securitySection {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.securityTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+}
+
+.changePasswordBtn {
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--azure);
+  border: 1px solid var(--azure);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.changePasswordBtn:hover {
+  background: rgba(24, 128, 234, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabButton {
+    padding: 12px 16px;
+    font-size: 0.8125rem;
+  }
+
+  .certificatesGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .documentItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .documentActions {
+    width: 100%;
+  }
+
+  .btnUpload {
+    width: 100%;
+  }
+}
+
