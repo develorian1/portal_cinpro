@@ -1,0 +1,350 @@
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  padding-bottom: 32px;
+  overflow: hidden;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.section {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-primary);
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.onlineCount,
+.pendingCount {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--azure);
+  background: var(--azure-bg);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* Activity Logs */
+.activityList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.activityList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.activityList::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.activityList::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+.activityList::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+.activityItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  transition: background 0.2s ease;
+}
+
+.activityItem:hover {
+  background: var(--bg-hover);
+}
+
+.activityIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--surface-primary);
+  color: var(--azure);
+}
+
+.activityIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.activityContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.activityText {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.activityUser {
+  font-weight: 500;
+}
+
+.activityAction {
+  color: var(--text-secondary);
+}
+
+.activityTime {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Online Users */
+.usersList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.usersList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.usersList::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.usersList::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+.usersList::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  transition: background 0.2s ease;
+}
+
+.userItem:hover {
+  background: var(--bg-hover);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.userName {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.userRole {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.userStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 2px var(--success-bg);
+}
+
+.lastActivity {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Pending Actions */
+.actionsList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.actionsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.actionsList::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.actionsList::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+.actionsList::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+.actionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.actionItem:hover {
+  border-color: var(--azure);
+  background: var(--bg-hover);
+  transform: translateX(2px);
+}
+
+.actionContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.actionTitle {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.actionDescription {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.actionArrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
+}
+
+.actionItem:hover .actionArrow {
+  color: var(--azure);
+}
+
+.priorityHigh {
+  border-left: 3px solid var(--danger);
+}
+
+.priorityMedium {
+  border-left: 3px solid var(--warning);
+}
+
+.priorityLow {
+  border-left: 3px solid var(--text-tertiary);
+}
+
+.emptyState {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 16px;
+    padding-bottom: 24px;
+  }
+
+  .sectionHeader {
+    padding: 12px 16px;
+  }
+}
+

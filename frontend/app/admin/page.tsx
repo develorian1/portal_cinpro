@@ -6,11 +6,21 @@ import { Finanzas } from '@/components/profiles/administrador/finanzas';
 import { Estadisticas } from '@/components/profiles/administrador/estadisticas';
 import { Comunicacion } from '@/components/profiles/administrador/comunicacion';
 import { Calendario } from '@/components/profiles/administrador/calendario';
+import Home from '@/components/profiles/administrador/home';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
 
 export default function AdminPage() {
   const { activeItem } = useNavigation();
+
+  // Render Home section
+  if (activeItem === 'home') {
+    return (
+      <SectionErrorBoundary sectionName="Home">
+        <Home />
+      </SectionErrorBoundary>
+    );
+  }
 
   // Render Usuarios section
   if (activeItem === 'usuarios' || 
@@ -78,16 +88,10 @@ export default function AdminPage() {
     );
   }
 
-  // TODO: Add other sections as they are implemented
-  // - Home
-
-  // Default home dashboard
+  // Default to home dashboard
   return (
     <SectionErrorBoundary sectionName="Home">
-      <div>
-        <h1>Administrador Dashboard</h1>
-        <p>This page is under construction.</p>
-      </div>
+      <Home />
     </SectionErrorBoundary>
   );
 }
