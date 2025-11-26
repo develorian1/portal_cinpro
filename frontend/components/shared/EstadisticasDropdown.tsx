@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { ProfileType } from '@/types/profile';
 import { useNavigation } from '@/contexts/NavigationContext';
 import styles from './FinanzasDropdown.module.css';
 
@@ -10,7 +11,7 @@ interface EstadisticasOption {
   icon: React.ReactNode;
 }
 
-const estadisticasOptions: EstadisticasOption[] = [
+const directorEstadisticasOptions: EstadisticasOption[] = [
   {
     id: 'estadisticas-empleados',
     label: 'Rendimiento Empleados',
@@ -59,14 +60,61 @@ const estadisticasOptions: EstadisticasOption[] = [
   },
 ];
 
-export default function EstadisticasDropdown() {
+const administradorEstadisticasOptions: EstadisticasOption[] = [
+  {
+    id: 'estadisticas-onboarding',
+    label: 'Velocidad de Onboarding',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
+  },
+  {
+    id: 'estadisticas-collection',
+    label: 'Eficiencia de Cobranza',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="1" y="4" width="22" height="16" rx="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+      </svg>
+    ),
+  },
+  {
+    id: 'estadisticas-support',
+    label: 'Carga de Soporte',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
+  },
+];
+
+interface EstadisticasDropdownProps {
+  profile?: ProfileType;
+}
+
+export default function EstadisticasDropdown({ profile = 'director' }: EstadisticasDropdownProps) {
   const { activeItem, setActiveItem } = useNavigation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const estadisticasOptions = useMemo(() => {
+    return profile === 'administrador' ? administradorEstadisticasOptions : directorEstadisticasOptions;
+  }, [profile]);
+
+  const getDefaultOption = () => {
+    if (profile === 'administrador') {
+      return 'estadisticas-onboarding';
+    }
+    return 'estadisticas-empleados';
+  };
+
   // Determine current active option
   const currentOption = estadisticasOptions.find(
-    (option) => option.id === activeItem || (activeItem === 'estadisticas' && option.id === 'estadisticas-empleados')
+    (option) => option.id === activeItem || (activeItem === 'estadisticas' && option.id === getDefaultOption())
   ) || estadisticasOptions[0];
 
   // Close dropdown when clicking outside

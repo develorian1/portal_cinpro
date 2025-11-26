@@ -5,7 +5,7 @@
  * Similar pattern to React Query / SWR but simplified for this project
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { apiClient, APIError } from '../client';
 
 export interface UseQueryOptions<T> {
@@ -15,6 +15,7 @@ export interface UseQueryOptions<T> {
   onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
   requiresAuth?: boolean;
+  retryOnError?: boolean; // Whether to retry after an error
 }
 
 export interface UseQueryResult<T> {
@@ -78,11 +79,23 @@ export function useQuery<T>(
     onSuccess,
     onError,
     requiresAuth = true,
+    retryOnError = false,
   } = options;
 
   const [data, setData] = useState<T | null>(() => getCachedData<T>(queryKey));
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(!data && enabled);
+
+  // Use refs to store callbacks to prevent infinite loops
+  const onSuccessRef = useRef(onSuccess);
+  const onErrorRef = useRef(onError);
+  const hasFetchedRef = useRef<boolean>(!!data); // Track if we've attempted a fetch
+
+  // Update refs when callbacks change
+  useEffect(() => {
+    onSuccessRef.current = onSuccess;
+    onErrorRef.current = onError;
+  }, [onSuccess, onError]);
 
   const fetchData = useCallback(async () => {
     if (!enabled) return;
@@ -98,36 +111,43 @@ export function useQuery<T>(
 
       setData(result);
       setCachedData(queryKey, result);
+      hasFetchedRef.current = true;
 
-      if (onSuccess) {
-        onSuccess(result);
+      if (onSuccessRef.current) {
+        onSuccessRef.current(result);
       }
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
+      hasFetchedRef.current = true;
 
-      if (onError) {
-        onError(error);
+      if (onErrorRef.current) {
+        onErrorRef.current(error);
       }
     } finally {
       setIsLoading(false);
     }
-  }, [endpoint, enabled, queryKey, onSuccess, onError, requiresAuth]);
+  }, [endpoint, enabled, queryKey, requiresAuth]);
 
-  // Initial fetch
+  // Initial fetch - only fetch once on mount
   useEffect(() => {
-    if (enabled && refetchOnMount && !data) {
+    if (!enabled || !refetchOnMount) return;
+    
+    // Only fetch if we haven't fetched yet
+    if (!hasFetchedRef.current) {
       fetchData();
     }
-  }, [enabled, refetchOnMount, fetchData, data]);
+    // Note: retryOnError is handled via explicit refetch() call, not automatic retries
+  }, [enabled, refetchOnMount, fetchData]);
 
-  // Polling / refetch interval
+  // Polling / refetch interval - don't poll if there's an error (unless retryOnError is true)
   useEffect(() => {
     if (!enabled || !refetchInterval) return;
+    if (error && !retryOnError) return; // Don't poll if there's an error
 
     const intervalId = setInterval(fetchData, refetchInterval);
     return () => clearInterval(intervalId);
-  }, [enabled, refetchInterval, fetchData]);
+  }, [enabled, refetchInterval, fetchData, error, retryOnError]);
 
   return {
     data,

@@ -132,9 +132,32 @@ export async function apiClient<T = unknown>(
       throw new Error(`Request timeout after ${timeout}ms`);
     }
 
-    // Network or other errors
-    console.error('Network or unknown error:', error);
-    throw new Error('Network error - please check your connection');
+    // Handle network errors (fetch failures, CORS, etc.)
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const isNetworkError = 
+      error instanceof TypeError && 
+      (errorMessage.includes('Failed to fetch') || 
+       errorMessage.includes('NetworkError') ||
+       errorMessage.includes('Network request failed'));
+
+    if (isNetworkError) {
+      // Provide more helpful error message for network failures
+      const friendlyMessage = `Unable to connect to the server. Please check that the backend is running at ${endpoint.split('/api')[0] || 'the configured URL'}.`;
+      console.warn('Network error:', {
+        endpoint,
+        message: errorMessage,
+        hint: 'This usually means the backend server is not running or not accessible.',
+      });
+      throw new Error(friendlyMessage);
+    }
+
+    // Other unknown errors
+    console.error('Unknown error:', {
+      endpoint,
+      error,
+      errorType: error instanceof Error ? error.constructor.name : typeof error,
+    });
+    throw new Error(errorMessage || 'An unexpected error occurred');
   }
 }
 

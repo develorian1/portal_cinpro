@@ -1,0 +1,208 @@
+.collectionEfficiency {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+.card {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+.lineChart {
+  margin-top: 20px;
+}
+
+.chartArea {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.chartGrid {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 300px;
+  padding: 20px 0;
+  min-width: 600px;
+  position: relative;
+}
+
+.linePoint {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.point {
+  width: 12px;
+  height: 12px;
+  background: var(--azure);
+  border-radius: 50%;
+  border: 2px solid var(--surface-primary);
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.point:hover {
+  transform: scale(1.5);
+  background: var(--azure-light);
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.pointLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.monthLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.valueLabel {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.pieChartContainer {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pieChart {
+  flex: 0 0 auto;
+}
+
+.pieSvg {
+  width: 200px;
+  height: 200px;
+}
+
+.pieSegment {
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.pieSegment:hover {
+  opacity: 0.8;
+}
+
+.pieLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.legendText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.legendMethod {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.legendPercentage {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.legendAmount {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.tableContainer {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.clientName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.outstandingAmount {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.daysMedium {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.daysHigh {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+

@@ -68,7 +68,10 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
       return activeItem === 'estadisticas-empleados' ||
         activeItem === 'estadisticas-clientes' ||
         activeItem === 'estadisticas-equipos' ||
-        activeItem === 'estadisticas-finanzas';
+        activeItem === 'estadisticas-finanzas' ||
+        activeItem === 'estadisticas-onboarding' ||
+        activeItem === 'estadisticas-collection' ||
+        activeItem === 'estadisticas-support';
     }
     // Special case: mark usuarios as active when any usuarios sub-page is active
     if (itemId === 'usuarios') {

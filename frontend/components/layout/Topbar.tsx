@@ -81,7 +81,10 @@ export default function Topbar({
     activeItem === 'estadisticas-empleados' || 
     activeItem === 'estadisticas-clientes' || 
     activeItem === 'estadisticas-equipos' || 
-    activeItem === 'estadisticas-finanzas';
+    activeItem === 'estadisticas-finanzas' ||
+    activeItem === 'estadisticas-onboarding' ||
+    activeItem === 'estadisticas-collection' ||
+    activeItem === 'estadisticas-support';
 
   // Check if we're on a usuarios page
   const isUsuariosPage = activeItem === 'usuarios' || 
@@ -112,7 +115,7 @@ export default function Topbar({
         {isAdminClientesPage && <AdminClientesDropdown />}
         {isAdminFinanzasPage && <AdminFinanzasDropdown />}
         {isFinanzasPage && !isAdminFinanzasPage && <FinanzasDropdown />}
-        {isEstadisticasPage && <EstadisticasDropdown />}
+        {isEstadisticasPage && <EstadisticasDropdown profile={profile} />}
         {isAdminUsuariosPage && profile === 'administrador' && <AdminUsuariosDropdown />}
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
         <div className={styles.searchContainer}>
