@@ -8,6 +8,8 @@ export { default as FinanzasDropdown } from './FinanzasDropdown';
 export { default as EstadisticasDropdown } from './EstadisticasDropdown';
 export { default as UsuariosDropdown } from './UsuariosDropdown';
 export { default as AdminUsuariosDropdown } from './AdminUsuariosDropdown';
+export { default as AdminFinanzasDropdown } from './AdminFinanzasDropdown';
+export { default as AdminClientesDropdown } from './AdminClientesDropdown';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as SectionErrorBoundary } from './SectionErrorBoundary';
 export { default as ToastContainer } from './ToastContainer';

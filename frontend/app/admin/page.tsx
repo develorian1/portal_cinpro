@@ -1,6 +1,8 @@
 'use client';
 
 import { Usuarios } from '@/components/profiles/administrador/usuarios';
+import { Clientes } from '@/components/profiles/administrador/clientes';
+import { Finanzas } from '@/components/profiles/administrador/finanzas';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
 
@@ -19,10 +21,32 @@ export default function AdminPage() {
     );
   }
 
+  // Render Clientes section
+  if (activeItem === 'clientes' || 
+      activeItem === 'clientes-directorio' || 
+      activeItem === 'clientes-nuevo-cliente' || 
+      activeItem === 'clientes-certificados') {
+    return (
+      <SectionErrorBoundary sectionName="Clientes">
+        <Clientes />
+      </SectionErrorBoundary>
+    );
+  }
+
+  // Render Finanzas section
+  if (activeItem === 'finanzas' || 
+      activeItem === 'finanzas-verificar-pagos' || 
+      activeItem === 'finanzas-cobranza' ||
+      activeItem === 'finanzas-certificados') {
+    return (
+      <SectionErrorBoundary sectionName="Finanzas">
+        <Finanzas />
+      </SectionErrorBoundary>
+    );
+  }
+
   // TODO: Add other sections as they are implemented
   // - Home
-  // - Clientes
-  // - Finanzas
   // - Estadísticas
   // - Comunicación
   // - Mensajes

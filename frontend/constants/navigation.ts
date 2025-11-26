@@ -29,6 +29,15 @@ export const FINANZAS_ITEMS = {
 } as const;
 
 /**
+ * Clientes Sub-Navigation
+ */
+export const CLIENTES_ITEMS = {
+  DIRECTORIO: 'clientes-directorio',
+  NUEVO_CLIENTE: 'clientes-nuevo-cliente',
+  CERTIFICADOS: 'clientes-certificados',
+} as const;
+
+/**
  * Estadisticas Sub-Navigation
  */
 export const ESTADISTICAS_ITEMS = {
@@ -58,6 +67,7 @@ export const USUARIOS_ITEMS = {
 export type NavigationItem =
   | (typeof NAV_ITEMS)[keyof typeof NAV_ITEMS]
   | (typeof FINANZAS_ITEMS)[keyof typeof FINANZAS_ITEMS]
+  | (typeof CLIENTES_ITEMS)[keyof typeof CLIENTES_ITEMS]
   | (typeof ESTADISTICAS_ITEMS)[keyof typeof ESTADISTICAS_ITEMS]
   | (typeof USUARIOS_ITEMS)[keyof typeof USUARIOS_ITEMS];
 

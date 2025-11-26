@@ -5,7 +5,7 @@ import { ProfileType } from '@/types/profile';
 import { PROFILE_TYPES } from '@/types/profile';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown } from '@/components/shared';
+import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown } from '@/components/shared';
 import styles from './Topbar.module.css';
 
 type UserStatus = 'activo' | 'ausente' | 'inactivo';
@@ -27,6 +27,7 @@ export default function Topbar({
   const notificationRef = useRef<HTMLDivElement>(null);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
+  const profileDropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>('activo');
 
   // Mock notifications
@@ -53,12 +54,27 @@ export default function Topbar({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [notificationsOpen]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (profileDropdownTimeoutRef.current) {
+        clearTimeout(profileDropdownTimeoutRef.current);
+      }
+    };
+  }, []);
   
-  // Check if we're on a finanzas page
+  // Check if we're on a finanzas page (director)
   const isFinanzasPage = activeItem === 'finanzas' || 
     activeItem === 'finanzas-receivables' || 
     activeItem === 'finanzas-payables' || 
     activeItem === 'finanzas-reports';
+
+  // Check if we're on an admin clientes page
+  const isAdminClientesPage = (activeItem === 'clientes' || 
+    activeItem === 'clientes-directorio' || 
+    activeItem === 'clientes-nuevo-cliente' || 
+    activeItem === 'clientes-certificados') && profile === 'administrador';
 
   // Check if we're on an estadisticas page
   const isEstadisticasPage = activeItem === 'estadisticas' || 
@@ -79,6 +95,12 @@ export default function Topbar({
     activeItem === 'usuarios-gestion' || 
     activeItem === 'usuarios-accesos';
 
+  // Check if we're on an admin finanzas page
+  const isAdminFinanzasPage = (activeItem === 'finanzas' || 
+    activeItem === 'finanzas-verificar-pagos' || 
+    activeItem === 'finanzas-cobranza' ||
+    activeItem === 'finanzas-certificados') && profile === 'administrador';
+
   // Get display name and initials based on profile
   const profileInfo = PROFILE_TYPES[profile];
   const displayName = userName || `${profileInfo.displayName} Usuario`;
@@ -87,7 +109,9 @@ export default function Topbar({
   return (
     <header className={styles.topbar}>
       <div className={styles.topbarCenter}>
-        {isFinanzasPage && <FinanzasDropdown />}
+        {isAdminClientesPage && <AdminClientesDropdown />}
+        {isAdminFinanzasPage && <AdminFinanzasDropdown />}
+        {isFinanzasPage && !isAdminFinanzasPage && <FinanzasDropdown />}
         {isEstadisticasPage && <EstadisticasDropdown />}
         {isAdminUsuariosPage && profile === 'administrador' && <AdminUsuariosDropdown />}
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
@@ -159,8 +183,21 @@ export default function Topbar({
         <div 
           className={styles.profileContainer} 
           ref={profileDropdownRef}
-          onMouseEnter={() => setProfileDropdownOpen(true)}
-          onMouseLeave={() => setProfileDropdownOpen(false)}
+          onMouseEnter={() => {
+            // Clear any pending close timeout
+            if (profileDropdownTimeoutRef.current) {
+              clearTimeout(profileDropdownTimeoutRef.current);
+              profileDropdownTimeoutRef.current = null;
+            }
+            setProfileDropdownOpen(true);
+          }}
+          onMouseLeave={() => {
+            // Add delay before closing dropdown
+            profileDropdownTimeoutRef.current = setTimeout(() => {
+              setProfileDropdownOpen(false);
+              profileDropdownTimeoutRef.current = null;
+            }, 300); // 300ms delay
+          }}
         >
           <button 
             className={styles.userMenu}
@@ -182,7 +219,23 @@ export default function Topbar({
             </svg>
           </button>
           {profileDropdownOpen && (
-            <div className={styles.profileDropdown}>
+            <div 
+              className={styles.profileDropdown}
+              onMouseEnter={() => {
+                // Clear any pending close timeout when hovering over dropdown
+                if (profileDropdownTimeoutRef.current) {
+                  clearTimeout(profileDropdownTimeoutRef.current);
+                  profileDropdownTimeoutRef.current = null;
+                }
+              }}
+              onMouseLeave={() => {
+                // Add delay before closing when leaving dropdown
+                profileDropdownTimeoutRef.current = setTimeout(() => {
+                  setProfileDropdownOpen(false);
+                  profileDropdownTimeoutRef.current = null;
+                }, 300); // 300ms delay
+              }}
+            >
               <div className={styles.profileHeader}>
                 <div className={styles.profileHeaderInfo}>
                   <div className={styles.userAvatar}>{initials}</div>

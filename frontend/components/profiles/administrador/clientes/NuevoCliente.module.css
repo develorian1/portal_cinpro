@@ -1,0 +1,325 @@
+.wizard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.wizardContent {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 32px;
+}
+
+[data-theme="dark"] .wizardContent {
+  background: var(--surface-elevated);
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stepTitle {
+  margin: 0 0 24px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-primary);
+  padding-bottom: 12px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formField label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.required {
+  color: var(--danger);
+}
+
+.formField input,
+.formField select {
+  padding: 10px 12px;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  transition: border-color 0.2s;
+}
+
+.formField input:focus,
+.formField select:focus {
+  outline: none;
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.formField input:disabled,
+.formField select:disabled {
+  background: var(--bg-tertiary);
+  cursor: not-allowed;
+}
+
+[data-theme="dark"] .formField input,
+[data-theme="dark"] .formField select {
+  background: var(--surface-secondary);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .formField input:focus,
+[data-theme="dark"] .formField select:focus {
+  box-shadow: 0 0 0 3px rgba(77, 163, 247, 0.2);
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+}
+
+.errorText {
+  font-size: 0.75rem;
+  color: var(--danger);
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.toggleSwitch {
+  width: 40px;
+  height: 20px;
+  appearance: none;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+[data-theme="dark"] .toggleSwitch {
+  background: var(--gray-300);
+}
+
+.toggleSwitch:checked {
+  background: var(--azure);
+}
+
+.toggleSwitch::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--white);
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+}
+
+.toggleSwitch:checked::before {
+  transform: translateX(20px);
+}
+
+.searchContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.searchInput {
+  flex: 1;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.searchButton:hover {
+  background: var(--azure-dark);
+}
+
+.foundUserCard {
+  grid-column: 1 / -1;
+  padding: 16px;
+  background: var(--success-bg);
+  border: 1px solid var(--success);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme="dark"] .foundUserCard {
+  background: var(--success-bg);
+  border-color: var(--success);
+}
+
+.foundUserInfo {
+  color: var(--success);
+  font-size: 0.875rem;
+}
+
+.linkButton {
+  padding: 8px 16px;
+  background: var(--success);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.linkButton:hover {
+  background: var(--success);
+  opacity: 0.9;
+}
+
+.divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.divider span {
+  padding: 0 16px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.createUserButton {
+  grid-column: 1 / -1;
+  padding: 12px 24px;
+  background: var(--surface-primary);
+  color: var(--azure);
+  border: 2px solid var(--azure);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+[data-theme="dark"] .createUserButton {
+  background: var(--surface-secondary);
+}
+
+.createUserButton:hover {
+  background: var(--azure);
+  color: var(--white);
+}
+
+.cancelButton {
+  grid-column: 1 / -1;
+  padding: 12px 24px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelButton:hover {
+  background: var(--bg-hover);
+}
+
+.wizardActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-primary);
+}
+
+.backButton {
+  padding: 10px 24px;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+[data-theme="dark"] .backButton {
+  background: var(--surface-secondary);
+  border-color: var(--border-primary);
+}
+
+.backButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-hover);
+}
+
+.nextButton,
+.submitButton {
+  padding: 10px 24px;
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nextButton:hover,
+.submitButton:hover {
+  background: var(--azure-dark);
+}
+
+.submitButton {
+  background: var(--success);
+}
+
+.submitButton:hover {
+  background: var(--success);
+  opacity: 0.9;
+}
+

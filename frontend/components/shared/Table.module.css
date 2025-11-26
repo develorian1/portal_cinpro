@@ -1,8 +1,6 @@
 .tableContainer {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: auto;
-  min-height: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .table {
@@ -11,10 +9,16 @@
 }
 
 .table thead {
-  background: var(--bg-secondary);
+  background: var(--surface-primary);
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .table thead {
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .table th {
@@ -26,6 +30,12 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 2px solid var(--border-primary);
+  background: inherit;
+}
+
+[data-theme="dark"] .table th {
+  color: var(--text-tertiary);
+  border-bottom-color: var(--border-secondary);
 }
 
 .table td {
@@ -41,6 +51,10 @@
 
 .table tbody tr:hover {
   background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .table tbody tr:hover {
+  background-color: var(--bg-hover);
 }
 
 .table tbody tr:last-child td {

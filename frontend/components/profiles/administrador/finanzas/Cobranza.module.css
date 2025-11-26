@@ -1,0 +1,399 @@
+.cobranza {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  padding: 24px;
+  gap: 24px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.tableContainer {
+  flex: 1;
+  overflow: auto;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  min-height: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border-primary);
+  background: var(--surface-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--border-primary);
+  transition: background 0.2s;
+}
+
+.tableRow:hover {
+  background: var(--bg-hover);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableCell {
+  padding: 16px 20px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clientName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.invoiceCount {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.debtAmount {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+}
+
+.oldestDate {
+  color: var(--text-secondary);
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--azure);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sendButton:hover {
+  background: var(--azure-dark);
+}
+
+.sendButton svg {
+  flex-shrink: 0;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 24px;
+}
+
+.modalContent {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--surface-secondary);
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modalCloseButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.modalCloseButton:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.modalBody {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.statementPreview {
+  width: 100%;
+}
+
+.pdfContainer {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+}
+
+.statementDocument {
+  background: var(--white);
+  padding: 40px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+[data-theme="dark"] .statementDocument {
+  background: var(--white);
+  color: #000;
+}
+
+.statementHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.statementLogo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0E0F2D;
+}
+
+.statementInfo {
+  text-align: right;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.statementInfo p {
+  margin: 4px 0;
+}
+
+.statementContent {
+  margin-top: 24px;
+}
+
+.statementSummary {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.summaryAmount {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0E0F2D;
+}
+
+.statementTable {
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.statementTableInner {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.statementTableInner thead {
+  background: #f1f5f9;
+}
+
+.statementTableInner th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #0E0F2D;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.statementTableInner td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+.statementTableInner tbody tr:hover {
+  background: #f8fafc;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.statementFooter {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.footerNote {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid var(--border-primary);
+  background: var(--surface-secondary);
+}
+
+.cancelButton,
+.confirmButton {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.cancelButton:hover {
+  background: var(--bg-hover);
+}
+
+.confirmButton {
+  background: var(--azure);
+  color: var(--white);
+}
+
+.confirmButton:hover {
+  background: var(--azure-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cobranza {
+    padding: 16px;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 800px;
+  }
+
+  .modalContent {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .statementDocument {
+    padding: 24px;
+  }
+}
+
