@@ -22,7 +22,6 @@
 
 .sidebar.collapsed {
   width: var(--sidebar-collapsed);
-  overflow-x: visible;
   overflow-y: hidden;
 }
 
