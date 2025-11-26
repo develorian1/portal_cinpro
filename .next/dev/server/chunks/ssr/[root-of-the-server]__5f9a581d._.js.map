@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Vector/Documents/GitHub/portal_cinpro/app/admin/page.tsx"],"sourcesContent":["export default function AdminPage() {\r\n  // TODO: Add admin profile content here\r\n  return (\r\n    <div>\r\n      <h1>Administrador Profile</h1>\r\n      <p>Content to be added...</p>\r\n    </div>\r\n  );\r\n}\r\n\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,uCAAuC;IACvC,qBACE,8OAAC;;0BACC,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;;;;;;;AAGT"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/profiles/director/finanzas/Finanzas.module.css"],"sourcesContent":[".finanzas {\r\n  width: 100%;\r\n  height: calc(100dvh - var(--topbar-height, 64px));\r\n  max-height: calc(100dvh - var(--topbar-height, 64px));\r\n  display: flex;\r\n  flex-direction: column;\r\n  overflow: hidden;\r\n  margin: -24px;\r\n  padding: 24px;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.finanzasContent {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n  max-height: 100%;\r\n  gap: 0;\r\n  overflow: hidden;\r\n}\r\n\r\n.tabContent {\r\n  flex: 1;\r\n  overflow: hidden;\r\n  min-height: 0;\r\n  max-height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAYA;;;;;;;;;AASA"}}]
-}
