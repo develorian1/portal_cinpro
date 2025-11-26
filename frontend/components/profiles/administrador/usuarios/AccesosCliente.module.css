@@ -34,7 +34,6 @@
 
 .userItem {
   padding: 12px;
-  background: var(--gray-50);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -43,11 +42,9 @@
 
 .userItem:hover {
   background: var(--gray-100);
-  border-color: var(--azure);
 }
 
 .userItemActive {
-  background: var(--azure-light);
   border-color: var(--azure);
 }
 

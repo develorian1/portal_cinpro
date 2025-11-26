@@ -217,7 +217,7 @@
 .orphanItem:hover {
   background: var(--azure-light);
   border-color: var(--azure);
-  color: var(--azure);
+  color: var(--white);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
 }
