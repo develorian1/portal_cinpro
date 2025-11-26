@@ -1,0 +1,120 @@
+/* [project]/components/profiles/director/usuarios/AdministrarAuxiliares.module.css [app-client] (css) */
+.AdministrarAuxiliares-module__3pW-uq__auxiliares {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  flex-direction: column;
+  height: 100%;
+  transition: background-color .3s, border-color .3s;
+  display: flex;
+  overflow: hidden;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__header {
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__title {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__tableContainer {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__nameCell {
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__avatar {
+  background: var(--azure);
+  width: 40px;
+  height: 40px;
+  color: var(--white);
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: .875rem;
+  font-weight: 600;
+  display: flex;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__avatar img {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__workload {
+  color: var(--gray-700);
+  font-size: .9rem;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__pending {
+  background: var(--gray-100);
+  border-radius: var(--radius-sm);
+  color: var(--gray-700);
+  padding: 4px 12px;
+  font-size: .85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__pendingHigh {
+  background: var(--danger-bg);
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+  padding: 4px 12px;
+  font-size: .85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__chief {
+  color: var(--gray-700);
+  font-size: .9rem;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__actionButtons {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__actionBtn {
+  border: 1px solid var(--border-primary);
+  background: var(--surface-primary);
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s;
+  display: flex;
+}
+
+.AdministrarAuxiliares-module__3pW-uq__actionBtn:hover {
+  border-color: var(--azure);
+  color: var(--azure);
+  background: var(--bg-secondary);
+}
+
+/*# sourceMappingURL=components_profiles_director_usuarios_AdministrarAuxiliares_module_css_bad6b30c._.single.css.map*/

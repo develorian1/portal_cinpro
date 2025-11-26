@@ -1,0 +1,37 @@
+/* [project]/components/profiles/director/dashboard/KpiStrip.module.css [app-client] (css) */
+.KpiStrip-module__zyH0pW__kpiStrip {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+  display: grid;
+}
+
+.KpiStrip-module__zyH0pW__kpiStrip > :first-child {
+  animation-delay: .1s;
+}
+
+.KpiStrip-module__zyH0pW__kpiStrip > :nth-child(2) {
+  animation-delay: .15s;
+}
+
+.KpiStrip-module__zyH0pW__kpiStrip > :nth-child(3) {
+  animation-delay: .2s;
+}
+
+.KpiStrip-module__zyH0pW__kpiStrip > :nth-child(4) {
+  animation-delay: .25s;
+}
+
+@media (max-width: 1200px) {
+  .KpiStrip-module__zyH0pW__kpiStrip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .KpiStrip-module__zyH0pW__kpiStrip {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_profiles_director_dashboard_KpiStrip_module_css_bad6b30c._.single.css.map*/

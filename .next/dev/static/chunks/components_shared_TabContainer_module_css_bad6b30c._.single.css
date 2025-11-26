@@ -1,0 +1,64 @@
+/* [project]/components/shared/TabContainer.module.css [app-client] (css) */
+.TabContainer-module__atKSgW__tabContainer {
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.TabContainer-module__atKSgW__tabsWrapper {
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 0 0 16px;
+  display: flex;
+}
+
+.TabContainer-module__atKSgW__tabs {
+  border-bottom: 2px solid var(--border-primary);
+  gap: 0;
+  width: fit-content;
+  display: flex;
+}
+
+.TabContainer-module__atKSgW__tab {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #0000;
+  margin-bottom: -2px;
+  padding: 12px 20px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  position: relative;
+}
+
+.TabContainer-module__atKSgW__tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.TabContainer-module__atKSgW__tab.TabContainer-module__atKSgW__active {
+  color: var(--text-primary);
+  border-bottom-color: var(--azure);
+  background: none;
+}
+
+.TabContainer-module__atKSgW__contentWrapper {
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=components_shared_TabContainer_module_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Vector/Documents/GitHub/portal_cinpro/app/director/layout.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { ProfileProvider } from '@/contexts/ProfileContext';\r\n\r\nexport default function DirectorLayout({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <ProfileProvider\r\n      defaultProfile=\"director\"\r\n      defaultUserName=\"Director Martinez\"\r\n      defaultUserInitials=\"DM\"\r\n    >\r\n      {children}\r\n    </ProfileProvider>\r\n  );\r\n}\r\n\r\n\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIe,SAAS,eAAe,EACrC,QAAQ,EAGT;IACC,qBACE,8OAAC,8IAAe;QACd,gBAAe;QACf,iBAAgB;QAChB,qBAAoB;kBAEnB;;;;;;AAGP"}}]
+}

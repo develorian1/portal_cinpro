@@ -1,0 +1,174 @@
+/* [project]/components/profiles/director/finanzas/FirmExpenses.module.css [app-client] (css) */
+.FirmExpenses-module__Q4f64q__firmExpenses {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  transition: background-color .3s, border-color .3s;
+  display: flex;
+  overflow: hidden;
+}
+
+.FirmExpenses-module__Q4f64q__header {
+  border-bottom: 2px solid var(--border-primary);
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__periodSelector {
+  align-items: flex-end;
+  gap: 16px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__periodField {
+  flex-direction: column;
+  gap: 6px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__periodField label {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.FirmExpenses-module__Q4f64q__periodSelect {
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-size: .95rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  min-width: 140px;
+  padding: 10px 36px 10px 14px;
+  transition: all .2s;
+}
+
+[data-theme="dark"] .FirmExpenses-module__Q4f64q__periodSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+.FirmExpenses-module__Q4f64q__periodSelect:focus {
+  border-color: var(--azure);
+  outline: none;
+  box-shadow: 0 0 0 3px #1880ea1a;
+}
+
+[data-theme="dark"] .FirmExpenses-module__Q4f64q__periodSelect:focus {
+  box-shadow: 0 0 0 3px #4da3f733;
+}
+
+.FirmExpenses-module__Q4f64q__periodSelect:hover {
+  border-color: var(--border-hover);
+}
+
+.FirmExpenses-module__Q4f64q__title {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.FirmExpenses-module__Q4f64q__total {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__totalLabel {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: .85rem;
+}
+
+.FirmExpenses-module__Q4f64q__totalAmount {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.FirmExpenses-module__Q4f64q__expensesList {
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  min-height: 0;
+  display: flex;
+  overflow-y: auto;
+}
+
+.FirmExpenses-module__Q4f64q__expenseItem {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  transition: all .2s;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__expenseInfo {
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__expenseDescription {
+  color: var(--text-primary);
+  font-size: .95rem;
+  font-weight: 500;
+}
+
+.FirmExpenses-module__Q4f64q__expenseMeta {
+  align-items: center;
+  gap: 16px;
+  display: flex;
+}
+
+.FirmExpenses-module__Q4f64q__expenseType {
+  background: var(--surface-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.FirmExpenses-module__Q4f64q__expenseDate {
+  color: var(--text-tertiary);
+  font-size: .85rem;
+}
+
+.FirmExpenses-module__Q4f64q__expenseAmount {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.FirmExpenses-module__Q4f64q__emptyState {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 40px;
+}
+
+/*# sourceMappingURL=components_profiles_director_finanzas_FirmExpenses_module_css_bad6b30c._.single.css.map*/

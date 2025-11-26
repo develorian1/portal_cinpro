@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/profiles/director/dashboard/KpiStrip.module.css"],"sourcesContent":[".kpiStrip {\r\n  display: grid;\r\n  grid-template-columns: repeat(4, 1fr);\r\n  gap: 16px;\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.kpiStrip > *:nth-child(1) {\r\n  animation-delay: 0.1s;\r\n}\r\n\r\n.kpiStrip > *:nth-child(2) {\r\n  animation-delay: 0.15s;\r\n}\r\n\r\n.kpiStrip > *:nth-child(3) {\r\n  animation-delay: 0.2s;\r\n}\r\n\r\n.kpiStrip > *:nth-child(4) {\r\n  animation-delay: 0.25s;\r\n}\r\n\r\n@media (max-width: 1200px) {\r\n  .kpiStrip {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kpiStrip {\r\n    grid-template-columns: 1fr;\r\n  }\r\n}\r\n\r\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA;;;;AAIA;;;;AAIA;;;;AAIA;;;;AAIA;EACE;;;;;AAKF;EACE"}}]
+}

@@ -1,0 +1,121 @@
+/* [project]/components/profiles/director/estadisticas/RendimientoClientes.module.css [app-client] (css) */
+.RendimientoClientes-module__xAfIJq__rendimientoClientes {
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  overflow: hidden auto;
+}
+
+.RendimientoClientes-module__xAfIJq__topClientsCard, .RendimientoClientes-module__xAfIJq__churnRiskCard {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  padding: 24px;
+  transition: background-color .3s, border-color .3s;
+}
+
+.RendimientoClientes-module__xAfIJq__cardTitle {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.RendimientoClientes-module__xAfIJq__cardSubtitle {
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+  font-size: .875rem;
+}
+
+.RendimientoClientes-module__xAfIJq__barChart {
+  align-items: flex-end;
+  gap: 16px;
+  height: 300px;
+  margin-top: 20px;
+  padding: 20px 0;
+  display: flex;
+}
+
+.RendimientoClientes-module__xAfIJq__barGroup {
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.RendimientoClientes-module__xAfIJq__barContainer {
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.RendimientoClientes-module__xAfIJq__bar {
+  background: linear-gradient(180deg, var(--azure-light), var(--azure));
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  width: 80%;
+  min-height: 20px;
+  transition: all .3s;
+}
+
+.RendimientoClientes-module__xAfIJq__bar:hover {
+  opacity: .9;
+  transform: scaleY(1.05);
+}
+
+.RendimientoClientes-module__xAfIJq__barLabel {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  display: flex;
+}
+
+.RendimientoClientes-module__xAfIJq__clientName {
+  color: var(--text-primary);
+  text-align: center;
+  word-break: break-word;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.RendimientoClientes-module__xAfIJq__clientValue {
+  color: var(--text-tertiary);
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+.RendimientoClientes-module__xAfIJq__tableContainer {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.RendimientoClientes-module__xAfIJq__daysToPay {
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-weight: 600;
+}
+
+.RendimientoClientes-module__xAfIJq__daysToPay.RendimientoClientes-module__xAfIJq__mediumRisk {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.RendimientoClientes-module__xAfIJq__daysToPay.RendimientoClientes-module__xAfIJq__highRisk {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.RendimientoClientes-module__xAfIJq__lifetimeValue {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/*# sourceMappingURL=2ad84_profiles_director_estadisticas_RendimientoClientes_module_css_bad6b30c._.single.css.map*/

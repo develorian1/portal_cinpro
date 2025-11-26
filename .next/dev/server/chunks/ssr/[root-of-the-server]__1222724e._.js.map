@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Vector/Documents/GitHub/portal_cinpro/app/page.tsx"],"sourcesContent":["import { redirect } from 'next/navigation';\r\n\r\nexport default function HomePage() {\r\n  // Redirect to director route by default\r\n  redirect('/director');\r\n}\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,wCAAwC;IACxC,IAAA,iMAAQ,EAAC;AACX"}}]
+}

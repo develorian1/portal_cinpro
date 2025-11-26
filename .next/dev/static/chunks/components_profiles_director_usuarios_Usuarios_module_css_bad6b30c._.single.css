@@ -1,0 +1,104 @@
+/* [project]/components/profiles/director/usuarios/Usuarios.module.css [app-client] (css) */
+.Usuarios-module__fdxikW__usuarios {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.Usuarios-module__fdxikW__usuariosContent {
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  display: flex;
+}
+
+.Usuarios-module__fdxikW__topBar {
+  z-index: 10;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  display: flex;
+  position: sticky;
+  top: 0;
+}
+
+.Usuarios-module__fdxikW__topBarActions {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.Usuarios-module__fdxikW__refreshBtn {
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  color: var(--gray-700);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+}
+
+.Usuarios-module__fdxikW__refreshBtn:hover:not(:disabled) {
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.Usuarios-module__fdxikW__refreshBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.Usuarios-module__fdxikW__createBtn {
+  background: var(--azure);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+}
+
+.Usuarios-module__fdxikW__createBtn:hover {
+  background: var(--azure-dark);
+}
+
+.Usuarios-module__fdxikW__tabContent {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden auto;
+}
+
+@keyframes Usuarios-module__fdxikW__spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Usuarios-module__fdxikW__spinning {
+  animation: 1s linear infinite Usuarios-module__fdxikW__spin;
+}
+
+/*# sourceMappingURL=components_profiles_director_usuarios_Usuarios_module_css_bad6b30c._.single.css.map*/

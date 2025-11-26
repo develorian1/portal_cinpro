@@ -1,0 +1,96 @@
+/* [project]/components/profiles/director/comunicacion/Comunicacion.module.css [app-client] (css) */
+.Comunicacion-module__jOJsdq__comunicacion {
+  width: 100%;
+  height: calc(100dvh - var(--topbar-height, 64px));
+  max-height: calc(100dvh - var(--topbar-height, 64px));
+  box-sizing: border-box;
+  flex-direction: column;
+  margin: -24px;
+  padding: 24px;
+  display: flex;
+  overflow: hidden;
+}
+
+.Comunicacion-module__jOJsdq__comunicacionContent {
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.Comunicacion-module__jOJsdq__topBar {
+  z-index: 10;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  display: flex;
+  position: sticky;
+  top: 0;
+}
+
+.Comunicacion-module__jOJsdq__header {
+  align-items: center;
+  display: flex;
+}
+
+.Comunicacion-module__jOJsdq__title {
+  font-family: var(--font-display);
+  color: var(--midnight);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.Comunicacion-module__jOJsdq__newBroadcastBtn {
+  border: 1px solid var(--azure);
+  background: var(--azure);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+}
+
+.Comunicacion-module__jOJsdq__newBroadcastBtn:hover {
+  background: var(--azure-dark);
+  border-color: var(--azure-dark);
+}
+
+.Comunicacion-module__jOJsdq__tabContent {
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.Comunicacion-module__jOJsdq__mensajesTab {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .Comunicacion-module__jOJsdq__mensajesTab {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_profiles_director_comunicacion_Comunicacion_module_css_bad6b30c._.single.css.map*/

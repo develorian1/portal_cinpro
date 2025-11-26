@@ -1,0 +1,42 @@
+/* [project]/components/shared/RefreshButton.module.css [app-client] (css) */
+.RefreshButton-module__aCzwvG__refreshBtn {
+  border: 1px solid var(--border-primary);
+  background: var(--surface-primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+}
+
+.RefreshButton-module__aCzwvG__refreshBtn:hover:not(:disabled) {
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.RefreshButton-module__aCzwvG__refreshBtn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+@keyframes RefreshButton-module__aCzwvG__spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.RefreshButton-module__aCzwvG__spinning {
+  animation: 1s linear infinite RefreshButton-module__aCzwvG__spin;
+}
+
+/*# sourceMappingURL=components_shared_RefreshButton_module_css_bad6b30c._.single.css.map*/

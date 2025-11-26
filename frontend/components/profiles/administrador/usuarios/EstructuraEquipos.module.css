@@ -1,0 +1,537 @@
+.estructuraEquipos {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.kanbanBoard {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+  align-content: start;
+  height: 100%;
+}
+
+.groupColumn {
+  display: flex;
+  flex-direction: column;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  gap: 12px;
+  height: fit-content;
+  min-height: 300px;
+  max-height: calc(100vh - 80px);
+}
+
+.groupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+.groupInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.groupName {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chiefName {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.editGroupBtn {
+  padding: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.editGroupBtn:hover {
+  background: var(--gray-100);
+  color: var(--azure);
+}
+
+.accountantsList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+.accountantItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--white);
+  border-left: 3px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+
+.accountantItem:hover {
+  background: var(--gray-50);
+  border-left-color: var(--azure);
+}
+
+.dragOver {
+  border-left-color: var(--azure) !important;
+  background: var(--azure-light) !important;
+}
+
+.borderGreen {
+  border-left-color: var(--success) !important;
+}
+
+.borderOrange {
+  border-left-color: var(--warning) !important;
+}
+
+.borderRed {
+  border-left-color: var(--danger) !important;
+}
+
+.itemIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.itemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.accountantName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clientCount {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.orphanSidebar {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-left: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  gap: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.orphanTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+.orphanList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-right: -8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.orphanItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--gray-50);
+  border: 1px dashed var(--gray-300);
+  border-radius: var(--radius-md);
+  cursor: grab;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.orphanItem:hover {
+  background: var(--azure-light);
+  border-color: var(--azure);
+  color: var(--azure);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+.orphanItem:active {
+  cursor: grabbing;
+  opacity: 0.8;
+  transform: translateY(0);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+[data-theme="dark"] .modalOverlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modalContent {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .modalContent {
+  background: var(--surface-primary);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modalClose {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.modalClose:hover {
+  background: var(--gray-100);
+  color: var(--text-primary);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.selectInput {
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.selectInput:focus {
+  outline: none;
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+[data-theme="dark"] .selectInput {
+  background: var(--bg-secondary);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .selectInput:focus {
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(77, 163, 247, 0.2);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancelBtn,
+.saveBtn {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.cancelBtn {
+  background: var(--gray-100);
+  color: var(--text-secondary);
+}
+
+.cancelBtn:hover {
+  background: var(--gray-200);
+  color: var(--text-primary);
+}
+
+.saveBtn {
+  background: var(--azure);
+  color: var(--white);
+}
+
+.saveBtn:hover {
+  background: var(--azure-dark);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .groupColumn {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .accountantItem {
+  background: var(--surface-primary);
+  border-left-color: var(--border-primary);
+}
+
+[data-theme="dark"] .accountantItem:hover {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .dragOver {
+  background: rgba(77, 163, 247, 0.15) !important;
+}
+
+[data-theme="dark"] .itemIndex {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .orphanSidebar {
+  background: var(--surface-primary);
+  border-left-color: var(--border-primary);
+}
+
+[data-theme="dark"] .orphanItem {
+  background: var(--bg-secondary);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .orphanItem:hover {
+  background: rgba(77, 163, 247, 0.15);
+  color: var(--azure);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(77, 163, 247, 0.2);
+}
+
+/* Accountant Clients Modal Styles */
+.clientsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-right: -8px;
+}
+
+.clientItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.clientItem:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+.clientInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clientName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.clientDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clientDetail {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.clientDetail strong {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.deleteClientBtn {
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteClientBtn:hover {
+  background: var(--danger-light);
+  color: var(--danger-dark);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px 20px;
+  font-size: 0.875rem;
+}
+
+[data-theme="dark"] .clientItem {
+  background: var(--bg-secondary);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .clientItem:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-secondary);
+}
+
+[data-theme="dark"] .deleteClientBtn:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .kanbanBoard {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .estructuraEquipos {
+    flex-direction: column;
+  }
+  
+  .orphanSidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--gray-200);
+    max-height: 300px;
+  }
+  
+  .kanbanBoard {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}

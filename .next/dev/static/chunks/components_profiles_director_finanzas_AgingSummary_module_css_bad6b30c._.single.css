@@ -1,0 +1,133 @@
+/* [project]/components/profiles/director/finanzas/AgingSummary.module.css [app-client] (css) */
+.AgingSummary-module__A9WT8G__agingSummary {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  transition: background-color .3s, border-color .3s;
+  display: flex;
+  overflow: hidden;
+}
+
+.AgingSummary-module__A9WT8G__header {
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__title {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: color .3s;
+}
+
+.AgingSummary-module__A9WT8G__metrics {
+  gap: 24px;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__metric {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__metricLabel {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: .85rem;
+  transition: color .3s;
+}
+
+.AgingSummary-module__A9WT8G__metricValue {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: color .3s;
+}
+
+.AgingSummary-module__A9WT8G__metricValue.AgingSummary-module__A9WT8G__overdue {
+  color: var(--danger);
+}
+
+.AgingSummary-module__A9WT8G__chart {
+  flex: 1;
+  align-items: flex-end;
+  gap: 32px;
+  min-height: 200px;
+  padding: 16px 0;
+  display: flex;
+  overflow-y: auto;
+}
+
+.AgingSummary-module__A9WT8G__barGroup {
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__barContainer {
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__bar {
+  background: linear-gradient(180deg, var(--azure-light), var(--azure));
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: pointer;
+  width: 80%;
+  min-height: 20px;
+  transition: all .3s;
+  position: relative;
+}
+
+.AgingSummary-module__A9WT8G__bar:hover {
+  opacity: .9;
+  transform: scaleY(1.05);
+}
+
+.AgingSummary-module__A9WT8G__overdueBar {
+  background: linear-gradient(180deg, var(--danger), #dc2626);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.AgingSummary-module__A9WT8G__barLabel {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.AgingSummary-module__A9WT8G__rangeLabel {
+  color: var(--text-secondary);
+  font-size: .85rem;
+  font-weight: 600;
+  transition: color .3s;
+}
+
+.AgingSummary-module__A9WT8G__amountLabel {
+  color: var(--text-tertiary);
+  font-size: .75rem;
+  transition: color .3s;
+}
+
+/*# sourceMappingURL=components_profiles_director_finanzas_AgingSummary_module_css_bad6b30c._.single.css.map*/

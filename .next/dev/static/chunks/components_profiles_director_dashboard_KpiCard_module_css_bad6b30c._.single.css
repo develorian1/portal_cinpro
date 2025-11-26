@@ -1,0 +1,70 @@
+/* [project]/components/profiles/director/dashboard/KpiCard.module.css [app-client] (css) */
+.KpiCard-module__AoQsBW__kpiCard {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-primary);
+  flex-direction: column;
+  padding: 16px;
+  transition: all .3s;
+  animation: .5s ease-out backwards KpiCard-module__AoQsBW__fadeInUp;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.KpiCard-module__AoQsBW__kpiLabel {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.KpiCard-module__AoQsBW__kpiLabel.KpiCard-module__AoQsBW__smallLabel {
+  font-size: .75rem;
+}
+
+.KpiCard-module__AoQsBW__kpiValue {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  align-items: flex-start;
+  height: 2.5rem;
+  margin-bottom: 8px;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  display: flex;
+}
+
+.KpiCard-module__AoQsBW__kpiValue.KpiCard-module__AoQsBW__positive {
+  color: var(--success);
+}
+
+.KpiCard-module__AoQsBW__kpiValue.KpiCard-module__AoQsBW__negative {
+  color: var(--danger);
+}
+
+.KpiCard-module__AoQsBW__kpiChange {
+  border-radius: var(--radius-sm);
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  padding: 4px 10px;
+  font-size: .8rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.KpiCard-module__AoQsBW__kpiChange.KpiCard-module__AoQsBW__up {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.KpiCard-module__AoQsBW__kpiChange.KpiCard-module__AoQsBW__down {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/*# sourceMappingURL=components_profiles_director_dashboard_KpiCard_module_css_bad6b30c._.single.css.map*/

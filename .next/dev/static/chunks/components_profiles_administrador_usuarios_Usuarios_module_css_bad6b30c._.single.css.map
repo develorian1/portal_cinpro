@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/profiles/administrador/usuarios/Usuarios.module.css"],"sourcesContent":[".usuarios {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n\n.tabContent {\n  flex: 1;\n  overflow-y: auto;\n  overflow-x: hidden;\n  min-height: 0;\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;;;AAQA"}}]
+}

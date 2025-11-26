@@ -1,0 +1,158 @@
+/* [project]/components/profiles/director/comunicacion/BroadcastCenter.module.css [app-client] (css) */
+.BroadcastCenter-module__LWHpXa__broadcastCenter {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+  flex-direction: column;
+  height: 100%;
+  transition: background-color .3s, border-color .3s;
+  display: flex;
+  overflow: hidden;
+}
+
+.BroadcastCenter-module__LWHpXa__header {
+  border-bottom: 1px solid var(--border-primary);
+  flex-shrink: 0;
+  padding: 12px 16px;
+}
+
+.BroadcastCenter-module__LWHpXa__title {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.BroadcastCenter-module__LWHpXa__broadcastForm {
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+  min-height: 0;
+  padding: 16px;
+  display: flex;
+  overflow: hidden;
+}
+
+.BroadcastCenter-module__LWHpXa__inputSection {
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+  min-height: 0;
+  display: flex;
+}
+
+.BroadcastCenter-module__LWHpXa__label {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.BroadcastCenter-module__LWHpXa__messageInput {
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  min-height: 120px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  resize: vertical;
+  flex: 1;
+  padding: 10px;
+  font-size: .875rem;
+  transition: all .2s;
+}
+
+.BroadcastCenter-module__LWHpXa__messageInput:focus {
+  border-color: var(--azure);
+  outline: none;
+  box-shadow: 0 0 0 3px #1880ea1a;
+}
+
+[data-theme="dark"] .BroadcastCenter-module__LWHpXa__messageInput:focus {
+  box-shadow: 0 0 0 3px #4da3f733;
+}
+
+.BroadcastCenter-module__LWHpXa__messageInput::placeholder {
+  color: var(--text-muted);
+}
+
+.BroadcastCenter-module__LWHpXa__targetSection {
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 6px;
+  display: flex;
+}
+
+.BroadcastCenter-module__LWHpXa__targetSelect {
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  padding: 8px 36px 8px 12px;
+  font-size: .875rem;
+  transition: all .2s;
+}
+
+[data-theme="dark"] .BroadcastCenter-module__LWHpXa__targetSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+.BroadcastCenter-module__LWHpXa__targetSelect:focus {
+  border-color: var(--azure);
+  outline: none;
+  box-shadow: 0 0 0 3px #1880ea1a;
+}
+
+[data-theme="dark"] .BroadcastCenter-module__LWHpXa__targetSelect:focus {
+  box-shadow: 0 0 0 3px #4da3f733;
+}
+
+.BroadcastCenter-module__LWHpXa__sendButton {
+  background: var(--azure);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: all .2s;
+  display: flex;
+}
+
+.BroadcastCenter-module__LWHpXa__sendButton:hover:not(:disabled) {
+  background: var(--azure-dark);
+}
+
+.BroadcastCenter-module__LWHpXa__sendButton:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+@keyframes BroadcastCenter-module__LWHpXa__spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.BroadcastCenter-module__LWHpXa__spinning {
+  animation: 1s linear infinite BroadcastCenter-module__LWHpXa__spin;
+}
+
+/*# sourceMappingURL=components_profiles_director_comunicacion_BroadcastCenter_module_css_bad6b30c._.single.css.map*/

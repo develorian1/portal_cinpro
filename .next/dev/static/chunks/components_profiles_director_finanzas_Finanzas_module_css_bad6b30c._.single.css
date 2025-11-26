@@ -1,0 +1,32 @@
+/* [project]/components/profiles/director/finanzas/Finanzas.module.css [app-client] (css) */
+.Finanzas-module__qT_Kdq__finanzas {
+  width: 100%;
+  height: calc(100dvh - var(--topbar-height, 64px));
+  max-height: calc(100dvh - var(--topbar-height, 64px));
+  box-sizing: border-box;
+  flex-direction: column;
+  margin: -24px;
+  padding: 24px;
+  display: flex;
+  overflow: hidden;
+}
+
+.Finanzas-module__qT_Kdq__finanzasContent {
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.Finanzas-module__qT_Kdq__tabContent {
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=components_profiles_director_finanzas_Finanzas_module_css_bad6b30c._.single.css.map*/

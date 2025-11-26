@@ -1,0 +1,159 @@
+/* [project]/components/profiles/administrador/usuarios/EditGroupModal.module.css [app-client] (css) */
+.EditGroupModal-module__a1qqKG__overlay {
+  z-index: 1000;
+  background: #00000080;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  animation: .2s ease-out EditGroupModal-module__a1qqKG__fadeIn;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+@keyframes EditGroupModal-module__a1qqKG__fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.EditGroupModal-module__a1qqKG__modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 500px;
+  animation: .3s ease-out EditGroupModal-module__a1qqKG__slideUp;
+}
+
+@keyframes EditGroupModal-module__a1qqKG__slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.EditGroupModal-module__a1qqKG__modalHeader {
+  border-bottom: 1px solid var(--gray-200);
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  display: flex;
+}
+
+.EditGroupModal-module__a1qqKG__modalTitle {
+  font-family: var(--font-display);
+  color: var(--midnight);
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.EditGroupModal-module__a1qqKG__closeBtn {
+  color: var(--gray-400);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  transition: all .2s;
+  display: flex;
+}
+
+.EditGroupModal-module__a1qqKG__closeBtn:hover {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+.EditGroupModal-module__a1qqKG__modalContent {
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  display: flex;
+}
+
+.EditGroupModal-module__a1qqKG__formGroup {
+  flex-direction: column;
+  gap: 8px;
+  display: flex;
+}
+
+.EditGroupModal-module__a1qqKG__label {
+  color: var(--gray-700);
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.EditGroupModal-module__a1qqKG__select {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: .9375rem;
+  font-family: var(--font-body);
+  color: var(--midnight);
+  background: var(--white);
+  cursor: pointer;
+  padding: 10px 12px;
+  transition: all .2s;
+}
+
+.EditGroupModal-module__a1qqKG__select:hover {
+  border-color: var(--azure);
+}
+
+.EditGroupModal-module__a1qqKG__select:focus {
+  border-color: var(--azure);
+  outline: none;
+  box-shadow: 0 0 0 3px #1880ea1a;
+}
+
+.EditGroupModal-module__a1qqKG__modalActions {
+  justify-content: flex-end;
+  gap: 12px;
+  display: flex;
+}
+
+.EditGroupModal-module__a1qqKG__cancelBtn {
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--gray-700);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: .9375rem;
+  font-weight: 500;
+  transition: all .2s;
+}
+
+.EditGroupModal-module__a1qqKG__cancelBtn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+}
+
+.EditGroupModal-module__a1qqKG__submitBtn {
+  background: var(--azure);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  font-size: .9375rem;
+  font-weight: 500;
+  transition: all .2s;
+}
+
+.EditGroupModal-module__a1qqKG__submitBtn:hover {
+  background: var(--azure-dark);
+}
+
+/*# sourceMappingURL=components_profiles_administrador_usuarios_EditGroupModal_module_css_bad6b30c._.single.css.map*/

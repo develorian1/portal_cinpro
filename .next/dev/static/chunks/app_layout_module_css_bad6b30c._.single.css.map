@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/layout.module.css"],"sourcesContent":[".mainWrapper {\r\n  margin-left: var(--sidebar-width);\r\n  height: 100dvh;\r\n  display: flex;\r\n  flex-direction: column;\r\n  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);\r\n  overflow: hidden;\r\n}\r\n\r\n.mainWrapperCollapsed {\r\n  margin-left: var(--sidebar-collapsed);\r\n}\r\n\r\n.mainContent {\r\n  flex: 1;\r\n  padding: 24px;\r\n  max-width: 1600px;\r\n  margin: 0 auto;\r\n  width: 100%;\r\n  overflow-y: auto;\r\n  overflow-x: hidden;\r\n}\r\n\r\n@media (max-width: 900px) {\r\n  .mainWrapper {\r\n    margin-left: var(--sidebar-collapsed);\r\n  }\r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;AAIA;;;;;;;;;AAUA;EACE"}}]
+}
