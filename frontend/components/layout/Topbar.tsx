@@ -32,13 +32,23 @@ export default function Topbar({
   const profileDropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>('activo');
 
-  // Mock notifications
-  const mockNotifications = [
-    { id: 1, title: 'Nuevo mensaje', message: 'Tienes un nuevo mensaje de Juan Pérez', time: 'Hace 5 min', unread: true },
-    { id: 2, title: 'Tarea completada', message: 'La tarea "Revisar reportes" ha sido completada', time: 'Hace 1 hora', unread: true },
-    { id: 3, title: 'Recordatorio', message: 'Reunión de equipo en 30 minutos', time: 'Hace 2 horas', unread: false },
-    { id: 4, title: 'Actualización del sistema', message: 'Nueva actualización disponible', time: 'Hace 1 día', unread: false },
-  ];
+  // Check if we're on a gerente (Chief Accountant) page
+  const isGerentePage = profile === 'gerente';
+
+  // Mock notifications - for gerente profile, include review requests
+  const mockNotifications = isGerentePage
+    ? [
+        { id: 1, title: 'Review Request', message: '12 items require your approval', time: 'Hace 5 min', unread: true },
+        { id: 2, title: 'Review Request', message: 'Low confidence match from María González', time: 'Hace 1 hora', unread: true },
+        { id: 3, title: 'Team Message', message: 'New message in Team General', time: 'Hace 2 horas', unread: false },
+        { id: 4, title: 'Review Request', message: '3 items pending review', time: 'Hace 1 día', unread: true },
+      ]
+    : [
+        { id: 1, title: 'Nuevo mensaje', message: 'Tienes un nuevo mensaje de Juan Pérez', time: 'Hace 5 min', unread: true },
+        { id: 2, title: 'Tarea completada', message: 'La tarea "Revisar reportes" ha sido completada', time: 'Hace 1 hora', unread: true },
+        { id: 3, title: 'Recordatorio', message: 'Reunión de equipo en 30 minutos', time: 'Hace 2 horas', unread: false },
+        { id: 4, title: 'Actualización del sistema', message: 'Nueva actualización disponible', time: 'Hace 1 día', unread: false },
+      ];
 
   // Close notifications dropdown when clicking outside
   useEffect(() => {
@@ -133,6 +143,9 @@ export default function Topbar({
   const displayName = userName || `${profileInfo.displayName} Usuario`;
   const initials = userInitials || profileInfo.displayName.substring(0, 2).toUpperCase();
 
+  // Mock group name - TODO: Replace with actual data from context/API
+  const groupName = isGerentePage ? 'Medical Group' : null;
+
   // Get context label based on profile and active item
   const getContextLabel = () => {
     return null;
@@ -152,6 +165,11 @@ export default function Topbar({
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
         {isClientContabilidadesPage && profile === 'cliente' && <ClientContabilidadesDropdown />}
         {isClientConfiguracionPage && profile === 'cliente' && <ClientConfiguracionDropdown />}
+        {isGerentePage && groupName && (
+          <div className={styles.groupBadge}>
+            {groupName}
+          </div>
+        )}
         {contextLabel && (
           <div className={styles.contextLabel}>
             {contextLabel}
@@ -165,7 +183,13 @@ export default function Topbar({
           <input
             type="text"
             className={styles.searchInput}
-            placeholder={isAccountantPage ? "Invoice UUID, Client Name, Amount" : "Buscar..."}
+            placeholder={
+              isAccountantPage 
+                ? "Invoice UUID, Client Name, Amount" 
+                : isGerentePage 
+                ? "Search within group..." 
+                : "Buscar..."
+            }
           />
         </div>
       </div>

@@ -54,6 +54,19 @@
   white-space: nowrap;
 }
 
+.groupBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--azure);
+  color: white;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
 .searchContainer {
   position: relative;
   flex: 1;
