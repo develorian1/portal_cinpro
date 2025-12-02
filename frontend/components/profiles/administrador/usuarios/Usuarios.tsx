@@ -2,9 +2,7 @@
 
 import { useEffect } from 'react';
 import { useNavigation } from '@/contexts/NavigationContext';
-import EstructuraEquipos from './EstructuraEquipos';
-import GestionStaff from './GestionStaff';
-import AccesosCliente from './AccesosCliente';
+import { EstructuraEquipos, GestionStaff, AccesosCliente } from './tabs';
 import styles from './Usuarios.module.css';
 
 export default function Usuarios() {

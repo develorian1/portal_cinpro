@@ -45,6 +45,11 @@
   border-bottom: none;
 }
 
+.selectedRow {
+  background-color: rgba(24, 128, 234, 0.05);
+  border-left: 4px solid var(--azure);
+}
+
 .tableCell {
   display: flex;
   align-items: center;

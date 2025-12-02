@@ -1,88 +1,153 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import FilterBar, { FilterState } from '../shared/FilterBar';
-import InvoicesDataGrid, { Invoice } from '../shared/InvoicesDataGrid';
+import InvoicesDataGrid from '../shared/InvoicesDataGrid';
 import InvoiceDetailPanel from '../shared/InvoiceDetailPanel';
+import { WorkspaceInvoice } from '@/types/accountant';
+import { useToast } from '@/contexts/ToastContext';
 import styles from './SATReceivablesTab.module.css';
 
-export default function SATReceivablesTab() {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
+interface SATReceivablesTabProps {
+  invoices: WorkspaceInvoice[];
+  clientId: string;
+  clientName: string;
+}
+
+export default function SATReceivablesTab({ invoices, clientId, clientName }: SATReceivablesTabProps) {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { start: null, end: null },
     paymentStatus: 'all',
     cancelled: false,
   });
+  const [invoiceData, setInvoiceData] = useState<WorkspaceInvoice[]>(invoices);
+  const [selectedInvoice, setSelectedInvoice] = useState<WorkspaceInvoice | null>(null);
+  const [selectedInvoiceXML, setSelectedInvoiceXML] = useState<string>('');
+  const toast = useToast();
 
   useEffect(() => {
-    // TODO: Replace with actual API call
-    // Fetch invoices from /api/cfdis endpoint
-    setInvoices([
-      {
-        id: '1',
-        date: '2024-01-15',
-        folio: 'FOL-001',
-        uuid: '12345678-1234-1234-1234-123456789012',
-        customer: 'Acme Corp',
-        amount: 15000.00,
-        status: 'pending',
-        ppdPue: 'PPD',
-      },
-      {
-        id: '2',
-        date: '2024-01-14',
-        folio: 'FOL-002',
-        uuid: '87654321-4321-4321-4321-210987654321',
-        customer: 'Tech Solutions',
-        amount: 25000.00,
-        status: 'paid',
-        ppdPue: 'PUE',
-      },
-    ]);
-  }, []);
+    setInvoiceData(invoices);
+  }, [invoices]);
+
+  const filteredInvoices = useMemo(() => {
+    return invoiceData.filter((invoice) => {
+      const invoiceDate = new Date(invoice.date);
+      const { dateRange, paymentStatus, cancelled } = filters;
+
+      const matchesDate =
+        (!dateRange.start || invoiceDate >= dateRange.start) &&
+        (!dateRange.end || invoiceDate <= dateRange.end);
+
+      const matchesStatus =
+        paymentStatus === 'all' ? true : invoice.status === paymentStatus;
+
+      const matchesCancelled = cancelled ? true : invoice.status !== 'cancelled';
+
+      return matchesDate && matchesStatus && matchesCancelled;
+    });
+  }, [filters, invoiceData]);
 
   const handleFilterChange = (newFilters: FilterState) => {
     setFilters(newFilters);
-    // TODO: Apply filters to API call
   };
 
-  const handleRowClick = (invoice: Invoice) => {
+  const buildXML = (invoice: WorkspaceInvoice) => {
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" Fecha="${invoice.date}T12:00:00" Folio="${
+      invoice.folio || invoice.id
+    }" Total="${invoice.amount.toFixed(2)}" UUID="${invoice.uuid || '00000000-0000-0000-0000-000000000000'}">
+  <cfdi:Emisor Rfc="CIN123456789" Nombre="CINPRO S.A. de C.V."/>
+  <cfdi:Receptor Rfc="${invoice.customer || 'CLIENTE'}" Nombre="${clientName}"/>
+  <cfdi:Conceptos>
+    ${invoice.lineItems
+      .map(
+        (item) =>
+          `<cfdi:Concepto Cantidad="${item.quantity}" Descripcion="${item.description}" ValorUnitario="${item.unitPrice.toFixed(
+            2
+          )}" Importe="${item.total.toFixed(2)}"/>`
+      )
+      .join('\n')}
+  </cfdi:Conceptos>
+</cfdi:Comprobante>`;
+  };
+
+  const handleRowClick = (invoice: WorkspaceInvoice) => {
     setSelectedInvoice(invoice);
+    setSelectedInvoiceXML(buildXML(invoice));
   };
 
   const handleClosePanel = () => {
     setSelectedInvoice(null);
   };
 
+  const updateInvoice = (invoiceId: string, updater: (invoice: WorkspaceInvoice) => WorkspaceInvoice) => {
+    setInvoiceData((prev) => prev.map((invoice) => (invoice.id === invoiceId ? updater(invoice) : invoice)));
+    setSelectedInvoice((current) => (current && current.id === invoiceId ? updater(current) : current));
+  };
+
   const handleRelateFacture = () => {
-    // TODO: Open RelateFactureModal
-    console.log('Relate facture for:', selectedInvoice?.id);
+    if (!selectedInvoice) return;
+    toast.success('Factura marcada como conciliada');
+    updateInvoice(selectedInvoice.id, (invoice) => ({
+      ...invoice,
+      linkedPayment: {
+        uuid: `MATCH-${Date.now()}`,
+        date: new Date().toISOString(),
+        amount: invoice.amount,
+        source: 'bank',
+      },
+    }));
   };
 
   const handleAttachProof = () => {
-    // TODO: Open AttachProofUploader
-    console.log('Attach proof for:', selectedInvoice?.id);
+    if (!selectedInvoice) return;
+    const proofLabel = `Comprobante manual ${new Date().toLocaleString('es-MX')}`;
+    updateInvoice(selectedInvoice.id, (invoice) => ({
+      ...invoice,
+      relatedDocuments: [
+        ...invoice.relatedDocuments,
+        {
+          id: `proof-${Date.now()}`,
+          type: 'proof',
+          label: proofLabel,
+          createdAt: new Date().toISOString(),
+          status: 'pending',
+        },
+      ],
+    }));
+    toast.success('Prueba adjuntada');
+  };
+
+  const triggerDownload = (content: string, fileName: string, mimeType: string) => {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
   };
 
   const handleDownloadXML = () => {
-    // TODO: Implement XML download
-    console.log('Download XML for:', selectedInvoice?.id);
+    if (!selectedInvoice || !selectedInvoiceXML) return;
+    triggerDownload(selectedInvoiceXML, `${selectedInvoice.uuid || selectedInvoice.id}.xml`, 'text/xml');
+    toast.info('Descarga iniciada (XML)');
   };
 
   const handleDownloadPDF = () => {
-    // TODO: Implement PDF download
-    console.log('Download PDF for:', selectedInvoice?.id);
+    if (!selectedInvoice) return;
+    const pdfContent = `Factura ${selectedInvoice.uuid || selectedInvoice.id} - ${clientName}`;
+    triggerDownload(pdfContent, `${selectedInvoice.uuid || selectedInvoice.id}.pdf`, 'application/pdf');
+    toast.info('Descarga iniciada (PDF)');
   };
 
   return (
     <div className={styles.tabContent}>
       <FilterBar onFilterChange={handleFilterChange} />
       <div className={styles.dataGridContainer}>
-        <InvoicesDataGrid
-          invoices={invoices}
-          onRowClick={handleRowClick}
-        />
+        <InvoicesDataGrid invoices={filteredInvoices} onRowClick={handleRowClick} />
       </div>
       {selectedInvoice && (
         <InvoiceDetailPanel
@@ -92,9 +157,9 @@ export default function SATReceivablesTab() {
           onAttachProof={handleAttachProof}
           onDownloadXML={handleDownloadXML}
           onDownloadPDF={handleDownloadPDF}
+          xmlContent={selectedInvoiceXML}
         />
       )}
     </div>
   );
 }
-

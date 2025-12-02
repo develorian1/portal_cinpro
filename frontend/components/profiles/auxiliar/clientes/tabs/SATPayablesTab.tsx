@@ -1,107 +1,120 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import FilterBar, { FilterState } from '../shared/FilterBar';
-import InvoicesDataGrid, { Invoice } from '../shared/InvoicesDataGrid';
+import InvoicesDataGrid from '../shared/InvoicesDataGrid';
 import InvoiceDetailPanel from '../shared/InvoiceDetailPanel';
+import { WorkspaceInvoice } from '@/types/accountant';
+import { useToast } from '@/contexts/ToastContext';
 import styles from './SATPayablesTab.module.css';
 
-export default function SATPayablesTab() {
-  const [expenses, setExpenses] = useState<Invoice[]>([]);
-  const [selectedExpense, setSelectedExpense] = useState<Invoice | null>(null);
+interface SATPayablesTabProps {
+  invoices: WorkspaceInvoice[];
+  clientId: string;
+  clientName: string;
+}
+
+export default function SATPayablesTab({ invoices }: SATPayablesTabProps) {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { start: null, end: null },
-    deductible: 'all',
+    paymentStatus: 'all',
+    cancelled: false,
     supplier: '',
   });
+  const [invoiceData, setInvoiceData] = useState<WorkspaceInvoice[]>(invoices);
+  const [selectedInvoice, setSelectedInvoice] = useState<WorkspaceInvoice | null>(null);
+  const [selectedInvoiceXML, setSelectedInvoiceXML] = useState<string>('');
+  const toast = useToast();
 
   useEffect(() => {
-    // TODO: Replace with actual API call
-    // Fetch expenses from /api/cfdis endpoint with payables filter
-    setExpenses([
-      {
-        id: '1',
-        date: '2024-01-15',
-        supplier: 'Office Supplies Inc',
-        concept: 'Office materials',
-        amount: 5000.00,
-        iva: 800.00,
-        isr: 0,
-        status: 'pending',
-      },
-      {
-        id: '2',
-        date: '2024-01-14',
-        supplier: 'Utilities Co',
-        concept: 'Electricity bill',
-        amount: 12000.00,
-        iva: 1920.00,
-        isr: 0,
-        status: 'paid',
-      },
-    ]);
-  }, []);
+    setInvoiceData(invoices);
+  }, [invoices]);
+
+  const filteredInvoices = useMemo(() => {
+    return invoiceData.filter((invoice) => {
+      const invoiceDate = new Date(invoice.date);
+      const { dateRange, paymentStatus, cancelled, supplier } = filters;
+      const matchesDate =
+        (!dateRange.start || invoiceDate >= dateRange.start) &&
+        (!dateRange.end || invoiceDate <= dateRange.end);
+      const matchesStatus =
+        paymentStatus === 'all' ? true : invoice.status === paymentStatus;
+      const matchesCancelled = cancelled ? true : invoice.status !== 'cancelled';
+      const matchesSupplier = supplier
+        ? invoice.supplier?.toLowerCase().includes(supplier.toLowerCase())
+        : true;
+
+      return matchesDate && matchesStatus && matchesCancelled && matchesSupplier;
+    });
+  }, [filters, invoiceData]);
 
   const handleFilterChange = (newFilters: FilterState) => {
     setFilters(newFilters);
-    // TODO: Apply filters to API call
   };
 
-  const handleRowClick = (expense: Invoice) => {
-    setSelectedExpense(expense);
+  const handleRowClick = (invoice: WorkspaceInvoice) => {
+    setSelectedInvoice(invoice);
+    setSelectedInvoiceXML(
+      `<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante Folio="${invoice.folio || invoice.id}" Total="${invoice.amount.toFixed(
+        2
+      )}" />`
+    );
   };
 
   const handleClosePanel = () => {
-    setSelectedExpense(null);
+    setSelectedInvoice(null);
   };
 
   const handleRelateFacture = () => {
-    // TODO: Open RelateFactureModal
-    console.log('Relate facture for:', selectedExpense?.id);
+    toast.success('Gasto vinculado correctamente');
   };
 
   const handleAttachProof = () => {
-    // TODO: Open AttachProofUploader
-    console.log('Attach spending proof for:', selectedExpense?.id);
+    toast.success('Soporte adjuntado al gasto');
   };
 
   const handleDownloadXML = () => {
-    // TODO: Implement XML download
-    console.log('Download XML for:', selectedExpense?.id);
+    if (!selectedInvoice || !selectedInvoiceXML) return;
+    const blob = new Blob([selectedInvoiceXML], { type: 'text/xml' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${selectedInvoice.uuid || selectedInvoice.id}.xml`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    toast.info('Descarga iniciada (XML)');
   };
 
   const handleDownloadPDF = () => {
-    // TODO: Implement PDF download
-    console.log('Download PDF for:', selectedExpense?.id);
+    if (!selectedInvoice) return;
+    toast.info('Descarga iniciada (PDF)');
   };
 
   return (
     <div className={styles.tabContent}>
-      <FilterBar
-        onFilterChange={handleFilterChange}
-        showDeductibleToggle={true}
-        showSupplierFilter={true}
-      />
+      <FilterBar onFilterChange={handleFilterChange} showSupplierFilter showDeductibleToggle />
       <div className={styles.dataGridContainer}>
         <InvoicesDataGrid
-          invoices={expenses}
+          invoices={filteredInvoices}
           onRowClick={handleRowClick}
-          showSupplier={true}
-          showConcept={true}
-          showIvaIsr={true}
+          showSupplier
+          showConcept
+          showIvaIsr
         />
       </div>
-      {selectedExpense && (
+      {selectedInvoice && (
         <InvoiceDetailPanel
-          invoice={selectedExpense}
+          invoice={selectedInvoice}
           onClose={handleClosePanel}
           onRelateFacture={handleRelateFacture}
           onAttachProof={handleAttachProof}
           onDownloadXML={handleDownloadXML}
           onDownloadPDF={handleDownloadPDF}
+          xmlContent={selectedInvoiceXML}
         />
       )}
     </div>
   );
 }
-

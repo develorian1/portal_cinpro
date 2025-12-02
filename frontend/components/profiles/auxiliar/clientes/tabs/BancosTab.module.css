@@ -34,23 +34,22 @@
   width: 100%;
   max-width: 400px;
   padding: 10px 14px;
-  padding-right: 36px;
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  background-image: none;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 [data-theme="dark"] .selector {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-color: var(--bg-primary);
+  background-image: none;
 }
 
 .dropzone {
@@ -131,6 +130,18 @@
   margin: 0;
 }
 
+.editorSubtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.editorActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .bulkActions {
   display: flex;
   gap: 8px;
@@ -151,6 +162,128 @@
 .bulkButton:hover {
   background: var(--bg-hover);
   border-color: var(--azure);
+}
+
+.saveButton {
+  padding: 8px 16px;
+  background: var(--azure);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.transactionsTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.tableHeader,
+.tableRow {
+  display: grid;
+  grid-template-columns: 60px 140px 1.2fr 1fr 120px 120px 140px 160px;
+  gap: 12px;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+.tableHeader {
+  background: var(--bg-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.tableRow {
+  border-top: 1px solid var(--border-primary);
+}
+
+.tableCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cellInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+}
+
+.balanceValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.rowActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.rowActionButton,
+.rowActionButtonSecondary {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-primary);
+  background: var(--surface-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.rowActionButton:hover {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.rowActionButtonSecondary:hover {
+  border-color: var(--warning);
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.statusBadge {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.staged {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.sent {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.flagged {
+  background: var(--warning-bg);
+  color: var(--warning);
 }
 
 .editorPlaceholder {

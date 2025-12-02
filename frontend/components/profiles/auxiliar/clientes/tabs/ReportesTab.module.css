@@ -33,23 +33,22 @@
 .formSelect {
   width: 100%;
   padding: 10px 14px;
-  padding-right: 36px;
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  background-image: none;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 [data-theme="dark"] .formSelect {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-color: var(--bg-primary);
+  background-image: none;
 }
 
 .dateInputs {
@@ -119,6 +118,138 @@
 .generateButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.buttonsRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.secondaryButton {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.secondaryButton:hover {
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.presetsSection,
+.jobsSection {
+  margin-top: 24px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  padding: 16px;
+}
+
+.presetList {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.presetChip {
+  padding: 6px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.presetChip:hover {
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.emptyState {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 12px 0 0 0;
+}
+
+.jobsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.jobCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+}
+
+.jobTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.jobMeta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.jobStatus {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.jobStatus.queued,
+.jobStatus.processing {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.jobStatus.ready {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.jobStatus.failed {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.jobActions {
+  display: flex;
+  gap: 8px;
+}
+
+.downloadButton,
+.retryButton {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.downloadButton {
+  background: var(--azure);
+  color: var(--white);
+}
+
+.retryButton {
+  background: var(--warning);
+  color: var(--white);
 }
 
 .spinner {

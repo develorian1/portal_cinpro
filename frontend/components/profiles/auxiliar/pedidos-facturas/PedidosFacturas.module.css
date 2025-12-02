@@ -1,0 +1,578 @@
+.pedidosFacturas {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  gap: 24px;
+}
+
+/* When showing detail view, remove all padding and margins */
+.pedidosFacturas.detailView {
+  padding: 0;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+  margin: -24px;
+  width: calc(100% + 48px);
+  max-width: none;
+}
+
+.header {
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.filtersSection {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filterLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filterInput,
+.filterSelect,
+.searchInput {
+  padding: 8px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  background-color: var(--bg-primary);
+}
+
+.filterSelect {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+[data-theme="dark"] .filterSelect {
+  background-color: var(--bg-primary);
+  background-image: none;
+}
+
+.filterInput:focus,
+.filterSelect:focus,
+.searchInput:focus {
+  outline: none;
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(24, 128, 234, 0.1);
+}
+
+[data-theme="dark"] .filterSelect:focus {
+  box-shadow: 0 0 0 3px rgba(77, 163, 247, 0.2);
+}
+
+.dataGrid {
+  flex: 1;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.gridHeader {
+  display: grid;
+  grid-template-columns: 150px 120px 1fr 120px 120px 120px 120px;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.headerCell {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.gridBody {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 150px 120px 1fr 120px 120px 120px 120px;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.gridRow:hover {
+  background-color: var(--bg-hover);
+}
+
+.gridRow:last-child {
+  border-bottom: none;
+}
+
+.gridCell {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.uuidText {
+  font-family: monospace;
+  font-size: 0.8125rem;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusPending {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.statusApproved {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.statusRejected {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.approveButton,
+.rejectButton,
+.viewButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-primary);
+  background: var(--surface-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.approveButton:hover {
+  border-color: var(--success);
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.rejectButton:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.viewButton:hover {
+  border-color: var(--azure);
+  color: var(--azure);
+  background: var(--bg-secondary);
+}
+
+.emptyState {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.detailTableBody .emptyState {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-muted);
+  justify-content: center;
+}
+
+/* Detail View Styles */
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-primary);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.backButton svg {
+  flex-shrink: 0;
+}
+
+.saveButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--azure);
+  background: var(--azure);
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.saveButton:hover {
+  background: #1570c4;
+  border-color: #1570c4;
+}
+
+.saveButton svg {
+  flex-shrink: 0;
+}
+
+.detailTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.detailTitleText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.detailSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+
+/* Invoice Template Styles */
+.invoiceContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--bg-secondary);
+}
+
+.invoiceTemplate {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.invoiceSection {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.invoiceSection:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subsectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--azure);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.invoiceMetadata {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.metadataItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metadataLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metadataValue {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoValue {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+/* Conceptos Table */
+.conceptsTable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.conceptsHeader {
+  display: grid;
+  grid-template-columns: 100px 120px 1fr 140px 140px;
+  gap: 0;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.conceptHeaderCell {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  border-right: 1px solid var(--border-primary);
+}
+
+.conceptHeaderCell:last-child {
+  border-right: none;
+}
+
+.conceptsBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.conceptRow {
+  display: grid;
+  grid-template-columns: 100px 120px 1fr 140px 140px;
+  gap: 0;
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.2s ease;
+}
+
+.conceptRow:hover {
+  background-color: var(--bg-hover);
+}
+
+.conceptRow:last-child {
+  border-bottom: none;
+}
+
+.conceptCell {
+  padding: 8px 16px;
+  border-right: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+}
+
+.conceptCell:last-child {
+  border-right: none;
+}
+
+.editableInput {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.editableInput:hover {
+  border-color: var(--border-primary);
+  background: var(--bg-secondary);
+}
+
+.editableInput:focus {
+  outline: none;
+  border-color: var(--azure);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px rgba(24, 128, 234, 0.1);
+}
+
+.wideInput {
+  min-width: 200px;
+}
+
+.calculatedValue {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+/* Totals Section */
+.totalsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin-left: auto;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.totalRow:last-child {
+  border-bottom: none;
+}
+
+.grandTotal {
+  padding: 12px 0;
+  border-top: 2px solid var(--border-primary);
+  border-bottom: 2px solid var(--border-primary);
+  margin-top: 8px;
+}
+
+.totalLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.grandTotal .totalLabel {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.totalValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: monospace;
+}
+
+.grandTotal .totalValue {
+  font-size: 1.25rem;
+  color: var(--azure);
+}
+

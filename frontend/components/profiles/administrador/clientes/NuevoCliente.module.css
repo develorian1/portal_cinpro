@@ -65,7 +65,11 @@
   font-size: 0.875rem;
   color: var(--text-primary);
   background: var(--surface-primary);
+  background-color: var(--surface-primary);
   transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .formField input:focus,
@@ -78,12 +82,14 @@
 .formField input:disabled,
 .formField select:disabled {
   background: var(--bg-tertiary);
+  background-color: var(--bg-tertiary);
   cursor: not-allowed;
 }
 
 [data-theme="dark"] .formField input,
 [data-theme="dark"] .formField select {
   background: var(--surface-secondary);
+  background-color: var(--surface-secondary);
   border-color: var(--border-primary);
 }
 

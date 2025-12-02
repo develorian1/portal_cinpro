@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Invoice } from './InvoicesDataGrid';
+import XMLViewerModal from './XMLViewerModal';
 import styles from './InvoiceDetailPanel.module.css';
 
 interface InvoiceDetailPanelProps {
@@ -11,6 +12,7 @@ interface InvoiceDetailPanelProps {
   onAttachProof: () => void;
   onDownloadXML: () => void;
   onDownloadPDF: () => void;
+  xmlContent?: string;
 }
 
 export default function InvoiceDetailPanel({
@@ -20,7 +22,10 @@ export default function InvoiceDetailPanel({
   onAttachProof,
   onDownloadXML,
   onDownloadPDF,
+  xmlContent,
 }: InvoiceDetailPanelProps) {
+  const [showXMLViewer, setShowXMLViewer] = useState(false);
+
   if (!invoice) return null;
 
   const formatCurrency = (amount: number) => {
@@ -52,18 +57,42 @@ export default function InvoiceDetailPanel({
           <div className={styles.section}>
             <h4 className={styles.sectionTitle}>Line Items</h4>
             <div className={styles.lineItemsList}>
-              <div className={styles.lineItem}>
-                <span className={styles.lineItemQty}>1</span>
-                <span className={styles.lineItemDesc}>Item description placeholder</span>
-                <span className={styles.lineItemPrice}>{formatCurrency(invoice.amount)}</span>
-              </div>
+              {invoice.lineItems?.length ? (
+                invoice.lineItems.map((item) => (
+                  <div key={item.id} className={styles.lineItem}>
+                    <span className={styles.lineItemQty}>{item.quantity}</span>
+                    <span className={styles.lineItemDesc}>{item.description}</span>
+                    <span className={styles.lineItemPrice}>{formatCurrency(item.total)}</span>
+                  </div>
+                ))
+              ) : (
+                <p className={styles.emptyMessage}>Sin conceptos registrados</p>
+              )}
             </div>
+            {invoice.linkedPayment && (
+              <div className={styles.linkedPayment}>
+                Vinculado a pago {invoice.linkedPayment.uuid} del{' '}
+                {new Date(invoice.linkedPayment.date).toLocaleDateString('es-MX')}
+              </div>
+            )}
           </div>
 
           <div className={styles.section}>
             <h4 className={styles.sectionTitle}>Related Documents</h4>
             <div className={styles.relatedDocumentsList}>
-              <p className={styles.emptyMessage}>No related documents</p>
+              {invoice.relatedDocuments?.length ? (
+                invoice.relatedDocuments.map((document) => (
+                  <div key={document.id} className={styles.relatedDocument}>
+                    <div className={styles.relatedMeta}>
+                      <span className={styles.relatedLabel}>{document.label}</span>
+                      <span className={styles.relatedType}>{document.type}</span>
+                    </div>
+                    <span className={styles.relatedStatus}>{document.status}</span>
+                  </div>
+                ))
+              ) : (
+                <p className={styles.emptyMessage}>No hay documentos relacionados</p>
+              )}
             </div>
           </div>
         </div>
@@ -75,6 +104,11 @@ export default function InvoiceDetailPanel({
           <button className={styles.actionButton} onClick={onAttachProof}>
             Attach Bank Proof
           </button>
+          {xmlContent && (
+            <button className={styles.actionButton} onClick={() => setShowXMLViewer(true)}>
+              Ver XML
+            </button>
+          )}
           <button className={styles.actionButton} onClick={onDownloadXML}>
             Download XML
           </button>
@@ -83,6 +117,18 @@ export default function InvoiceDetailPanel({
           </button>
         </div>
       </div>
+      {showXMLViewer && xmlContent && (
+        <XMLViewerModal
+          xmlContent={xmlContent}
+          invoiceMetadata={{
+            uuid: invoice.uuid,
+            date: invoice.date,
+            total: invoice.amount,
+            folio: invoice.folio,
+          }}
+          onClose={() => setShowXMLViewer(false)}
+        />
+      )}
     </div>
   );
 }

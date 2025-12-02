@@ -1,14 +1,18 @@
 'use client';
 
 import { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import { ClientTab, WorkspaceClient } from '@/types/accountant';
 
-export type ClientTab = 'sat-receivables' | 'sat-payables' | 'bancos' | 'conciliacion' | 'reportes';
+export type { ClientTab } from '@/types/accountant';
 
 interface ClientContextType {
   selectedClientId: string | undefined;
   setSelectedClientId: (clientId: string | undefined) => void;
   activeTab: ClientTab;
   setActiveTab: (tab: ClientTab) => void;
+  clients: WorkspaceClient[];
+  setClients: (clients: WorkspaceClient[]) => void;
+  getClientById: (clientId?: string) => WorkspaceClient | undefined;
 }
 
 const ClientContext = createContext<ClientContextType | undefined>(undefined);
@@ -22,6 +26,7 @@ export function ClientProvider({
 }) {
   const [selectedClientId, setSelectedClientId] = useState<string | undefined>(undefined);
   const [activeTab, setActiveTab] = useState<ClientTab>(defaultTab);
+  const [clients, setClients] = useState<WorkspaceClient[]>([]);
 
   const value = useMemo(
     () => ({
@@ -29,8 +34,12 @@ export function ClientProvider({
       setSelectedClientId,
       activeTab,
       setActiveTab,
+      clients,
+      setClients,
+      getClientById: (clientId?: string) =>
+        clientId ? clients.find((client) => client.id === clientId) : undefined,
     }),
-    [selectedClientId, activeTab]
+    [selectedClientId, activeTab, clients]
   );
 
   return (
@@ -49,6 +58,9 @@ export function useClient() {
       setSelectedClientId: () => {},
       activeTab: 'sat-receivables' as const,
       setActiveTab: () => {},
+      clients: [],
+      setClients: () => {},
+      getClientById: () => undefined,
     };
   }
   return context;

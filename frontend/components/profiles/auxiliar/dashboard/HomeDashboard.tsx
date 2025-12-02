@@ -1,58 +1,81 @@
+
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useNavigation } from '@/contexts/NavigationContext';
+import { useEffect, useState } from 'react';
+import { useWorkspaceNavigation } from '@/hooks/useWorkspaceNavigation';
+import { useToast } from '@/contexts/ToastContext';
 import StatusCounter from './StatusCounter';
 import TaskList from './TaskList';
 import type { Task } from './TaskCard';
+import { DashboardCounts, WorkspaceTask } from '@/types/accountant';
 import styles from './HomeDashboard.module.css';
 
+interface WorkspaceResponse {
+  counts: DashboardCounts;
+  tasks: WorkspaceTask[];
+}
+
 export default function HomeDashboard() {
-  const router = useRouter();
-  const { setActiveItem } = useNavigation();
+  const { goToClientWorkspace } = useWorkspaceNavigation();
+  const toast = useToast();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [counts, setCounts] = useState({
     pendingReconciliations: 0,
     missingStatements: 0,
     rejectedItems: 0,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // TODO: Replace with actual API call
-    // Fetch tasks and counts from API
-    setTasks([
-      {
-        id: '1',
-        priority: 'high',
-        client: 'Acme Corp',
-        description: 'Reconcile Q4 bank statements',
-        dueDate: '2024-01-15',
-        status: 'pending',
-      },
-      {
-        id: '2',
-        priority: 'medium',
-        client: 'Tech Solutions',
-        description: 'Review missing invoices',
-        dueDate: '2024-01-20',
-        status: 'in-progress',
-      },
-    ]);
+    let isMounted = true;
 
-    setCounts({
-      pendingReconciliations: 12,
-      missingStatements: 5,
-      rejectedItems: 3,
-    });
-  }, []);
+    const fetchWorkspace = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/auxiliar/workspace');
+        if (!response.ok) {
+          throw new Error('Failed to load workspace data');
+        }
+        const data: WorkspaceResponse = await response.json();
+        if (!isMounted) return;
+
+        const mappedTasks: Task[] = data.tasks.map((task) => ({
+          id: task.id,
+          priority: task.priority,
+          client: task.clientName,
+          description: task.description,
+          dueDate: task.dueDate,
+          status: task.status === 'in-progress' ? 'in-progress' : 'pending',
+          clientId: task.clientId,
+          targetTab: task.targetTab,
+        }));
+
+        setTasks(mappedTasks);
+        setCounts(data.counts);
+      } catch (error) {
+        if (isMounted) {
+          toast.error('No se pudo cargar el tablero de tareas');
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchWorkspace();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [toast]);
 
   const handleStartTask = (taskId: string) => {
-    const task = tasks.find(t => t.id === taskId);
-    if (task) {
-      setActiveItem('clientes');
-      // TODO: Navigate to specific client workspace
-      router.push('/auxiliar/clientes');
+    const task = tasks.find((t) => t.id === taskId);
+    if (task?.clientId && task?.targetTab) {
+      goToClientWorkspace(task.clientId, task.targetTab);
+    } else {
+      toast.info('Selecciona un cliente desde el directorio');
     }
   };
 
@@ -63,43 +86,26 @@ export default function HomeDashboard() {
           title="Conciliaciones Pendientes"
           count={counts.pendingReconciliations}
           status="danger"
-          icon={
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-          }
         />
         <StatusCounter
           title="Estados de Cuenta Faltantes"
           count={counts.missingStatements}
           status="warning"
-          icon={
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-            </svg>
-          }
         />
         <StatusCounter
           title="Elementos Rechazados"
           count={counts.rejectedItems}
           status="danger"
-          icon={
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="15" y1="9" x2="9" y2="15" />
-              <line x1="9" y1="9" x2="15" y2="15" />
-            </svg>
-          }
         />
       </div>
 
       <div className={styles.taskSection}>
-        <TaskList tasks={tasks} onStartTask={handleStartTask} />
+        {isLoading ? (
+          <div className={styles.loadingState}>Cargando tareas...</div>
+        ) : (
+          <TaskList tasks={tasks} onStartTask={handleStartTask} />
+        )}
       </div>
     </div>
   );
 }
-

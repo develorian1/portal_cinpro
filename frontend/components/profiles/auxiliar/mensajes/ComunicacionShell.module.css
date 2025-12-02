@@ -1,0 +1,31 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tabButton {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.tabButton.active {
+  background: var(--azure);
+  color: var(--white);
+  border-color: var(--azure);
+}
+
+.viewBody {
+  flex: 1;
+  min-height: 0;
+}

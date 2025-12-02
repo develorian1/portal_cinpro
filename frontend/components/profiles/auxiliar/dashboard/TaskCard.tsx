@@ -1,5 +1,6 @@
 'use client';
 
+import { ClientTab } from '@/types/accountant';
 import styles from './TaskCard.module.css';
 
 export interface Task {
@@ -9,6 +10,8 @@ export interface Task {
   description: string;
   dueDate: string;
   status: 'pending' | 'in-progress' | 'completed';
+  clientId?: string;
+  targetTab?: ClientTab;
 }
 
 export type { Task };
@@ -18,46 +21,30 @@ interface TaskCardProps {
   onStart: (taskId: string) => void;
 }
 
-export default function TaskCard({ task, onStart }: TaskCardProps) {
-  const priorityColors = {
-    high: 'danger',
-    medium: 'warning',
-    low: 'success',
-  } as const;
+const priorityConfig = {
+  high: { label: 'Alta', color: 'danger' },
+  medium: { label: 'Media', color: 'warning' },
+  low: { label: 'Baja', color: 'success' },
+} as const;
 
-  const priorityLabels = {
-    high: 'Alta',
-    medium: 'Media',
-    low: 'Baja',
-  } as const;
+export default function TaskCard({ task, onStart }: TaskCardProps) {
+  const { label, color } = priorityConfig[task.priority];
 
   return (
     <div className={styles.taskCard}>
-      <div className={styles.taskRow}>
-        <div className={styles.taskCell}>
-          <span className={`${styles.priorityBadge} ${styles[priorityColors[task.priority]]}`}>
-            {priorityLabels[task.priority]}
-          </span>
-        </div>
-        <div className={styles.taskCell}>
-          <span className={styles.clientName}>{task.client}</span>
-        </div>
-        <div className={styles.taskCell}>
-          <span className={styles.taskDescription}>{task.description}</span>
-        </div>
-        <div className={styles.taskCell}>
-          <span className={styles.dueDate}>{new Date(task.dueDate).toLocaleDateString()}</span>
-        </div>
-        <div className={styles.taskCell}>
-          <button
-            className={styles.startButton}
-            onClick={() => onStart(task.id)}
-            aria-label={`Iniciar tarea para ${task.client}`}
-          >
-            Iniciar
-          </button>
-        </div>
+      <span className={`${styles.priorityBadge} ${styles[color]}`}>{label}</span>
+      <div className={styles.taskInfo}>
+        <span className={styles.clientName}>{task.client}</span>
+        <span className={styles.taskDescription}>{task.description}</span>
+        <span className={styles.dueDate}>{new Date(task.dueDate).toLocaleDateString()}</span>
       </div>
+      <button
+        className={styles.startButton}
+        onClick={() => onStart(task.id)}
+        aria-label={`Iniciar tarea para ${task.client}`}
+      >
+        Iniciar
+      </button>
     </div>
   );
 }

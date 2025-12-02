@@ -14,3 +14,11 @@
   margin-top: 8px;
 }
 
+.loadingState {
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary);
+  border: 1px dashed var(--border-primary);
+  border-radius: var(--radius-md);
+}
+

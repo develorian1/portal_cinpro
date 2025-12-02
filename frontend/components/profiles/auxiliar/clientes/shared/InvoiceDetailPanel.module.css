@@ -138,6 +138,52 @@
   gap: 8px;
 }
 
+.relatedDocument {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--surface-primary);
+}
+
+.relatedMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.relatedLabel {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.relatedType {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.relatedStatus {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.linkedPayment {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  border-left: 3px solid var(--azure);
+  background: rgba(24, 128, 234, 0.08);
+  border-radius: var(--radius-sm);
+}
+
 .emptyMessage {
   font-size: 0.875rem;
   color: var(--text-muted);
@@ -175,3 +221,8 @@
   transform: translateY(0);
 }
 
+.relatedLabel {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}

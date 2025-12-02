@@ -1,12 +1,25 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ProfileType } from '@/types/profile';
 import { PROFILE_TYPES } from '@/types/profile';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useClient } from '@/contexts/ClientContext';
-import { FinanzasDropdown, EstadisticasDropdown, UsuariosDropdown, AdminUsuariosDropdown, AdminClientesDropdown, AdminFinanzasDropdown, ClientContabilidadesDropdown, ClientConfiguracionDropdown, AuxiliarClientesDropdown } from '@/components/shared';
+import { useNotifications } from '@/contexts/NotificationContext';
+import { useWorkspaceNavigation } from '@/hooks/useWorkspaceNavigation';
+import { ClientTab } from '@/types/accountant';
+import {
+  FinanzasDropdown,
+  EstadisticasDropdown,
+  UsuariosDropdown,
+  AdminUsuariosDropdown,
+  AdminClientesDropdown,
+  AdminFinanzasDropdown,
+  ClientContabilidadesDropdown,
+  ClientConfiguracionDropdown,
+  AuxiliarClientesDropdown,
+} from '@/components/shared';
 import styles from './Topbar.module.css';
 
 type UserStatus = 'activo' | 'ausente' | 'inactivo';
@@ -17,38 +30,98 @@ interface TopbarProps {
   userInitials?: string;
 }
 
+interface SearchResult {
+  id: string;
+  label: string;
+  description: string;
+  type: 'client' | 'invoice' | 'expense';
+  clientId: string;
+  tab: ClientTab;
+}
+
 export default function Topbar({
   profile = 'director',
   userName,
-  userInitials
+  userInitials,
 }: TopbarProps) {
   const { activeItem } = useNavigation();
   const { theme, toggleTheme } = useTheme();
-  const { selectedClientId } = useClient();
+  const { goToClientWorkspace } = useWorkspaceNavigation();
+  const { selectedClientId, clients } = useClient();
+  const { notifications, unreadCount, markRead, markAllRead, removeNotification } = useNotifications();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const profileDropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [userStatus, setUserStatus] = useState<UserStatus>('activo');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const searchBlurTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Check if we're on a gerente (Chief Accountant) page
   const isGerentePage = profile === 'gerente';
+  const isFinanzasPage =
+    activeItem === 'finanzas' ||
+    activeItem === 'finanzas-receivables' ||
+    activeItem === 'finanzas-payables' ||
+    activeItem === 'finanzas-reports';
 
-  // Mock notifications - for gerente profile, include review requests
-  const mockNotifications = isGerentePage
-    ? [
-        { id: 1, title: 'Review Request', message: '12 items require your approval', time: 'Hace 5 min', unread: true },
-        { id: 2, title: 'Review Request', message: 'Low confidence match from María González', time: 'Hace 1 hora', unread: true },
-        { id: 3, title: 'Team Message', message: 'New message in Team General', time: 'Hace 2 horas', unread: false },
-        { id: 4, title: 'Review Request', message: '3 items pending review', time: 'Hace 1 día', unread: true },
-      ]
-    : [
-        { id: 1, title: 'Nuevo mensaje', message: 'Tienes un nuevo mensaje de Juan Pérez', time: 'Hace 5 min', unread: true },
-        { id: 2, title: 'Tarea completada', message: 'La tarea "Revisar reportes" ha sido completada', time: 'Hace 1 hora', unread: true },
-        { id: 3, title: 'Recordatorio', message: 'Reunión de equipo en 30 minutos', time: 'Hace 2 horas', unread: false },
-        { id: 4, title: 'Actualización del sistema', message: 'Nueva actualización disponible', time: 'Hace 1 día', unread: false },
-      ];
+  const isAdminClientesPage =
+    (activeItem === 'clientes' ||
+      activeItem === 'clientes-directorio' ||
+      activeItem === 'clientes-nuevo-cliente' ||
+      activeItem === 'clientes-certificados') &&
+    profile === 'administrador';
+
+  const isEstadisticasPage =
+    activeItem === 'estadisticas' ||
+    activeItem === 'estadisticas-empleados' ||
+    activeItem === 'estadisticas-clientes' ||
+    activeItem === 'estadisticas-equipos' ||
+    activeItem === 'estadisticas-finanzas' ||
+    activeItem === 'estadisticas-onboarding' ||
+    activeItem === 'estadisticas-collection' ||
+    activeItem === 'estadisticas-support';
+
+  const isUsuariosPage =
+    activeItem === 'usuarios' ||
+    activeItem === 'usuarios-auxiliares' ||
+    activeItem === 'usuarios-admins' ||
+    activeItem === 'usuarios-jefes';
+
+  const isAdminUsuariosPage =
+    activeItem === 'usuarios' ||
+    activeItem === 'usuarios-estructura' ||
+    activeItem === 'usuarios-gestion' ||
+    activeItem === 'usuarios-accesos';
+
+  const isAdminFinanzasPage =
+    (activeItem === 'finanzas' ||
+      activeItem === 'finanzas-verificar-pagos' ||
+      activeItem === 'finanzas-cobranza' ||
+      activeItem === 'finanzas-certificados') &&
+    profile === 'administrador';
+
+  const isClientContabilidadesPage =
+    activeItem === 'client-contabilidades' ||
+    activeItem === 'client-contabilidades-progress' ||
+    activeItem === 'client-contabilidades-overview';
+
+  const isClientConfiguracionPage =
+    activeItem === 'client-configuracion' ||
+    activeItem === 'client-config-certificates' ||
+    activeItem === 'client-config-documents' ||
+    activeItem === 'client-config-profile';
+
+  const isAccountantPage = profile === 'auxiliar';
+  const isAuxiliarClientPage =
+    isAccountantPage && activeItem === 'clientes' && Boolean(selectedClientId);
+
+  const profileInfo = PROFILE_TYPES[profile];
+  const displayName = userName || `${profileInfo.displayName} Usuario`;
+  const initials = userInitials || profileInfo.displayName.substring(0, 2).toUpperCase();
+
 
   // Close notifications dropdown when clicking outside
   useEffect(() => {
@@ -67,91 +140,107 @@ export default function Topbar({
     };
   }, [notificationsOpen]);
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (profileDropdownTimeoutRef.current) {
         clearTimeout(profileDropdownTimeoutRef.current);
       }
+      if (searchBlurTimeoutRef.current) {
+        clearTimeout(searchBlurTimeoutRef.current);
+      }
     };
   }, []);
-  
-  // Check if we're on a finanzas page (director)
-  const isFinanzasPage = activeItem === 'finanzas' || 
-    activeItem === 'finanzas-receivables' || 
-    activeItem === 'finanzas-payables' || 
-    activeItem === 'finanzas-reports';
 
-  // Check if we're on an admin clientes page
-  const isAdminClientesPage = (activeItem === 'clientes' || 
-    activeItem === 'clientes-directorio' || 
-    activeItem === 'clientes-nuevo-cliente' || 
-    activeItem === 'clientes-certificados') && profile === 'administrador';
+  // Build omnibox results whenever query or clients change
+  useEffect(() => {
+    if (!searchQuery || searchQuery.trim().length < 2) {
+      setSearchResults([]);
+      return;
+    }
 
-  // Check if we're on an estadisticas page
-  const isEstadisticasPage = activeItem === 'estadisticas' || 
-    activeItem === 'estadisticas-empleados' || 
-    activeItem === 'estadisticas-clientes' || 
-    activeItem === 'estadisticas-equipos' || 
-    activeItem === 'estadisticas-finanzas' ||
-    activeItem === 'estadisticas-onboarding' ||
-    activeItem === 'estadisticas-collection' ||
-    activeItem === 'estadisticas-support';
+    const normalized = searchQuery.trim().toLowerCase();
+    const results: SearchResult[] = [];
 
-  // Check if we're on a usuarios page
-  const isUsuariosPage = activeItem === 'usuarios' || 
-    activeItem === 'usuarios-auxiliares' || 
-    activeItem === 'usuarios-admins' || 
-    activeItem === 'usuarios-jefes';
+    clients.forEach((client) => {
+      if (
+        client.entityName.toLowerCase().includes(normalized) ||
+        client.rfc.toLowerCase().includes(normalized)
+      ) {
+        results.push({
+          id: `client-${client.id}`,
+          label: client.entityName,
+          description: client.rfc,
+          type: 'client',
+          clientId: client.id,
+          tab: 'sat-receivables',
+        });
+      }
 
-  // Check if we're on an admin usuarios page
-  const isAdminUsuariosPage = activeItem === 'usuarios' || 
-    activeItem === 'usuarios-estructura' || 
-    activeItem === 'usuarios-gestion' || 
-    activeItem === 'usuarios-accesos';
+      client.receivables.forEach((invoice) => {
+        if (
+          invoice.uuid?.toLowerCase().includes(normalized) ||
+          invoice.folio?.toLowerCase().includes(normalized) ||
+          invoice.customer?.toLowerCase().includes(normalized)
+        ) {
+          results.push({
+            id: `invoice-${invoice.id}`,
+            label: invoice.uuid || invoice.folio || 'CFDI',
+            description: `${client.entityName} · ${invoice.amount.toLocaleString('es-MX', {
+              style: 'currency',
+              currency: 'MXN',
+            })}`,
+            type: 'invoice',
+            clientId: client.id,
+            tab: 'sat-receivables',
+          });
+        }
+      });
 
-  // Check if we're on an admin finanzas page
-  const isAdminFinanzasPage = (activeItem === 'finanzas' || 
-    activeItem === 'finanzas-verificar-pagos' || 
-    activeItem === 'finanzas-cobranza' ||
-    activeItem === 'finanzas-certificados') && profile === 'administrador';
+      client.payables.forEach((expense) => {
+        if (
+          expense.supplier?.toLowerCase().includes(normalized) ||
+          expense.concept?.toLowerCase().includes(normalized)
+        ) {
+          results.push({
+            id: `expense-${expense.id}`,
+            label: expense.supplier || 'Proveedor',
+            description: `${expense.concept || ''} · ${expense.amount.toLocaleString('es-MX', {
+              style: 'currency',
+              currency: 'MXN',
+            })}`,
+            type: 'expense',
+            clientId: client.id,
+            tab: 'sat-payables',
+          });
+        }
+      });
+    });
 
-  // Check if we're on a client contabilidades page
-  const isClientContabilidadesPage = activeItem === 'client-contabilidades' || 
-    activeItem === 'client-contabilidades-progress' || 
-    activeItem === 'client-contabilidades-overview';
+    setSearchResults(results.slice(0, 6));
+  }, [clients, searchQuery]);
 
-  // Check if we're on a client configuracion page
-  const isClientConfiguracionPage = activeItem === 'client-configuracion' || 
-    activeItem === 'client-config-certificates' || 
-    activeItem === 'client-config-documents' || 
-    activeItem === 'client-config-profile';
 
-  // Check if we're on an accountant (auxiliar) page
-  const isAccountantPage = profile === 'auxiliar' && (
-    activeItem === 'home' ||
-    activeItem === 'clientes'
+  const handleNotificationClick = useCallback(
+    (notificationId: string, clientId?: string, tab?: ClientTab) => {
+      markRead(notificationId);
+      if (clientId && tab) {
+        goToClientWorkspace(clientId, tab);
+      }
+      setNotificationsOpen(false);
+    },
+    [goToClientWorkspace, markRead]
   );
 
-  // Check if we're viewing a client detail (auxiliar profile with selected client)
-  const isAuxiliarClientPage = profile === 'auxiliar' && 
-    activeItem === 'clientes' && 
-    selectedClientId !== undefined;
+  const handleSearchSelect = useCallback(
+    (result: SearchResult) => {
+      goToClientWorkspace(result.clientId, result.tab);
+      setSearchQuery('');
+      setSearchResults([]);
+      setSearchFocused(false);
+    },
+    [goToClientWorkspace]
+  );
 
-  // Get display name and initials based on profile
-  const profileInfo = PROFILE_TYPES[profile];
-  const displayName = userName || `${profileInfo.displayName} Usuario`;
-  const initials = userInitials || profileInfo.displayName.substring(0, 2).toUpperCase();
-
-  // Mock group name - TODO: Replace with actual data from context/API
-  const groupName = isGerentePage ? 'Medical Group' : null;
-
-  // Get context label based on profile and active item
-  const getContextLabel = () => {
-    return null;
-  };
-
-  const contextLabel = getContextLabel();
 
   return (
     <header className={styles.topbar}>
@@ -165,18 +254,16 @@ export default function Topbar({
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
         {isClientContabilidadesPage && profile === 'cliente' && <ClientContabilidadesDropdown />}
         {isClientConfiguracionPage && profile === 'cliente' && <ClientConfiguracionDropdown />}
-        {isGerentePage && groupName && (
-          <div className={styles.groupBadge}>
-            {groupName}
-          </div>
-        )}
-        {contextLabel && (
-          <div className={styles.contextLabel}>
-            {contextLabel}
-          </div>
-        )}
         <div className={styles.searchContainer}>
-          <svg className={styles.searchIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            className={styles.searchIcon}
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -184,19 +271,52 @@ export default function Topbar({
             type="text"
             className={styles.searchInput}
             placeholder={
-              isAccountantPage 
-                ? "Invoice UUID, Client Name, Amount" 
-                : isGerentePage 
-                ? "Search within group..." 
-                : "Buscar..."
+              isAccountantPage
+                ? 'Invoice UUID, Client Name, Amount'
+                : isGerentePage
+                ? 'Search within group...'
+                : 'Buscar...'
             }
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => {
+              searchBlurTimeoutRef.current = setTimeout(() => {
+                setSearchFocused(false);
+                setSearchResults([]);
+              }, 150);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && searchResults.length > 0) {
+                event.preventDefault();
+                handleSearchSelect(searchResults[0]);
+              }
+            }}
           />
+          {searchFocused && searchResults.length > 0 && (
+            <div className={styles.searchDropdown}>
+              {searchResults.map((result) => (
+                <button
+                  key={result.id}
+                  className={styles.searchResult}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => handleSearchSelect(result)}
+                >
+                  <span className={styles.searchResultTitle}>{result.label}</span>
+                  <span className={styles.searchResultMeta}>
+                    {result.description}
+                    <span className={styles.searchResultType}>{result.type}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       <div className={styles.topbarRight}>
         <div className={styles.notifContainer} ref={notificationRef}>
-          <button 
+          <button
             className={styles.notifBtn}
             onClick={() => setNotificationsOpen(!notificationsOpen)}
             aria-label="Notifications"
@@ -205,35 +325,58 @@ export default function Topbar({
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
-            <span className={styles.notifBadge}>{mockNotifications.filter(n => n.unread).length}</span>
+            {unreadCount > 0 && <span className={styles.notifBadge}>{unreadCount}</span>}
           </button>
           {notificationsOpen && (
             <div className={styles.notifDropdown}>
               <div className={styles.notifHeader}>
                 <h3 className={styles.notifTitle}>Notificaciones</h3>
-                <button 
-                  className={styles.notifCloseBtn}
-                  onClick={() => setNotificationsOpen(false)}
-                  aria-label="Close notifications"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
+                <div className={styles.notifActions}>
+                  <button className={styles.markAllBtn} onClick={markAllRead}>
+                    Marcar todo como leido
+                  </button>
+                  <button
+                    className={styles.notifCloseBtn}
+                    onClick={() => setNotificationsOpen(false)}
+                    aria-label="Close notifications"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div className={styles.notifList}>
-                {mockNotifications.length > 0 ? (
-                  mockNotifications.map((notification) => (
-                    <div 
-                      key={notification.id} 
+                {notifications.length > 0 ? (
+                  notifications.map((notification) => (
+                    <div
+                      key={notification.id}
                       className={`${styles.notifItem} ${notification.unread ? styles.notifItemUnread : ''}`}
+                      onClick={() =>
+                        handleNotificationClick(notification.id, notification.clientId, notification.tab)
+                      }
                     >
                       <div className={styles.notifItemContent}>
                         <h4 className={styles.notifItemTitle}>{notification.title}</h4>
                         <p className={styles.notifItemMessage}>{notification.message}</p>
-                        <span className={styles.notifItemTime}>{notification.time}</span>
+                        <span className={styles.notifItemTime}>
+                          {new Date(notification.time).toLocaleString('es-MX')}
+                        </span>
                       </div>
+                      <button
+                        className={styles.notifRemoveBtn}
+                        aria-label="Remove notification"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          removeNotification(notification.id);
+                        }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                      </button>
                       {notification.unread && <div className={styles.notifItemDot} />}
                     </div>
                   ))
@@ -246,11 +389,10 @@ export default function Topbar({
             </div>
           )}
         </div>
-        <div 
-          className={styles.profileContainer} 
+        <div
+          className={styles.profileContainer}
           ref={profileDropdownRef}
           onMouseEnter={() => {
-            // Clear any pending close timeout
             if (profileDropdownTimeoutRef.current) {
               clearTimeout(profileDropdownTimeoutRef.current);
               profileDropdownTimeoutRef.current = null;
@@ -258,18 +400,13 @@ export default function Topbar({
             setProfileDropdownOpen(true);
           }}
           onMouseLeave={() => {
-            // Add delay before closing dropdown
             profileDropdownTimeoutRef.current = setTimeout(() => {
               setProfileDropdownOpen(false);
               profileDropdownTimeoutRef.current = null;
-            }, 300); // 300ms delay
+            }, 300);
           }}
         >
-          <button 
-            className={styles.userMenu}
-            aria-expanded={profileDropdownOpen}
-            aria-haspopup="true"
-          >
+          <button className={styles.userMenu} aria-expanded={profileDropdownOpen} aria-haspopup="true">
             <div className={styles.userAvatar}>{initials}</div>
             <span className={styles.userName}>{displayName}</span>
             <svg
@@ -285,21 +422,19 @@ export default function Topbar({
             </svg>
           </button>
           {profileDropdownOpen && (
-            <div 
+            <div
               className={styles.profileDropdown}
               onMouseEnter={() => {
-                // Clear any pending close timeout when hovering over dropdown
                 if (profileDropdownTimeoutRef.current) {
                   clearTimeout(profileDropdownTimeoutRef.current);
                   profileDropdownTimeoutRef.current = null;
                 }
               }}
               onMouseLeave={() => {
-                // Add delay before closing when leaving dropdown
                 profileDropdownTimeoutRef.current = setTimeout(() => {
                   setProfileDropdownOpen(false);
                   profileDropdownTimeoutRef.current = null;
-                }, 300); // 300ms delay
+                }, 300);
               }}
             >
               <div className={styles.profileHeader}>
@@ -316,7 +451,9 @@ export default function Topbar({
                 <div className={styles.profileSectionTitle}>Estado</div>
                 <div className={styles.statusOptions}>
                   <button
-                    className={`${styles.statusOption} ${userStatus === 'activo' ? styles.statusOptionActive : ''}`}
+                    className={`${styles.statusOption} ${
+                      userStatus === 'activo' ? styles.statusOptionActive : ''
+                    }`}
                     onClick={() => setUserStatus('activo')}
                   >
                     <div className={styles.statusIndicator}>
@@ -325,7 +462,9 @@ export default function Topbar({
                     <span className={styles.statusLabel}>Activo</span>
                   </button>
                   <button
-                    className={`${styles.statusOption} ${userStatus === 'ausente' ? styles.statusOptionActive : ''}`}
+                    className={`${styles.statusOption} ${
+                      userStatus === 'ausente' ? styles.statusOptionActive : ''
+                    }`}
                     onClick={() => setUserStatus('ausente')}
                   >
                     <div className={styles.statusIndicator}>
@@ -337,10 +476,7 @@ export default function Topbar({
               </div>
               <div className={styles.profileDivider}></div>
               <div className={styles.profileSection}>
-                <button
-                  className={styles.profileMenuItem}
-                  onClick={toggleTheme}
-                >
+                <button className={styles.profileMenuItem} onClick={toggleTheme}>
                   <div className={styles.menuItemIcon}>
                     {theme === 'light' ? (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -370,7 +506,6 @@ export default function Topbar({
                 <button
                   className={`${styles.profileMenuItem} ${styles.profileMenuItemDanger}`}
                   onClick={() => {
-                    // TODO: Implement logout logic
                     console.log('Logout clicked');
                     setProfileDropdownOpen(false);
                   }}
@@ -382,7 +517,7 @@ export default function Topbar({
                       <line x1="21" y1="12" x2="9" y2="12" />
                     </svg>
                   </div>
-                  <span className={styles.menuItemLabel}>Cerrar sesión</span>
+                  <span className={styles.menuItemLabel}>Cerrar sesion</span>
                 </button>
               </div>
             </div>
@@ -392,4 +527,3 @@ export default function Topbar({
     </header>
   );
 }
-

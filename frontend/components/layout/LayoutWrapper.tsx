@@ -5,6 +5,7 @@ import { useProfile } from '@/contexts/ProfileContext';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import { AIAssistant } from '@/components/shared';
+import { NotificationProvider } from '@/contexts/NotificationContext';
 import styles from '../../app/layout.module.css';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -12,22 +13,22 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <>
-      <Sidebar 
-        profile={profile} 
+    <NotificationProvider>
+      <Sidebar
+        profile={profile}
         collapsed={collapsed}
         onToggleSidebar={() => setCollapsed(!collapsed)}
       />
       <div className={`${styles.mainWrapper} ${collapsed ? styles.mainWrapperCollapsed : ''}`}>
-        <Topbar 
-          profile={profile} 
-          userName={userName} 
+        <Topbar
+          profile={profile}
+          userName={userName}
           userInitials={userInitials}
         />
         {children}
       </div>
       {profile !== 'cliente' && <AIAssistant />}
-    </>
+    </NotificationProvider>
   );
 }
 

@@ -74,6 +74,7 @@
   border: 1px solid var(--border-secondary);
   border-radius: var(--radius-sm);
   background: var(--surface-primary);
+  background-color: var(--surface-primary);
   color: var(--text-primary);
   font-size: 0.875rem;
   cursor: pointer;
@@ -95,6 +96,7 @@
 
 [data-theme="dark"] .selectInput {
   background: var(--surface-secondary);
+  background-color: var(--surface-secondary);
   border-color: var(--border-primary);
 }
 

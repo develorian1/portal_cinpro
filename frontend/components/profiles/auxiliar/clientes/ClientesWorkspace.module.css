@@ -4,3 +4,9 @@
   height: 100%;
 }
 
+.loadingState {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+

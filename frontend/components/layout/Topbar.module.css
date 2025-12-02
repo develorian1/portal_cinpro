@@ -46,12 +46,40 @@
   margin: 0 auto;
 }
 
+.workspaceContext {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
 .contextLabel {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-primary);
-  padding: 0 12px;
+  padding: 0 4px;
   white-space: nowrap;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.breadcrumbDivider {
+  color: var(--text-tertiary);
+  margin: 0 2px;
 }
 
 .groupBadge {
@@ -103,6 +131,57 @@
 
 .searchInput::placeholder {
   color: var(--text-muted);
+}
+
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.searchResult {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.searchResult:hover {
+  background: var(--bg-hover);
+}
+
+.searchResultTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.searchResultMeta {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchResultType {
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  color: var(--gray-500);
 }
 
 .viewSwitcher {
@@ -282,6 +361,28 @@
   border-bottom: 1px solid var(--border-primary);
 }
 
+.notifActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.markAllBtn {
+  border: none;
+  background: transparent;
+  color: var(--azure);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.markAllBtn:hover {
+  background: rgba(24, 128, 234, 0.1);
+}
+
 .notifTitle {
   font-size: 1rem;
   font-weight: 600;
@@ -372,6 +473,27 @@
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 6px;
+}
+
+.notifRemoveBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.notifRemoveBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .notifEmpty {

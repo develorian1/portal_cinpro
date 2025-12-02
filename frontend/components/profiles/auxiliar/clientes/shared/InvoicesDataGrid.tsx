@@ -1,22 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { WorkspaceInvoice } from '@/types/accountant';
 import styles from './InvoicesDataGrid.module.css';
 
-export interface Invoice {
-  id: string;
-  date: string;
-  folio?: string;
-  uuid?: string;
-  customer?: string;
-  supplier?: string;
-  concept?: string;
-  amount: number;
-  iva?: number;
-  isr?: number;
-  status: 'paid' | 'pending' | 'cancelled';
-  ppdPue?: 'PPD' | 'PUE';
-}
+export type Invoice = WorkspaceInvoice;
 
 interface InvoicesDataGridProps {
   invoices: Invoice[];

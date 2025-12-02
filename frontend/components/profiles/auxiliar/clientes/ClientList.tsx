@@ -1,22 +1,17 @@
 'use client';
 
+import { WorkspaceClient } from '@/types/accountant';
 import styles from './ClientList.module.css';
 
-export interface Client {
-  id: string;
-  entityName: string;
-  rfc: string;
-  group: string;
-  status: 'up-to-date' | 'behind';
-  lastAction: string;
-}
+export type Client = WorkspaceClient;
 
 interface ClientListProps {
   clients: Client[];
   onSelectClient: (clientId: string) => void;
+  selectedClientId?: string;
 }
 
-export default function ClientList({ clients, onSelectClient }: ClientListProps) {
+export default function ClientList({ clients, onSelectClient, selectedClientId }: ClientListProps) {
   return (
     <div className={styles.clientList}>
       <div className={styles.tableHeader}>
@@ -30,7 +25,9 @@ export default function ClientList({ clients, onSelectClient }: ClientListProps)
           clients.map((client) => (
             <div
               key={client.id}
-              className={styles.tableRow}
+              className={`${styles.tableRow} ${
+                selectedClientId === client.id ? styles.selectedRow : ''
+              }`}
               onClick={() => onSelectClient(client.id)}
               role="button"
               tabIndex={0}
