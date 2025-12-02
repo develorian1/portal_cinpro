@@ -225,3 +225,83 @@
   transition: color 0.3s ease;
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .chartGrid {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .finanzasGenerales {
+    gap: 16px;
+  }
+
+  .growthCard,
+  .costCard {
+    padding: 16px;
+  }
+
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+
+  .chartContainer {
+    flex-direction: column;
+  }
+
+  .chartYAxis {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    padding: 8px 0;
+  }
+
+  .chartGrid {
+    height: 200px;
+    min-width: 100%;
+    overflow-x: auto;
+  }
+
+  .chartLegend {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .costItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .costItemValues {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  .growthCard,
+  .costCard {
+    padding: 14px;
+  }
+
+  .chartGrid {
+    height: 180px;
+    gap: 4px;
+  }
+
+  .monthLabel {
+    font-size: 0.65rem;
+  }
+
+  .legendItem {
+    font-size: 0.8rem;
+  }
+
+  .costAmount {
+    font-size: 1rem;
+  }
+}
+

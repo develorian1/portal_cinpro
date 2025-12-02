@@ -171,3 +171,210 @@
   color: var(--text-tertiary);
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .total {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .firmExpenses {
+    padding: 16px;
+  }
+
+  .header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .periodSelector {
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .periodField {
+    flex: 1;
+  }
+
+  /* Touch-friendly select - min 44px height */
+  .periodSelect {
+    min-width: 100%;
+    min-height: 44px;
+    padding: 12px 14px;
+    padding-right: 36px;
+    font-size: 1rem;
+  }
+
+  .totalAmount {
+    font-size: 1.5rem;
+  }
+
+  .expenseItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .expenseAmount {
+    align-self: flex-end;
+    font-size: 1.1rem;
+  }
+
+  .expenseMeta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .firmExpenses {
+    padding: 14px;
+  }
+
+  .header {
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .periodSelector {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .periodField label {
+    font-size: 0.75rem;
+  }
+
+  .total {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .totalLabel {
+    font-size: 0.8rem;
+  }
+
+  .totalAmount {
+    font-size: 1.35rem;
+  }
+
+  .expensesList {
+    gap: 10px;
+  }
+
+  .expenseItem {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .expenseDescription {
+    font-size: 0.9rem;
+  }
+
+  .expenseType {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .expenseDate {
+    font-size: 0.8rem;
+  }
+
+  .expenseAmount {
+    font-size: 1.05rem;
+  }
+
+  .emptyState {
+    padding: 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .firmExpenses {
+    padding: 12px;
+  }
+
+  .header {
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .periodField label {
+    font-size: 0.7rem;
+  }
+
+  .periodSelect {
+    padding: 10px 12px;
+    padding-right: 32px;
+    font-size: 0.9rem;
+    min-height: 42px;
+  }
+
+  .total {
+    padding: 10px;
+  }
+
+  .totalLabel {
+    font-size: 0.75rem;
+  }
+
+  .totalAmount {
+    font-size: 1.2rem;
+  }
+
+  .expenseItem {
+    padding: 10px;
+  }
+
+  .expenseInfo {
+    gap: 6px;
+  }
+
+  .expenseDescription {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .expenseMeta {
+    gap: 6px;
+  }
+
+  .expenseType {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+  }
+
+  .expenseDate {
+    font-size: 0.75rem;
+  }
+
+  .expenseAmount {
+    font-size: 1rem;
+  }
+
+  .emptyState {
+    padding: 20px;
+    font-size: 0.85rem;
+  }
+}
+

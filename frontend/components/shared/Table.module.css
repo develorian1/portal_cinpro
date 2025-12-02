@@ -1,6 +1,9 @@
 .tableContainer {
   width: 100%;
   height: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
 .table {
@@ -66,5 +69,122 @@
   padding: 40px 16px !important;
   color: var(--text-tertiary);
   font-style: italic;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .tableContainer {
+    margin: 0 -16px;
+    padding: 0 16px;
+    width: calc(100% + 32px);
+  }
+
+  .table th,
+  .table td {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .table th {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Mobile card view transformation */
+  .tableContainer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .table {
+    display: block;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .table tbody tr {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .table tbody tr:hover {
+    background: var(--surface-primary);
+    border-color: var(--border-hover);
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    gap: 12px;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Hide empty labels */
+  .table td[data-label=""]::before {
+    display: none;
+  }
+
+  .table td[data-label=""]  {
+    justify-content: center;
+  }
+
+  .hideOnMobile {
+    display: none !important;
+  }
+
+  .emptyState {
+    padding: 32px 12px !important;
+  }
+
+  .emptyState::before {
+    display: none;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .table td {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .table td::before {
+    min-width: unset;
+  }
 }
 

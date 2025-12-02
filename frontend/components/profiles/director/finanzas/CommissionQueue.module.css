@@ -132,3 +132,121 @@
   cursor: not-allowed;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 16px;
+    padding: 14px 16px;
+    align-items: stretch;
+  }
+
+  .footerInfo {
+    text-align: center;
+  }
+
+  .approveBtn {
+    width: 100%;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .commissionQueue {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .tableContainer {
+    margin-bottom: 16px;
+    overflow: visible;
+    height: auto;
+  }
+
+  /* Larger checkbox for touch */
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+
+  .staffInfo {
+    align-items: flex-end;
+  }
+
+  .staffName {
+    font-size: 0.95rem;
+  }
+
+  .staffRole {
+    font-size: 0.75rem;
+  }
+
+  .totalOwed {
+    font-size: 1.05rem;
+  }
+
+  .statusBadge {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .priorityBadge {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  .footer {
+    background: var(--surface-primary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-primary);
+    padding: 16px;
+  }
+
+  .selectedCount {
+    font-size: 0.85rem;
+  }
+
+  .totalSelected {
+    font-size: 1.1rem;
+  }
+
+  /* Touch-friendly button - min 44px height */
+  .approveBtn {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 14px;
+  }
+
+  .selectedCount {
+    font-size: 0.8rem;
+  }
+
+  .totalSelected {
+    font-size: 1rem;
+  }
+
+  .approveBtn {
+    font-size: 0.95rem;
+  }
+}
+

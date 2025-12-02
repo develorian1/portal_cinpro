@@ -92,3 +92,85 @@
   transition: color 0.3s ease;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .activityLog {
+    border-radius: var(--radius-md);
+  }
+
+  .header {
+    padding: 8px 12px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .activityStream {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .activityItem {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .activityIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .activityMessage {
+    font-size: 0.8rem;
+  }
+
+  .activityTimestamp {
+    font-size: 0.7rem;
+  }
+
+  .emptyState {
+    padding: 20px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 6px 10px;
+  }
+
+  .title {
+    font-size: 0.875rem;
+  }
+
+  .activityStream {
+    padding: 6px;
+    gap: 4px;
+  }
+
+  .activityItem {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .activityIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .activityMessage {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .activityTimestamp {
+    font-size: 0.65rem;
+  }
+
+  .emptyState {
+    padding: 16px 10px;
+    font-size: 0.75rem;
+  }
+}
+

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Mensajes.module.css';
 
 interface Chat {
@@ -53,10 +53,31 @@ export default function Mensajes() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
   const [userSearchQuery, setUserSearchQuery] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileView, setMobileView] = useState<'list' | 'chat'>('list');
+  const [isAttachmentMenuOpen, setIsAttachmentMenuOpen] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const userSearchInputRef = React.useRef<HTMLInputElement>(null);
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedChat]);
 
   // Helper function to check if document is A4 format (PDF, DOCX)
   const isA4Format = (type: Document['type']): boolean => {
@@ -296,6 +317,17 @@ export default function Mensajes() {
 
   const handleChatSelect = (chatId: string) => {
     setSelectedChat(chatId);
+    if (isMobile) {
+      setMobileView('chat');
+    }
+  };
+
+  // Handle back navigation on mobile
+  const handleMobileBack = () => {
+    setMobileView('list');
+    setSelectedChat(null);
+    setIsDocumentViewerOpen(false);
+    setSelectedDocument(null);
   };
 
   const handleSendMessage = () => {
@@ -351,6 +383,11 @@ export default function Mensajes() {
     setTimeout(() => {
       searchInputRef.current?.focus();
     }, 100);
+  };
+
+  // Handle opening sidebar on mobile
+  const handleOpenSidebar = () => {
+    window.dispatchEvent(new CustomEvent('openMobileSidebar'));
   };
 
   // Handle search input blur
@@ -505,9 +542,24 @@ export default function Mensajes() {
   }, [isDropdownOpen]);
 
   return (
-    <div className={styles.mensajes}>
-      <div className={`${styles.chatsList} ${!isDocumentViewerOpen ? styles.chatsListExpanded : ''}`}>
+    <div className={`${styles.mensajes} ${isMobile ? styles.mensajesMobile : ''}`}>
+      {/* Mobile Chat List View */}
+      <div className={`${styles.chatsList} ${!isDocumentViewerOpen ? styles.chatsListExpanded : ''} ${isMobile ? styles.chatsListMobile : ''} ${isMobile && mobileView === 'chat' ? styles.chatsListHidden : ''}`}>
         <div className={styles.chatsListHeader}>
+          {/* Mobile Menu Button */}
+          {isMobile && (
+            <button
+              className={styles.mobileMenuButton}
+              onClick={handleOpenSidebar}
+              title="Abrir menú"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          )}
           <div className={`${styles.chatsListHeaderContent} ${isSearchMode ? styles.chatsListHeaderContentSearch : ''}`}>
             <h2 className={styles.chatsListTitle}>Mensajes</h2>
             <div className={styles.chatsListSearchContainer}>
@@ -557,16 +609,18 @@ export default function Mensajes() {
                 </svg>
               </button>
             )}
-            <button
-              className={styles.chatsListHeaderButton}
-              onClick={handleNewConversation}
-              title="Nueva conversación"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </button>
+            {!isMobile && (
+              <button
+                className={styles.chatsListHeaderButton}
+                onClick={handleNewConversation}
+                title="Nueva conversación"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            )}
             <button
               className={`${styles.chatsListHeaderButton} ${showArchived ? styles.chatsListHeaderButtonActive : ''}`}
               onClick={() => setShowArchived(!showArchived)}
@@ -587,6 +641,13 @@ export default function Mensajes() {
               className={`${styles.chatItem} ${selectedChat === chat.id ? styles.chatItemActive : ''}`}
               onClick={() => handleChatSelect(chat.id)}
             >
+              {/* Mobile Avatar */}
+              {isMobile && (
+                <div className={styles.mobileAvatar}>
+                  <span className={styles.mobileAvatarInitial}>{chat.name.charAt(0).toUpperCase()}</span>
+                  <span className={`${styles.mobileAvatarStatus} ${styles[`status${chat.status.charAt(0).toUpperCase() + chat.status.slice(1)}`]}`} />
+                </div>
+              )}
               <div className={styles.chatInfo}>
                 <div className={styles.chatHeader}>
                   <span className={styles.chatName}>{chat.name}</span>
@@ -602,13 +663,47 @@ export default function Mensajes() {
             </div>
           ))}
         </div>
+
+        {/* Mobile FAB for new conversation */}
+        {isMobile && (
+          <button
+            className={styles.mobileFab}
+            onClick={handleNewConversation}
+            title="Nueva conversación"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              <line x1="12" y1="8" x2="12" y2="14" />
+              <line x1="9" y1="11" x2="15" y2="11" />
+            </svg>
+          </button>
+        )}
       </div>
 
-      <div className={`${styles.chatWindow} ${!isDocumentViewerOpen ? styles.chatWindowExpanded : ''}`}>
+      <div className={`${styles.chatWindow} ${!isDocumentViewerOpen ? styles.chatWindowExpanded : ''} ${isMobile ? styles.chatWindowMobile : ''} ${isMobile && mobileView === 'chat' ? styles.chatWindowVisible : ''}`}>
         {selectedChatData ? (
           <>
-            <div className={styles.chatHeader}>
+            <div className={`${styles.chatHeader} ${isMobile ? styles.chatHeaderMobile : ''}`}>
+              {/* Mobile Back Button */}
+              {isMobile && (
+                <button
+                  className={styles.mobileBackButton}
+                  onClick={handleMobileBack}
+                  title="Volver"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+              )}
               <div className={styles.chatHeaderInfo}>
+                {/* Mobile Avatar in Header */}
+                {isMobile && (
+                  <div className={styles.chatHeaderAvatar}>
+                    <span className={styles.chatHeaderAvatarInitial}>{selectedChatData.name.charAt(0).toUpperCase()}</span>
+                    <span className={`${styles.chatHeaderAvatarStatus} ${styles[`status${selectedChatData.status.charAt(0).toUpperCase() + selectedChatData.status.slice(1)}`]}`} />
+                  </div>
+                )}
                 <div>
                   <h3 className={styles.chatHeaderName}>{selectedChatData.name}</h3>
                   <span className={styles.chatHeaderStatus}>
@@ -659,23 +754,27 @@ export default function Mensajes() {
               </div>
             </div>
 
-            <div className={styles.messagesContainer}>
+            <div className={`${styles.messagesContainer} ${isMobile ? styles.messagesContainerMobile : ''}`}>
               {selectedMessages.map((message) => (
                 <div
                   key={message.id}
-                  className={`${styles.message} ${message.isOwn ? styles.messageOwn : styles.messageOther}`}
+                  className={`${styles.message} ${message.isOwn ? styles.messageOwn : styles.messageOther} ${isMobile ? styles.messageMobile : ''}`}
                 >
-                  <div className={styles.messageContent}>
+                  <div className={`${styles.messageContent} ${isMobile ? styles.messageContentMobile : ''}`}>
                     {message.content && (
                       <p className={styles.messageText}>{message.content}</p>
                     )}
                     {message.document && (
                       <div 
-                        className={`${styles.documentAttachment} ${!isA4Format(message.document.type) ? styles.documentAttachmentModal : ''}`}
+                        className={`${styles.documentAttachment} ${!isA4Format(message.document.type) ? styles.documentAttachmentModal : ''} ${isMobile ? styles.documentAttachmentMobile : ''}`}
                         onClick={() => {
                           if (isA4Format(message.document!.type)) {
                             setSelectedDocument(message.document!);
                             setIsDocumentViewerOpen(true);
+                            if (isMobile) {
+                              setIsModalOpen(true);
+                              setModalDocument(message.document!);
+                            }
                           }
                         }}
                       >
@@ -776,9 +875,10 @@ export default function Mensajes() {
                   </div>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
 
-            <div className={styles.messageInputContainer}>
+            <div className={`${styles.messageInputContainer} ${isMobile ? styles.messageInputContainerMobile : ''}`}>
               <input
                 type="file"
                 ref={fileInputRef}
@@ -787,33 +887,53 @@ export default function Mensajes() {
                 style={{ display: 'none' }}
                 accept=".pdf,.xlsx,.docx,.txt,.csv,.xml,image/*"
               />
-              <button
-                className={styles.attachButton}
-                title="Adjuntar archivo"
-                onClick={handleAttachClick}
-                type="button"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
-                </svg>
-              </button>
-              <button
-                className={`${styles.micButton} ${isMicActive ? styles.micButtonActive : ''}`}
-                title="Grabar audio"
-                onClick={handleMicClick}
-                type="button"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                  <line x1="12" y1="19" x2="12" y2="23" />
-                  <line x1="8" y1="23" x2="16" y2="23" />
-                </svg>
-              </button>
+              
+              {/* Mobile Attachment Menu */}
+              {isMobile && (
+                <button
+                  className={`${styles.mobileAttachButton} ${isAttachmentMenuOpen ? styles.mobileAttachButtonActive : ''}`}
+                  onClick={() => setIsAttachmentMenuOpen(!isAttachmentMenuOpen)}
+                  type="button"
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="12" y1="5" x2="12" y2="19" style={{ transform: isAttachmentMenuOpen ? 'rotate(45deg)' : 'none', transformOrigin: 'center', transition: 'transform 0.2s ease' }} />
+                    <line x1="5" y1="12" x2="19" y2="12" style={{ transform: isAttachmentMenuOpen ? 'rotate(45deg)' : 'none', transformOrigin: 'center', transition: 'transform 0.2s ease' }} />
+                  </svg>
+                </button>
+              )}
+
+              {!isMobile && (
+                <>
+                  <button
+                    className={styles.attachButton}
+                    title="Adjuntar archivo"
+                    onClick={handleAttachClick}
+                    type="button"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                    </svg>
+                  </button>
+                  <button
+                    className={`${styles.micButton} ${isMicActive ? styles.micButtonActive : ''}`}
+                    title="Grabar audio"
+                    onClick={handleMicClick}
+                    type="button"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <line x1="12" y1="19" x2="12" y2="23" />
+                      <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                  </button>
+                </>
+              )}
+
               <input
                 type="text"
-                className={styles.messageInput}
-                placeholder="Escribe un mensaje..."
+                className={`${styles.messageInput} ${isMobile ? styles.messageInputMobile : ''}`}
+                placeholder="Mensaje"
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
                 onKeyPress={(e) => {
@@ -822,14 +942,137 @@ export default function Mensajes() {
                   }
                 }}
               />
-              <button
-                className={styles.sendButton}
-                onClick={handleSendMessage}
-                disabled={!messageInput.trim()}
-              >
-                ENVIAR
-              </button>
+
+              {isMobile ? (
+                messageInput.trim() ? (
+                  <button
+                    className={styles.mobileSendButton}
+                    onClick={handleSendMessage}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </button>
+                ) : (
+                  <button
+                    className={`${styles.mobileMicButton} ${isMicActive ? styles.mobileMicButtonActive : ''}`}
+                    onClick={handleMicClick}
+                    type="button"
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <line x1="12" y1="19" x2="12" y2="23" />
+                      <line x1="8" y1="23" x2="16" y2="23" />
+                    </svg>
+                  </button>
+                )
+              ) : (
+                <button
+                  className={styles.sendButton}
+                  onClick={handleSendMessage}
+                  disabled={!messageInput.trim()}
+                >
+                  ENVIAR
+                </button>
+              )}
             </div>
+
+            {/* Mobile Attachment Bottom Sheet */}
+            {isMobile && isAttachmentMenuOpen && (
+              <>
+                <div className={styles.mobileAttachmentOverlay} onClick={() => setIsAttachmentMenuOpen(false)} />
+                <div className={styles.mobileAttachmentSheet}>
+                  <div className={styles.mobileAttachmentSheetHandle} />
+                  <div className={styles.mobileAttachmentGrid}>
+                    <button
+                      className={styles.mobileAttachmentOption}
+                      onClick={() => {
+                        fileInputRef.current?.click();
+                        setIsAttachmentMenuOpen(false);
+                      }}
+                    >
+                      <div className={styles.mobileAttachmentIcon} style={{ background: '#7c4dff' }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                      </div>
+                      <span>Documento</span>
+                    </button>
+                    <button
+                      className={styles.mobileAttachmentOption}
+                      onClick={() => {
+                        const input = document.createElement('input');
+                        input.type = 'file';
+                        input.accept = 'image/*';
+                        input.capture = 'environment';
+                        input.onchange = (e) => {
+                          const files = (e.target as HTMLInputElement).files;
+                          if (files && files.length > 0) {
+                            console.log('Photo captured:', files[0]);
+                          }
+                        };
+                        input.click();
+                        setIsAttachmentMenuOpen(false);
+                      }}
+                    >
+                      <div className={styles.mobileAttachmentIcon} style={{ background: '#e91e63' }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                          <circle cx="12" cy="13" r="4" />
+                        </svg>
+                      </div>
+                      <span>Cámara</span>
+                    </button>
+                    <button
+                      className={styles.mobileAttachmentOption}
+                      onClick={() => {
+                        const input = document.createElement('input');
+                        input.type = 'file';
+                        input.accept = 'image/*';
+                        input.multiple = true;
+                        input.onchange = (e) => {
+                          const files = (e.target as HTMLInputElement).files;
+                          if (files && files.length > 0) {
+                            console.log('Gallery images:', files);
+                          }
+                        };
+                        input.click();
+                        setIsAttachmentMenuOpen(false);
+                      }}
+                    >
+                      <div className={styles.mobileAttachmentIcon} style={{ background: '#00bcd4' }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                      </div>
+                      <span>Galería</span>
+                    </button>
+                    <button
+                      className={styles.mobileAttachmentOption}
+                      onClick={() => {
+                        handleMicClick();
+                        setIsAttachmentMenuOpen(false);
+                      }}
+                    >
+                      <div className={styles.mobileAttachmentIcon} style={{ background: '#ff5722' }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                          <line x1="12" y1="19" x2="12" y2="23" />
+                          <line x1="8" y1="23" x2="16" y2="23" />
+                        </svg>
+                      </div>
+                      <span>Audio</span>
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </>
         ) : (
           <div className={styles.emptyChat}>

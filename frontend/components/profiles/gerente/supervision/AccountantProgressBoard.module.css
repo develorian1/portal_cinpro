@@ -1,0 +1,275 @@
+.progressBoard {
+  padding: 0;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.accountantCard {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.2s;
+}
+
+.accountantCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Header */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.accountantInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--azure);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.avatar::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--surface-primary);
+}
+
+.avatar.online::after {
+  background: var(--success);
+}
+
+.avatar.offline::after {
+  background: var(--text-muted);
+}
+
+.avatar.away::after {
+  background: var(--warning);
+}
+
+.nameStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status.online .statusDot {
+  background: var(--success);
+}
+
+.status.offline .statusDot {
+  background: var(--text-muted);
+}
+
+.status.away .statusDot {
+  background: var(--warning);
+}
+
+.performanceBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.scoreValue {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--azure);
+}
+
+.scoreLabel {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Workload Section */
+.workloadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.workloadHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workloadLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.workloadTotal {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.workloadBar {
+  display: flex;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+.workloadSegment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.workloadSegment.reconciled {
+  background: var(--success);
+}
+
+.workloadSegment.pending {
+  background: var(--warning);
+}
+
+.workloadSegment.unmatched {
+  background: var(--danger);
+}
+
+.workloadLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legendDot.reconciled {
+  background: var(--success);
+}
+
+.legendDot.pending {
+  background: var(--warning);
+}
+
+.legendDot.unmatched {
+  background: var(--danger);
+}
+
+/* Metrics Row */
+.metricsRow {
+  display: flex;
+  gap: 16px;
+}
+
+.metric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.metric svg {
+  color: var(--text-tertiary);
+}
+
+.metricLabel {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metricValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* View Queue Button */
+.viewQueueBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.viewQueueBtn:hover {
+  background: var(--azure);
+  border-color: var(--azure);
+  color: var(--white);
+}
+

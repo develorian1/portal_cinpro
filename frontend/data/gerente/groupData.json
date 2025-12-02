@@ -1,0 +1,42 @@
+{
+  "group": {
+    "id": "grp-001",
+    "group_name": "Medical Group",
+    "emoji": "🏥",
+    "description": "Healthcare and medical services companies",
+    "client_count": 24,
+    "assigned_chief": {
+      "id": "usr-chief-001",
+      "name": "Roberto Hernández",
+      "email": "roberto.hernandez@cinpro.mx"
+    },
+    "accountants": [
+      {
+        "id": "usr-acc-001",
+        "name": "María López",
+        "avatar": "ML",
+        "status": "online"
+      },
+      {
+        "id": "usr-acc-002",
+        "name": "Carlos Mendoza",
+        "avatar": "CM",
+        "status": "online"
+      },
+      {
+        "id": "usr-acc-003",
+        "name": "Ana Martínez",
+        "avatar": "AM",
+        "status": "offline"
+      },
+      {
+        "id": "usr-acc-004",
+        "name": "Pedro Sánchez",
+        "avatar": "PS",
+        "status": "away"
+      }
+    ],
+    "sectors": ["Hospitales", "Clínicas", "Laboratorios", "Farmacias"]
+  }
+}
+

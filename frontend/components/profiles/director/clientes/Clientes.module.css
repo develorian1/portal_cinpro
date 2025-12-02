@@ -255,3 +255,80 @@
   color: var(--danger);
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .searchContainer {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 0;
+    margin-bottom: 16px;
+  }
+
+  .searchContainer {
+    max-width: 100%;
+    order: 2;
+  }
+
+  .filterContainer {
+    width: 100%;
+    justify-content: center;
+    order: 1;
+  }
+
+  .filterBtn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .tableContainer {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .groupBadge,
+  .debtStatus {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .searchInput {
+    padding: 8px 14px 8px 36px;
+    font-size: 0.85rem;
+  }
+
+  .filterBtn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .rfc {
+    font-size: 0.7rem;
+  }
+
+  .emptyState {
+    padding: 32px 12px;
+  }
+}
+

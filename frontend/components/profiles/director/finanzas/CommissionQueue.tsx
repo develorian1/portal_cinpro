@@ -99,6 +99,7 @@ export default function CommissionQueue() {
           className={styles.checkbox}
         />
       ),
+      mobileLabel: '',
       render: (commission) => (
         <input
           type="checkbox"
@@ -111,6 +112,7 @@ export default function CommissionQueue() {
     {
       key: 'staff',
       header: 'Personal',
+      mobileLabel: 'Personal',
       render: (commission) => (
         <div className={styles.staffInfo}>
           <span className={styles.staffName}>{commission.staffName}</span>
@@ -121,21 +123,25 @@ export default function CommissionQueue() {
     {
       key: 'client',
       header: 'Cliente',
+      mobileLabel: 'Cliente',
       render: (commission) => commission.client,
     },
     {
       key: 'baseAmount',
       header: 'Monto Base',
+      mobileLabel: 'Base',
       render: (commission) => `$${commission.baseAmount.toLocaleString()}`,
     },
     {
       key: 'commissionRate',
       header: '% Comisión',
+      mobileLabel: 'Comisión',
       render: (commission) => `${(commission.commissionRate * 100).toFixed(0)}%`,
     },
     {
       key: 'totalOwed',
       header: 'Total a Pagar',
+      mobileLabel: 'Total',
       render: (commission) => (
         <span className={styles.totalOwed}>
           ${commission.totalOwed.toLocaleString()}
@@ -145,6 +151,7 @@ export default function CommissionQueue() {
     {
       key: 'status',
       header: 'Estado',
+      mobileLabel: 'Estado',
       render: (commission) => (
         <span className={styles.statusBadge}>{commission.status}</span>
       ),

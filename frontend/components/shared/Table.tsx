@@ -9,6 +9,10 @@ export interface TableColumn<T> {
   render: (row: T, index: number) => ReactNode;
   className?: string;
   headerClassName?: string;
+  /** Label shown on mobile card view. If not provided, uses header text */
+  mobileLabel?: string;
+  /** Hide this column on mobile card view */
+  hideOnMobile?: boolean;
 }
 
 export interface TableProps<T> {
@@ -43,6 +47,12 @@ export default function Table<T>({
     return column.header;
   };
 
+  const getMobileLabel = (column: TableColumn<T>): string => {
+    if (column.mobileLabel) return column.mobileLabel;
+    if (typeof column.header === 'string') return column.header;
+    return '';
+  };
+
   return (
     <div className={`${styles.tableContainer} ${containerClassName || ''}`}>
       <table className={`${styles.table} ${className || ''}`}>
@@ -71,7 +81,11 @@ export default function Table<T>({
                 style={onRowClick ? { cursor: 'pointer' } : undefined}
               >
                 {columns.map((column) => (
-                  <td key={column.key} className={column.className}>
+                  <td 
+                    key={column.key} 
+                    className={`${column.className || ''} ${column.hideOnMobile ? styles.hideOnMobile : ''}`}
+                    data-label={getMobileLabel(column)}
+                  >
                     {column.render(row, index)}
                   </td>
                 ))}

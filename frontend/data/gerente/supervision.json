@@ -1,0 +1,169 @@
+{
+  "accountants": [
+    {
+      "id": "usr-acc-001",
+      "name": "María López",
+      "avatar": "ML",
+      "status": "online",
+      "lastSeen": "2025-01-28T15:30:00Z",
+      "workload": {
+        "reconciled": 145,
+        "pendingAIReview": 23,
+        "unmatched": 12,
+        "total": 180
+      },
+      "avgResponseTime": "1.5h",
+      "clientsAssigned": 6,
+      "performanceScore": 94
+    },
+    {
+      "id": "usr-acc-002",
+      "name": "Carlos Mendoza",
+      "avatar": "CM",
+      "status": "online",
+      "lastSeen": "2025-01-28T15:28:00Z",
+      "workload": {
+        "reconciled": 132,
+        "pendingAIReview": 35,
+        "unmatched": 28,
+        "total": 195
+      },
+      "avgResponseTime": "2.2h",
+      "clientsAssigned": 7,
+      "performanceScore": 87
+    },
+    {
+      "id": "usr-acc-003",
+      "name": "Ana Martínez",
+      "avatar": "AM",
+      "status": "offline",
+      "lastSeen": "2025-01-28T12:00:00Z",
+      "workload": {
+        "reconciled": 98,
+        "pendingAIReview": 15,
+        "unmatched": 7,
+        "total": 120
+      },
+      "avgResponseTime": "1.8h",
+      "clientsAssigned": 5,
+      "performanceScore": 91
+    },
+    {
+      "id": "usr-acc-004",
+      "name": "Pedro Sánchez",
+      "avatar": "PS",
+      "status": "away",
+      "lastSeen": "2025-01-28T14:45:00Z",
+      "workload": {
+        "reconciled": 78,
+        "pendingAIReview": 42,
+        "unmatched": 35,
+        "total": 155
+      },
+      "avgResponseTime": "3.1h",
+      "clientsAssigned": 6,
+      "performanceScore": 72
+    }
+  ],
+  "pendingTasks": [
+    {
+      "id": "task-001",
+      "accountantId": "usr-acc-001",
+      "type": "unreconciled_lines",
+      "description": "50 líneas bancarias sin conciliar",
+      "client": {
+        "id": "client-001",
+        "name": "Hospital San Rafael"
+      },
+      "priority": "high",
+      "isPrioritized": false,
+      "createdAt": "2025-01-28T08:00:00Z",
+      "dueDate": "2025-01-30"
+    },
+    {
+      "id": "task-002",
+      "accountantId": "usr-acc-001",
+      "type": "missing_document",
+      "description": "Falta estado de cuenta PDF - Enero",
+      "client": {
+        "id": "client-002",
+        "name": "Clínica del Valle"
+      },
+      "priority": "medium",
+      "isPrioritized": true,
+      "createdAt": "2025-01-27T14:30:00Z",
+      "dueDate": "2025-01-29"
+    },
+    {
+      "id": "task-003",
+      "accountantId": "usr-acc-002",
+      "type": "unreconciled_lines",
+      "description": "85 líneas bancarias sin conciliar",
+      "client": {
+        "id": "client-003",
+        "name": "Laboratorios Médicos SA"
+      },
+      "priority": "high",
+      "isPrioritized": false,
+      "createdAt": "2025-01-28T09:15:00Z",
+      "dueDate": "2025-01-31"
+    },
+    {
+      "id": "task-004",
+      "accountantId": "usr-acc-002",
+      "type": "review_request",
+      "description": "Revisión de clasificación de gastos",
+      "client": {
+        "id": "client-004",
+        "name": "Farmacia Santa Cruz"
+      },
+      "priority": "low",
+      "isPrioritized": false,
+      "createdAt": "2025-01-26T11:00:00Z",
+      "dueDate": "2025-02-01"
+    },
+    {
+      "id": "task-005",
+      "accountantId": "usr-acc-003",
+      "type": "cfdi_download",
+      "description": "Descargar CFDIs de diciembre",
+      "client": {
+        "id": "client-005",
+        "name": "Centro Médico Integral"
+      },
+      "priority": "medium",
+      "isPrioritized": false,
+      "createdAt": "2025-01-25T16:00:00Z",
+      "dueDate": "2025-01-29"
+    },
+    {
+      "id": "task-006",
+      "accountantId": "usr-acc-004",
+      "type": "unreconciled_lines",
+      "description": "120 líneas bancarias sin conciliar",
+      "client": {
+        "id": "client-007",
+        "name": "Hospital General del Norte"
+      },
+      "priority": "critical",
+      "isPrioritized": true,
+      "createdAt": "2025-01-28T07:00:00Z",
+      "dueDate": "2025-01-29"
+    },
+    {
+      "id": "task-007",
+      "accountantId": "usr-acc-004",
+      "type": "tax_filing",
+      "description": "Preparar declaración mensual",
+      "client": {
+        "id": "client-008",
+        "name": "Laboratorio Clínico Express"
+      },
+      "priority": "high",
+      "isPrioritized": false,
+      "createdAt": "2025-01-27T10:00:00Z",
+      "dueDate": "2025-01-31"
+    }
+  ]
+}
+

@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useFinanzas } from '@/contexts/FinanzasContext';
-import { TabContainer, Tab } from '@/components/shared';
 import AgingSummary from './AgingSummary';
 import DebtorsList from './DebtorsList';
 import CommissionQueue from './CommissionQueue';
@@ -12,95 +11,63 @@ import ReportGenerator from './ReportGenerator';
 import styles from './Finanzas.module.css';
 
 export default function Finanzas() {
-  const { activeItem } = useNavigation();
+  const { activeItem, setActiveItem } = useNavigation();
   const { isRefreshing, refresh } = useFinanzas();
-  const [activeCategory, setActiveCategory] = useState<'receivables' | 'payables' | 'reports'>('receivables');
-  const [activeComponentTab, setActiveComponentTab] = useState<string>('');
 
-  // Update active category based on navigation
+  // Set default view when entering finanzas for the first time
   useEffect(() => {
-    if (activeItem === 'finanzas-receivables') {
-      setActiveCategory('receivables');
-      setActiveComponentTab('aging');
-    } else if (activeItem === 'finanzas-payables') {
-      setActiveCategory('payables');
-      setActiveComponentTab('commissions');
-    } else if (activeItem === 'finanzas-reports') {
-      setActiveCategory('reports');
-      setActiveComponentTab('');
-    } else if (activeItem === 'finanzas') {
-      // Default to receivables when clicking finanzas directly
-      setActiveCategory('receivables');
-      setActiveComponentTab('aging');
+    if (activeItem === 'finanzas') {
+      setActiveItem('finanzas-aging');
     }
-  }, [activeItem]);
+  }, [activeItem, setActiveItem]);
 
-  // Set default tab when category changes
-  useEffect(() => {
-    if (activeCategory === 'receivables' && !activeComponentTab) {
-      setActiveComponentTab('aging');
-    } else if (activeCategory === 'payables' && !activeComponentTab) {
-      setActiveComponentTab('commissions');
+  // Render content based on dropdown selection
+  const renderContent = () => {
+    switch (activeItem) {
+      case 'finanzas-aging':
+      case 'finanzas':
+        return <AgingSummary />;
+      case 'finanzas-debtors':
+        return <DebtorsList />;
+      case 'finanzas-commissions':
+        return <CommissionQueue />;
+      case 'finanzas-expenses':
+        return <FirmExpenses />;
+      case 'finanzas-reports':
+        return <ReportGenerator />;
+      default:
+        return <AgingSummary />;
     }
-  }, [activeCategory, activeComponentTab]);
-
-  // Define tabs configuration based on active category
-  const tabsConfig = useMemo<Tab[]>(() => {
-    if (activeCategory === 'receivables') {
-      return [
-        {
-          id: 'aging',
-          label: 'Resumen de Antigüedad',
-          content: <AgingSummary />,
-        },
-        {
-          id: 'debtors',
-          label: 'Lista de Deudores',
-          content: <DebtorsList />,
-        },
-      ];
-    } else if (activeCategory === 'payables') {
-      return [
-        {
-          id: 'commissions',
-          label: 'Cola de Aprobación',
-          content: <CommissionQueue />,
-        },
-        {
-          id: 'expenses',
-          label: 'Gastos',
-          content: <FirmExpenses />,
-        },
-      ];
-    }
-    return [];
-  }, [activeCategory]);
-
-  // Render content for reports (no tabs)
-  if (activeCategory === 'reports') {
-    return (
-      <div className={styles.finanzas}>
-        <div className={styles.finanzasContent}>
-          <div className={styles.tabContent}>
-            <ReportGenerator />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  };
 
   return (
     <div className={styles.finanzas}>
       <div className={styles.finanzasContent}>
-        <div className={styles.tabContent}>
-          <TabContainer
-            tabs={tabsConfig}
-            activeTab={activeComponentTab}
-            onTabChange={setActiveComponentTab}
-            showRefresh={true}
-            onRefresh={refresh}
-            isRefreshing={isRefreshing}
-          />
+        <div className={styles.contentWrapper}>
+          <div className={styles.contentHeader}>
+            <button
+              className={`${styles.refreshBtn} ${isRefreshing ? styles.refreshing : ''}`}
+              onClick={refresh}
+              disabled={isRefreshing}
+              aria-label="Actualizar datos"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <polyline points="23 4 23 10 17 10" />
+                <polyline points="1 20 1 14 7 14" />
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+              </svg>
+            </button>
+          </div>
+          <div className={styles.tabContent}>
+            {renderContent()}
+          </div>
         </div>
       </div>
     </div>

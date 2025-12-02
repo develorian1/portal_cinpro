@@ -1,0 +1,266 @@
+{
+  "channels": [
+    {
+      "id": "channel-general",
+      "name": "Team General",
+      "type": "broadcast",
+      "icon": "📢",
+      "unreadCount": 3,
+      "lastMessage": {
+        "sender": "Roberto Hernández",
+        "preview": "Recordatorio: Cierre mensual el viernes",
+        "timestamp": "2025-01-28T14:00:00Z"
+      }
+    },
+    {
+      "id": "channel-dm-maria",
+      "name": "María López",
+      "type": "direct",
+      "avatar": "ML",
+      "status": "online",
+      "unreadCount": 0,
+      "lastMessage": {
+        "sender": "María López",
+        "preview": "Ya terminé la conciliación del Hospital",
+        "timestamp": "2025-01-28T13:45:00Z"
+      }
+    },
+    {
+      "id": "channel-dm-carlos",
+      "name": "Carlos Mendoza",
+      "type": "direct",
+      "avatar": "CM",
+      "status": "online",
+      "unreadCount": 2,
+      "lastMessage": {
+        "sender": "Carlos Mendoza",
+        "preview": "Tengo una duda sobre el cliente nuevo",
+        "timestamp": "2025-01-28T12:30:00Z"
+      }
+    },
+    {
+      "id": "channel-dm-ana",
+      "name": "Ana Martínez",
+      "type": "direct",
+      "avatar": "AM",
+      "status": "offline",
+      "unreadCount": 0,
+      "lastMessage": {
+        "sender": "Ana Martínez",
+        "preview": "Gracias por la aclaración",
+        "timestamp": "2025-01-28T11:00:00Z"
+      }
+    },
+    {
+      "id": "channel-intercept-001",
+      "name": "Hospital San Rafael - AI Assist",
+      "type": "intercept",
+      "icon": "🤖",
+      "unreadCount": 1,
+      "lastMessage": {
+        "sender": "AI Agent",
+        "preview": "Solicito ayuda con clasificación de gasto",
+        "timestamp": "2025-01-28T10:15:00Z"
+      }
+    },
+    {
+      "id": "channel-intercept-002",
+      "name": "Clínica del Valle - AI Assist",
+      "type": "intercept",
+      "icon": "🤖",
+      "unreadCount": 0,
+      "lastMessage": {
+        "sender": "Roberto Hernández",
+        "preview": "Resuelto, era pago parcial",
+        "timestamp": "2025-01-27T16:30:00Z"
+      }
+    }
+  ],
+  "messages": {
+    "channel-general": [
+      {
+        "id": "msg-001",
+        "senderId": "usr-chief-001",
+        "senderName": "Roberto Hernández",
+        "senderAvatar": "RH",
+        "content": "Buenos días equipo. Recordatorio: El cierre mensual es este viernes. Por favor asegúrense de tener todas las conciliaciones al día.",
+        "timestamp": "2025-01-28T14:00:00Z",
+        "isOwn": true
+      },
+      {
+        "id": "msg-002",
+        "senderId": "usr-acc-001",
+        "senderName": "María López",
+        "senderAvatar": "ML",
+        "content": "Entendido jefe, voy al 85% con mis clientes.",
+        "timestamp": "2025-01-28T14:05:00Z",
+        "isOwn": false
+      },
+      {
+        "id": "msg-003",
+        "senderId": "usr-acc-002",
+        "senderName": "Carlos Mendoza",
+        "senderAvatar": "CM",
+        "content": "Yo tengo algunos pendientes con Laboratorios Médicos, pero estaré listo.",
+        "timestamp": "2025-01-28T14:08:00Z",
+        "isOwn": false
+      },
+      {
+        "id": "msg-004",
+        "senderId": "usr-chief-001",
+        "senderName": "Roberto Hernández",
+        "senderAvatar": "RH",
+        "content": "Perfecto. Carlos, si necesitas ayuda con Laboratorios me avisas.",
+        "timestamp": "2025-01-28T14:10:00Z",
+        "isOwn": true
+      }
+    ],
+    "channel-dm-maria": [
+      {
+        "id": "msg-dm-001",
+        "senderId": "usr-acc-001",
+        "senderName": "María López",
+        "senderAvatar": "ML",
+        "content": "Hola Roberto, ya terminé la conciliación del Hospital San Rafael.",
+        "timestamp": "2025-01-28T13:30:00Z",
+        "isOwn": false
+      },
+      {
+        "id": "msg-dm-002",
+        "senderId": "usr-chief-001",
+        "senderName": "Roberto Hernández",
+        "senderAvatar": "RH",
+        "content": "Excelente María, gracias por la actualización. ¿Cómo vas con Clínica del Valle?",
+        "timestamp": "2025-01-28T13:35:00Z",
+        "isOwn": true
+      },
+      {
+        "id": "msg-dm-003",
+        "senderId": "usr-acc-001",
+        "senderName": "María López",
+        "senderAvatar": "ML",
+        "content": "Estoy esperando el estado de cuenta de enero. Ya lo solicité al cliente.",
+        "timestamp": "2025-01-28T13:40:00Z",
+        "isOwn": false
+      },
+      {
+        "id": "msg-dm-004",
+        "senderId": "usr-chief-001",
+        "senderName": "Roberto Hernández",
+        "senderAvatar": "RH",
+        "content": "Ok, dale seguimiento mañana si no responden.",
+        "timestamp": "2025-01-28T13:42:00Z",
+        "isOwn": true
+      },
+      {
+        "id": "msg-dm-005",
+        "senderId": "usr-acc-001",
+        "senderName": "María López",
+        "senderAvatar": "ML",
+        "content": "Ya terminé la conciliación del Hospital",
+        "timestamp": "2025-01-28T13:45:00Z",
+        "isOwn": false
+      }
+    ],
+    "channel-intercept-001": [
+      {
+        "id": "msg-ai-001",
+        "senderId": "ai-agent",
+        "senderName": "AI Agent",
+        "senderAvatar": "🤖",
+        "content": "Se requiere intervención humana. El cliente Hospital San Rafael preguntó: '¿Pueden clasificar este gasto como deducible?' - No tengo suficiente contexto para responder.",
+        "timestamp": "2025-01-28T10:15:00Z",
+        "isOwn": false,
+        "metadata": {
+          "clientQuery": "¿Pueden clasificar este gasto como deducible?",
+          "transactionAmount": 15000,
+          "transactionDescription": "Compra de equipo médico"
+        }
+      }
+    ]
+  },
+  "calendarEvents": [
+    {
+      "id": "evt-001",
+      "title": "Declaración Mensual ISR",
+      "type": "tax_deadline",
+      "date": "2025-02-17",
+      "allDay": true,
+      "color": "#ef4444",
+      "description": "Fecha límite para declaración mensual de ISR",
+      "clients": "all"
+    },
+    {
+      "id": "evt-002",
+      "title": "Declaración IVA",
+      "type": "tax_deadline",
+      "date": "2025-02-17",
+      "allDay": true,
+      "color": "#ef4444",
+      "description": "Fecha límite para declaración mensual de IVA",
+      "clients": "all"
+    },
+    {
+      "id": "evt-003",
+      "title": "DIOT",
+      "type": "tax_deadline",
+      "date": "2025-02-28",
+      "allDay": true,
+      "color": "#f59e0b",
+      "description": "Declaración Informativa de Operaciones con Terceros",
+      "clients": "all"
+    },
+    {
+      "id": "evt-004",
+      "title": "Contabilidad Electrónica",
+      "type": "tax_deadline",
+      "date": "2025-02-25",
+      "allDay": true,
+      "color": "#f59e0b",
+      "description": "Envío de contabilidad electrónica al SAT",
+      "clients": "all"
+    },
+    {
+      "id": "evt-005",
+      "title": "Renovación Certificado - Hospital San Rafael",
+      "type": "certificate",
+      "date": "2025-03-15",
+      "allDay": true,
+      "color": "#1880EA",
+      "description": "Vence certificado de sello digital",
+      "clients": ["client-001"]
+    },
+    {
+      "id": "evt-006",
+      "title": "Auditoría Sector Salud",
+      "type": "sector_specific",
+      "date": "2025-02-20",
+      "allDay": true,
+      "color": "#10b981",
+      "description": "Revisión especial para sector médico",
+      "clients": "medical"
+    },
+    {
+      "id": "evt-007",
+      "title": "Reunión de Equipo",
+      "type": "meeting",
+      "date": "2025-01-31",
+      "time": "10:00",
+      "endTime": "11:00",
+      "color": "#8b5cf6",
+      "description": "Revisión de avances mensuales",
+      "clients": null
+    },
+    {
+      "id": "evt-008",
+      "title": "Cierre Mensual",
+      "type": "internal",
+      "date": "2025-01-31",
+      "allDay": true,
+      "color": "#ec4899",
+      "description": "Fecha límite para cierre de conciliaciones",
+      "clients": "all"
+    }
+  ]
+}
+

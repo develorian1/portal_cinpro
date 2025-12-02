@@ -1,0 +1,226 @@
+.teamPerformance {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .teamPerformance {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartCard {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.chartTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.chartTitle svg {
+  color: var(--azure);
+}
+
+.chartSubtitle {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin: 0 0 20px 0;
+}
+
+/* Bar Chart */
+.barChart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.barLabel {
+  width: 120px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.barContainer {
+  flex: 1;
+  height: 24px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--azure), var(--azure-light));
+  border-radius: var(--radius-sm);
+  transition: width 0.5s ease;
+}
+
+.bar.errorBar {
+  background: var(--danger);
+}
+
+.barValue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.highError {
+  color: var(--danger);
+}
+
+.errorDetail {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+/* Satisfaction */
+.satisfactionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overallScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.scoreNumber {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--azure);
+  line-height: 1;
+}
+
+.scoreMax {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.starsRow {
+  display: flex;
+  gap: 4px;
+}
+
+/* Breakdown */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.breakdownItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.breakdownLabel {
+  width: 150px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.breakdownBar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.breakdownFill {
+  height: 100%;
+  background: var(--success);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.breakdownValue {
+  width: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* Recent Feedback */
+.recentFeedback {
+  border-top: 1px solid var(--border-primary);
+  padding-top: 20px;
+}
+
+.feedbackTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+}
+
+.feedbackItem {
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+.feedbackItem:last-child {
+  margin-bottom: 0;
+}
+
+.feedbackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.feedbackClient {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.feedbackStars {
+  display: flex;
+  gap: 2px;
+}
+
+.feedbackComment {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.4;
+}
+

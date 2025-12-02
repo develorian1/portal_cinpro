@@ -4,6 +4,12 @@
   --sidebar-collapsed: 72px;
   --topbar-height: 64px;
 
+  /* Responsive breakpoints (Tailwind-aligned) */
+  --bp-sm: 640px;   /* Small devices (phones) */
+  --bp-md: 768px;   /* Medium devices (tablets) */
+  --bp-lg: 1024px;  /* Large devices (small desktops) */
+  --bp-xl: 1280px;  /* Extra large devices (large desktops) */
+
   /* Border radius */
   --radius-sm: 6px;
   --radius-md: 10px;

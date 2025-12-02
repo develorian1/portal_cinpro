@@ -154,3 +154,69 @@
   animation: spin 1s linear infinite;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .broadcastCenter {
+    border-radius: var(--radius-md);
+  }
+
+  .header {
+    padding: 8px 12px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .broadcastForm {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .messageInput {
+    min-height: 90px;
+    padding: 8px;
+  }
+
+  .sendButton {
+    width: 100%;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 6px 10px;
+  }
+
+  .title {
+    font-size: 0.875rem;
+  }
+
+  .broadcastForm {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .messageInput {
+    font-size: 0.8rem;
+    min-height: 70px;
+    padding: 6px;
+  }
+
+  .targetSelect {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    padding-right: 30px;
+  }
+
+  .sendButton {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+

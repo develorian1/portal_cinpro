@@ -1287,13 +1287,32 @@
   background: var(--text-muted);
 }
 
+@media (max-width: 1024px) {
+  .chatWindow {
+    width: 45%;
+    min-width: 300px;
+  }
+
+  .documentViewer {
+    min-width: 250px;
+  }
+}
+
 @media (max-width: 768px) {
+  .mensajes {
+    margin: -16px;
+    padding: 0;
+  }
+
   .chatsList {
     width: 100%;
   }
 
   .chatWindow {
     display: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
   }
 
   .chatWindow.active {
@@ -1302,6 +1321,44 @@
 
   .chatsList.hidden {
     display: none;
+  }
+
+  .documentViewer {
+    display: none;
+  }
+
+  .chatsListHeader {
+    padding: 12px 14px;
+  }
+
+  .chatItem {
+    padding: 10px;
+  }
+
+  .chatName {
+    font-size: 0.95rem;
+  }
+
+  .chatLastMessage {
+    font-size: 0.8rem;
+  }
+
+  .messageContent {
+    padding: 10px 14px;
+  }
+
+  .messageText {
+    font-size: 0.95rem;
+  }
+
+  .messageInputContainer {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .messageInput {
+    max-width: 100%;
+    padding: 10px;
   }
 
   .modalContent {
@@ -1325,6 +1382,126 @@
 
   .modalBody {
     padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mensajes {
+    margin: -12px;
+  }
+
+  .chatsListHeader {
+    padding: 10px 12px;
+  }
+
+  .chatsListTitle {
+    font-size: 0.95rem;
+  }
+
+  .chatsListHeaderButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .chatItem {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .chatName {
+    font-size: 0.9rem;
+  }
+
+  .chatLastMessage {
+    font-size: 0.75rem;
+  }
+
+  .chatTimestamp {
+    font-size: 0.7rem;
+  }
+
+  .messagesContainer {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
+  .messageContent {
+    padding: 8px 12px;
+  }
+
+  .messageText {
+    font-size: 0.9rem;
+  }
+
+  .messageTime {
+    font-size: 0.625rem;
+  }
+
+  .messageInputContainer {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .attachButton,
+  .micButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .messageInput {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .sendButton {
+    padding: 8px 12px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  .documentAttachment {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .documentIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .documentName {
+    font-size: 0.8rem;
+  }
+
+  .documentSize {
+    font-size: 0.7rem;
+  }
+
+  .userItem {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .userAvatarInitial {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .userName {
+    font-size: 0.875rem;
+  }
+
+  .userEmail {
+    font-size: 0.75rem;
+  }
+
+  .noUsersFound {
+    padding: 24px 16px;
   }
 }
 

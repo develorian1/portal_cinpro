@@ -307,3 +307,91 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/* Mobile overlay */
+.mobileOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 199;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile close button - hidden by default */
+.mobileCloseBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.mobileCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+  }
+
+  .sidebar.collapsed {
+    width: var(--sidebar-width);
+    transform: translateX(-100%);
+  }
+
+  .sidebar.mobileOpen {
+    transform: translateX(0);
+  }
+
+  .mobileOverlay {
+    display: block;
+  }
+
+  .toggleBtn {
+    display: none;
+  }
+
+  .mobileCloseBtn {
+    display: flex;
+  }
+
+  .sidebarHeader {
+    justify-content: space-between;
+  }
+
+  .sidebar.mobileOpen .logo {
+    display: flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 100%;
+    max-width: 300px;
+  }
+}

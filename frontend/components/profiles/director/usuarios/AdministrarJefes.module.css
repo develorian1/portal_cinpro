@@ -185,3 +185,74 @@
   border-color: var(--azure-dark);
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .chiefName {
+    font-size: 1rem;
+  }
+
+  .groupBadge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+
+  .cardActions {
+    padding-top: 12px;
+  }
+
+  .actionBtn {
+    padding: 8px 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 14px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+  }
+
+  .statValue {
+    font-size: 0.9rem;
+  }
+}
+

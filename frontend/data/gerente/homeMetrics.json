@@ -1,0 +1,133 @@
+{
+  "kpiMetrics": {
+    "taxCompliance": {
+      "percentage": 78,
+      "filedCount": 19,
+      "totalCount": 24,
+      "label": "Cumplimiento Fiscal"
+    },
+    "openReviews": {
+      "count": 12,
+      "label": "Revisiones Pendientes",
+      "description": "Coincidencias con confianza < 80%"
+    },
+    "groupRevenue": {
+      "amount": 485000,
+      "currency": "MXN",
+      "label": "Ingresos del Grupo",
+      "change": {
+        "direction": "up",
+        "percentage": 8.5,
+        "text": "vs mes anterior"
+      }
+    },
+    "criticalAlerts": {
+      "count": 3,
+      "label": "Alertas Críticas",
+      "description": "Clientes con deuda crítica"
+    }
+  },
+  "triageItems": [
+    {
+      "id": "triage-001",
+      "client": {
+        "id": "client-001",
+        "name": "Hospital San Rafael",
+        "rfc": "HSR850101ABC"
+      },
+      "transaction": {
+        "bankDescription": "TRANSFERENCIA SPEI REF 8847321",
+        "amount": 45000,
+        "date": "2025-01-28"
+      },
+      "aiSuggestion": {
+        "invoiceNumber": "F-2025-0234",
+        "matchPercentage": 52,
+        "suggestedCategory": "Pago parcial servicios enero"
+      },
+      "status": "pending",
+      "createdAt": "2025-01-28T14:30:00Z"
+    },
+    {
+      "id": "triage-002",
+      "client": {
+        "id": "client-002",
+        "name": "Clínica del Valle",
+        "rfc": "CDV920315XYZ"
+      },
+      "transaction": {
+        "bankDescription": "DEP EFECTIVO SUC 445",
+        "amount": 28500,
+        "date": "2025-01-27"
+      },
+      "aiSuggestion": {
+        "invoiceNumber": "F-2025-0198",
+        "matchPercentage": 45,
+        "suggestedCategory": "Depósito no identificado"
+      },
+      "status": "pending",
+      "createdAt": "2025-01-27T16:45:00Z"
+    },
+    {
+      "id": "triage-003",
+      "client": {
+        "id": "client-003",
+        "name": "Laboratorios Médicos SA",
+        "rfc": "LMS880720QWE"
+      },
+      "transaction": {
+        "bankDescription": "PAGO NOMINA QUINCENAL",
+        "amount": 125000,
+        "date": "2025-01-26"
+      },
+      "aiSuggestion": {
+        "invoiceNumber": null,
+        "matchPercentage": 68,
+        "suggestedCategory": "Gasto de nómina"
+      },
+      "status": "pending",
+      "createdAt": "2025-01-26T09:15:00Z"
+    },
+    {
+      "id": "triage-004",
+      "client": {
+        "id": "client-004",
+        "name": "Farmacia Santa Cruz",
+        "rfc": "FSC950610RTY"
+      },
+      "transaction": {
+        "bankDescription": "COMISION BANCARIA",
+        "amount": 580,
+        "date": "2025-01-25"
+      },
+      "aiSuggestion": {
+        "invoiceNumber": null,
+        "matchPercentage": 78,
+        "suggestedCategory": "Gasto bancario"
+      },
+      "status": "pending",
+      "createdAt": "2025-01-25T11:20:00Z"
+    },
+    {
+      "id": "triage-005",
+      "client": {
+        "id": "client-005",
+        "name": "Centro Médico Integral",
+        "rfc": "CMI900225UIO"
+      },
+      "transaction": {
+        "bankDescription": "TRF INTERBANCARIA 99182736",
+        "amount": 67800,
+        "date": "2025-01-24"
+      },
+      "aiSuggestion": {
+        "invoiceNumber": "F-2025-0156",
+        "matchPercentage": 55,
+        "suggestedCategory": "Pago proveedor médico"
+      },
+      "status": "pending",
+      "createdAt": "2025-01-24T08:00:00Z"
+    }
+  ]
+}
+

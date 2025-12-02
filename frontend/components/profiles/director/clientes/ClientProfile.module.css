@@ -215,5 +215,51 @@
   .overlay {
     padding: 0;
   }
+
+  .modalHeader {
+    padding: 16px;
+  }
+
+  .modalTitle {
+    font-size: 1.25rem;
+  }
+
+  .modalContent {
+    padding: 16px;
+    gap: 24px;
+  }
+
+  .section {
+    gap: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .modalHeader {
+    padding: 14px;
+  }
+
+  .modalContent {
+    padding: 14px;
+    gap: 20px;
+  }
+
+  .infoLabel {
+    font-size: 0.7rem;
+  }
+
+  .infoValue {
+    font-size: 0.9rem;
+  }
+
+  .groupBadge,
+  .statusBadge {
+    padding: 3px 10px;
+    font-size: 0.75rem;
+  }
 }
 

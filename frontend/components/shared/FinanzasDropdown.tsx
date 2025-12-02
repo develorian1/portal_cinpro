@@ -8,12 +8,38 @@ interface FinanzasOption {
   id: string;
   label: string;
   icon: React.ReactNode;
+  category?: string;
 }
 
 const finanzasOptions: FinanzasOption[] = [
   {
-    id: 'finanzas-verificar-pagos',
-    label: 'Verificar Pagos',
+    id: 'finanzas-aging',
+    label: 'Resumen de Antigüedad',
+    category: 'Cuentas por Cobrar',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    id: 'finanzas-debtors',
+    label: 'Lista de Deudores',
+    category: 'Cuentas por Cobrar',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+  {
+    id: 'finanzas-commissions',
+    label: 'Cola de Aprobación',
+    category: 'Cuentas por Pagar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 11l3 3L22 4" />
@@ -22,13 +48,26 @@ const finanzasOptions: FinanzasOption[] = [
     ),
   },
   {
-    id: 'finanzas-cobranza',
-    label: 'Cobranza',
+    id: 'finanzas-expenses',
+    label: 'Gastos',
+    category: 'Cuentas por Pagar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="1" y="4" width="22" height="16" rx="2" />
         <line x1="1" y1="10" x2="23" y2="10" />
-        <path d="M7 14h.01M7 18h.01" />
+      </svg>
+    ),
+  },
+  {
+    id: 'finanzas-reports',
+    label: 'Generador de Reportes',
+    category: 'Reportes',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     ),
   },
@@ -41,8 +80,18 @@ export default function FinanzasDropdown() {
 
   // Determine current active option
   const currentOption = finanzasOptions.find(
-    (option) => option.id === activeItem || (activeItem === 'finanzas' && option.id === 'finanzas-verificar-pagos')
+    (option) => option.id === activeItem
   ) || finanzasOptions[0];
+
+  // Group options by category
+  const groupedOptions = finanzasOptions.reduce((acc, option) => {
+    const category = option.category || 'Otros';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(option);
+    return acc;
+  }, {} as Record<string, FinanzasOption[]>);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -91,28 +140,33 @@ export default function FinanzasDropdown() {
 
       {isOpen && (
         <div className={styles.dropdownMenu}>
-          {finanzasOptions.map((option) => (
-            <button
-              key={option.id}
-              className={`${styles.dropdownOption} ${activeItem === option.id ? styles.active : ''}`}
-              onClick={() => handleOptionClick(option.id)}
-            >
-              <span className={styles.optionIcon}>{option.icon}</span>
-              <span className={styles.optionLabel}>{option.label}</span>
-              {activeItem === option.id && (
-                <svg
-                  className={styles.checkIcon}
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
+          {Object.entries(groupedOptions).map(([category, options]) => (
+            <div key={category} className={styles.dropdownGroup}>
+              <div className={styles.groupLabel}>{category}</div>
+              {options.map((option) => (
+                <button
+                  key={option.id}
+                  className={`${styles.dropdownOption} ${activeItem === option.id ? styles.active : ''}`}
+                  onClick={() => handleOptionClick(option.id)}
                 >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              )}
-            </button>
+                  <span className={styles.optionIcon}>{option.icon}</span>
+                  <span className={styles.optionLabel}>{option.label}</span>
+                  {activeItem === option.id && (
+                    <svg
+                      className={styles.checkIcon}
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+                </button>
+              ))}
+            </div>
           ))}
         </div>
       )}

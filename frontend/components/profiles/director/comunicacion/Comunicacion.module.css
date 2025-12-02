@@ -92,3 +92,63 @@
   }
 }
 
+@media (max-width: 768px) {
+  .comunicacion {
+    margin: -12px;
+    padding: 12px;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 0;
+    margin-bottom: 8px;
+  }
+
+  .header {
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 1.125rem;
+    text-align: center;
+  }
+
+  .newBroadcastBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+  }
+
+  .mensajesTab {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .comunicacion {
+    margin: -8px;
+    padding: 8px;
+  }
+
+  .topBar {
+    gap: 6px;
+    padding: 6px 0;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .newBroadcastBtn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .mensajesTab {
+    gap: 6px;
+  }
+}
+

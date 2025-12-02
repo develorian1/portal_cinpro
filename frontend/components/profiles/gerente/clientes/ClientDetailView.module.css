@@ -1,0 +1,390 @@
+.clientDetailView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-secondary);
+}
+
+/* Header */
+.header {
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 20px 24px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.backBtn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.clientHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clientName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.clientRfc {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+}
+
+.clientMeta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metaValue {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  background: var(--surface-primary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab.active {
+  color: var(--azure);
+  border-bottom-color: var(--azure);
+}
+
+.tabCount {
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.tab.active .tabCount {
+  background: var(--azure);
+  color: var(--white);
+}
+
+/* Tab Content */
+.tabContent {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+/* Ledger Tab */
+.ledgerTab {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.ledgerTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ledgerTable th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.ledgerTable td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-primary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.ledgerTable tr:last-child td {
+  border-bottom: none;
+}
+
+.description {
+  color: var(--text-primary);
+  max-width: 300px;
+}
+
+.debit {
+  color: var(--danger);
+}
+
+.credit {
+  color: var(--success);
+}
+
+.balance {
+  font-weight: 600;
+}
+
+.balance.positive {
+  color: var(--success);
+}
+
+.balance.negative {
+  color: var(--danger);
+}
+
+.confidenceBadge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.confidenceBadge.high {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.confidenceBadge.medium {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.confidenceBadge.low {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Documents Tab */
+.documentsTab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.documentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.documentCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.documentCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.docIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--azure);
+}
+
+.docInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.docType {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.docFolio {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.docUuid {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.docMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.docDate {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.docAmount {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.docStatus {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.docStatus.valid {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+/* Chat Tab */
+.chatTab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chatEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chatQuestion,
+.chatAnswer {
+  display: flex;
+}
+
+.chatQuestion {
+  justify-content: flex-end;
+}
+
+.chatAnswer {
+  justify-content: flex-start;
+}
+
+.chatBubble {
+  display: flex;
+  gap: 12px;
+  max-width: 80%;
+}
+
+.chatQuestion .chatBubble {
+  flex-direction: row-reverse;
+}
+
+.chatIcon {
+  font-size: 1.5rem;
+}
+
+.chatContent {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.chatQuestion .chatContent {
+  background: var(--azure);
+  border-color: var(--azure);
+  color: var(--white);
+}
+
+.chatContent p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.chatTime {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.emptyChat {
+  text-align: center;
+  padding: 48px;
+  color: var(--text-tertiary);
+}
+

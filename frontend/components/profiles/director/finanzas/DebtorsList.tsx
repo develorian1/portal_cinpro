@@ -65,6 +65,7 @@ export default function DebtorsList() {
     {
       key: 'client',
       header: 'Cliente',
+      mobileLabel: 'Cliente',
       render: (debtor) => (
         <a href={`/clientes/${debtor.clientId}`} className={styles.clientLink}>
           {debtor.clientName}
@@ -74,6 +75,7 @@ export default function DebtorsList() {
     {
       key: 'group',
       header: 'Grupo',
+      mobileLabel: 'Grupo',
       render: (debtor) => (
         <span className={styles.groupBadge}>{debtor.group}</span>
       ),
@@ -81,6 +83,7 @@ export default function DebtorsList() {
     {
       key: 'amount',
       header: 'Monto Pendiente',
+      mobileLabel: 'Monto',
       render: (debtor) => (
         <span className={debtor.isOverdue ? styles.amountOverdue : styles.amount}>
           ${debtor.amountDue.toLocaleString()}
@@ -90,6 +93,7 @@ export default function DebtorsList() {
     {
       key: 'daysLate',
       header: 'Días de Retraso',
+      mobileLabel: 'Retraso',
       render: (debtor) =>
         debtor.daysLate > 0 ? (
           <span className={styles.daysLate}>{debtor.daysLate} días</span>
@@ -100,6 +104,7 @@ export default function DebtorsList() {
     {
       key: 'action',
       header: 'Acción',
+      mobileLabel: '',
       render: (debtor) => (
         <button
           className={styles.notifyBtn}

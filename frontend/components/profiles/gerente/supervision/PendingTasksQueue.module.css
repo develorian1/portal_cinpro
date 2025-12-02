@@ -1,0 +1,245 @@
+.pendingTasksQueue {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Filter Bar */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.filterSelect {
+  padding: 8px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--azure);
+}
+
+.selectedAccountant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--azure);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.accountantAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.taskCount {
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+/* Task List */
+.taskList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.taskItem:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.taskItem.prioritized {
+  border-left: 3px solid var(--warning);
+  background: var(--warning-bg);
+}
+
+/* Prioritize Button */
+.prioritizeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.prioritizeBtn:hover {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.prioritizeBtn.active {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+/* Task Icon */
+.taskIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* Task Content */
+.taskContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.taskDescription {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.taskMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.clientName {
+  color: var(--azure);
+  font-weight: 500;
+}
+
+.separator {
+  color: var(--text-muted);
+}
+
+.accountantName {
+  color: var(--text-secondary);
+}
+
+/* Task Right */
+.taskRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.priorityBadge {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priorityBadge.critical {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.priorityBadge.high {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.priorityBadge.medium {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.priorityBadge.low {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+}
+
+.dueDate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.dueDate.overdue {
+  color: var(--danger);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: var(--text-tertiary);
+}
+
+.emptyState svg {
+  margin-bottom: 16px;
+  color: var(--success);
+}
+
+.emptyState p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+

@@ -1,0 +1,246 @@
+{
+  "clients": [
+    {
+      "id": "client-001",
+      "entityName": "Hospital San Rafael",
+      "rfc": "HSR850101ABC",
+      "currentBalance": 245000.50,
+      "taxStatus": "filed",
+      "lastActivity": "2025-01-28T14:30:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-001",
+        "name": "María López",
+        "avatar": "ML"
+      },
+      "contact": {
+        "name": "Dr. Fernando Reyes",
+        "email": "f.reyes@sanrafael.com",
+        "phone": "+52 55 1234 5678"
+      },
+      "monthlyRevenue": 85000,
+      "sector": "Hospitales"
+    },
+    {
+      "id": "client-002",
+      "entityName": "Clínica del Valle",
+      "rfc": "CDV920315XYZ",
+      "currentBalance": -15200.00,
+      "taxStatus": "pending",
+      "lastActivity": "2025-01-27T16:45:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-001",
+        "name": "María López",
+        "avatar": "ML"
+      },
+      "contact": {
+        "name": "Lic. Patricia Gómez",
+        "email": "p.gomez@clinicavalle.mx",
+        "phone": "+52 55 2345 6789"
+      },
+      "monthlyRevenue": 42000,
+      "sector": "Clínicas"
+    },
+    {
+      "id": "client-003",
+      "entityName": "Laboratorios Médicos SA",
+      "rfc": "LMS880720QWE",
+      "currentBalance": 567800.25,
+      "taxStatus": "filed",
+      "lastActivity": "2025-01-26T09:15:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-002",
+        "name": "Carlos Mendoza",
+        "avatar": "CM"
+      },
+      "contact": {
+        "name": "Ing. Roberto Vega",
+        "email": "r.vega@labmedicos.com",
+        "phone": "+52 55 3456 7890"
+      },
+      "monthlyRevenue": 125000,
+      "sector": "Laboratorios"
+    },
+    {
+      "id": "client-004",
+      "entityName": "Farmacia Santa Cruz",
+      "rfc": "FSC950610RTY",
+      "currentBalance": 89500.00,
+      "taxStatus": "overdue",
+      "lastActivity": "2025-01-25T11:20:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-002",
+        "name": "Carlos Mendoza",
+        "avatar": "CM"
+      },
+      "contact": {
+        "name": "Sra. Carmen Ortiz",
+        "email": "c.ortiz@farmaciasc.mx",
+        "phone": "+52 55 4567 8901"
+      },
+      "monthlyRevenue": 35000,
+      "sector": "Farmacias"
+    },
+    {
+      "id": "client-005",
+      "entityName": "Centro Médico Integral",
+      "rfc": "CMI900225UIO",
+      "currentBalance": 320150.75,
+      "taxStatus": "filed",
+      "lastActivity": "2025-01-24T08:00:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-003",
+        "name": "Ana Martínez",
+        "avatar": "AM"
+      },
+      "contact": {
+        "name": "Dr. Miguel Ángel Torres",
+        "email": "m.torres@cmi.com.mx",
+        "phone": "+52 55 5678 9012"
+      },
+      "monthlyRevenue": 78000,
+      "sector": "Hospitales"
+    },
+    {
+      "id": "client-006",
+      "entityName": "Clínica Dental Sonrisa",
+      "rfc": "CDS870415PAS",
+      "currentBalance": -8750.00,
+      "taxStatus": "pending",
+      "lastActivity": "2025-01-23T10:30:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-003",
+        "name": "Ana Martínez",
+        "avatar": "AM"
+      },
+      "contact": {
+        "name": "Dra. Laura Jiménez",
+        "email": "l.jimenez@sonrisa.com",
+        "phone": "+52 55 6789 0123"
+      },
+      "monthlyRevenue": 28000,
+      "sector": "Clínicas"
+    },
+    {
+      "id": "client-007",
+      "entityName": "Hospital General del Norte",
+      "rfc": "HGN810930MNO",
+      "currentBalance": 892300.00,
+      "taxStatus": "filed",
+      "lastActivity": "2025-01-22T15:45:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-004",
+        "name": "Pedro Sánchez",
+        "avatar": "PS"
+      },
+      "contact": {
+        "name": "Lic. Eduardo Ramírez",
+        "email": "e.ramirez@hgn.org.mx",
+        "phone": "+52 55 7890 1234"
+      },
+      "monthlyRevenue": 145000,
+      "sector": "Hospitales"
+    },
+    {
+      "id": "client-008",
+      "entityName": "Laboratorio Clínico Express",
+      "rfc": "LCE960520DEF",
+      "currentBalance": 45600.50,
+      "taxStatus": "overdue",
+      "lastActivity": "2025-01-21T12:00:00Z",
+      "assignedAccountant": {
+        "id": "usr-acc-004",
+        "name": "Pedro Sánchez",
+        "avatar": "PS"
+      },
+      "contact": {
+        "name": "QFB. Ana Belén Mora",
+        "email": "a.mora@labexpress.mx",
+        "phone": "+52 55 8901 2345"
+      },
+      "monthlyRevenue": 52000,
+      "sector": "Laboratorios"
+    }
+  ],
+  "clientDetails": {
+    "client-001": {
+      "ledger": [
+        {
+          "id": "rec-001",
+          "date": "2025-01-28",
+          "description": "Pago recibido - Factura F-2025-0234",
+          "debit": 0,
+          "credit": 45000,
+          "balance": 245000.50,
+          "status": "reconciled",
+          "confidenceScore": 0.95
+        },
+        {
+          "id": "rec-002",
+          "date": "2025-01-25",
+          "description": "Factura emitida - Servicios enero",
+          "debit": 85000,
+          "credit": 0,
+          "balance": 290000.50,
+          "status": "reconciled",
+          "confidenceScore": 1.0
+        },
+        {
+          "id": "rec-003",
+          "date": "2025-01-20",
+          "description": "Pago parcial recibido",
+          "debit": 0,
+          "credit": 35000,
+          "balance": 205000.50,
+          "status": "reconciled",
+          "confidenceScore": 0.88
+        }
+      ],
+      "documents": [
+        {
+          "id": "doc-001",
+          "type": "CFDI",
+          "folio": "F-2025-0234",
+          "uuid": "ABC123-DEF456-GHI789",
+          "date": "2025-01-15",
+          "amount": 85000,
+          "status": "valid"
+        },
+        {
+          "id": "doc-002",
+          "type": "CFDI",
+          "folio": "F-2025-0198",
+          "uuid": "JKL012-MNO345-PQR678",
+          "date": "2025-01-10",
+          "amount": 42000,
+          "status": "valid"
+        },
+        {
+          "id": "doc-003",
+          "type": "Complemento de Pago",
+          "folio": "CP-2025-0045",
+          "uuid": "STU901-VWX234-YZA567",
+          "date": "2025-01-08",
+          "amount": 35000,
+          "status": "valid"
+        }
+      ],
+      "chatLog": [
+        {
+          "id": "chat-001",
+          "timestamp": "2025-01-28T14:35:00Z",
+          "type": "ai_query",
+          "message": "¿Cuál es el estatus de mi declaración de enero?",
+          "response": "Su declaración mensual de enero está en proceso. El 78% de las transacciones han sido conciliadas."
+        },
+        {
+          "id": "chat-002",
+          "timestamp": "2025-01-25T10:20:00Z",
+          "type": "ai_query",
+          "message": "Necesito el XML de la factura F-2025-0234",
+          "response": "He enviado el archivo XML a su correo electrónico registrado."
+        }
+      ]
+    }
+  }
+}
+

@@ -507,6 +507,7 @@
   margin: 0 auto;
   width: 100%;
   scrollbar-width: none;
+  box-sizing: border-box;
 }
 
 .messagesContainer::-webkit-scrollbar {
@@ -530,6 +531,7 @@
 .message {
   display: flex;
   max-width: 85%;
+  min-width: 0;
 }
 
 .messageOwn {
@@ -547,6 +549,10 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-primary);
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
 }
 
 .messageOwn .messageContent {
@@ -561,6 +567,9 @@
   line-height: 1.5;
   color: var(--text-primary);
   transition: color 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .messageOwn .messageText {
@@ -692,6 +701,10 @@
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-sm);
   transition: all 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 64px;
+  overflow: visible;
 }
 
 .documentAttachment:not(.documentAttachmentModal) {
@@ -802,11 +815,12 @@
 }
 
 .documentInfo {
-  flex: 1;
+  flex: 1 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  overflow: hidden;
 }
 
 .documentName {
@@ -834,7 +848,7 @@
 }
 
 .documentActions {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1287,44 +1301,1003 @@
   background: var(--text-muted);
 }
 
+/* ===========================================
+   MOBILE STYLES - Telegram/WhatsApp Inspired
+   =========================================== */
+
+/* Mobile Container */
+.mensajesMobile {
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+/* Mobile Chat List */
+.chatsListMobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-right: none;
+  z-index: 10;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.chatsListHidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile Chat Window */
+.chatWindowMobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  border-right: none;
+  z-index: 20;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.chatWindowVisible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile Avatar in Chat List */
+.mobileAvatar {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.mobileAvatarInitial {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--azure) 0%, #5a9fd4 100%);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.25rem;
+  font-family: var(--font-display);
+}
+
+.mobileAvatarStatus {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--surface-primary);
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.mobileMenuButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuButton:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Header Styles */
+.chatHeaderMobile {
+  padding: 10px 8px;
+  background: var(--azure);
+  border-bottom: none;
+  gap: 8px;
+}
+
+.chatHeaderMobile .chatHeaderName {
+  color: var(--white);
+  font-size: 1.0625rem;
+}
+
+.chatHeaderMobile .chatHeaderStatus {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+}
+
+/* Mobile Back Button */
+.mobileBackButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.mobileBackButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobileBackButton:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Chat Header Avatar */
+.chatHeaderAvatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.chatHeaderAvatarInitial {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.chatHeaderAvatarStatus {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--azure);
+}
+
+.chatHeaderMobile .chatHeaderMenuButton {
+  background: transparent;
+  border-color: transparent;
+  color: var(--white);
+}
+
+.chatHeaderMobile .chatHeaderMenuButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+  color: var(--white);
+}
+
+/* Mobile Messages Container */
+.messagesContainerMobile {
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  max-width: 100%;
+  gap: 4px;
+  /* WhatsApp-style chat background pattern */
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(24, 128, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(24, 128, 234, 0.03) 0%, transparent 50%);
+  background-size: 100px 100px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Mobile Message Bubbles - Telegram/WhatsApp style */
+.messageMobile {
+  max-width: 90%;
+  min-width: 0;
+}
+
+/* Messages with documents need more width on mobile */
+.messageMobile:has(.documentAttachment) {
+  max-width: 95%;
+}
+
+/* Ensure message content with documents renders fully */
+.messageMobile .messageContent:has(.documentAttachment) {
+  min-height: 80px;
+  overflow: visible;
+}
+
+.messageMobile .messageContent {
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.messageMobile.messageOwn .messageContent {
+  border-radius: 18px 18px 4px 18px;
+  background: var(--azure);
+}
+
+.messageMobile.messageOther .messageContent {
+  border-radius: 18px 18px 18px 4px;
+  background: var(--surface-primary);
+}
+
+.messageContentMobile {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.messageContentMobile .messageText {
+  font-size: 0.9375rem;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.messageContentMobile .messageTime {
+  font-size: 0.6875rem;
+  text-align: right;
+}
+
+/* Mobile Input Container */
+.messageInputContainerMobile {
+  padding: 8px 8px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  gap: 8px;
+  background: var(--surface-primary);
+  border-top: 1px solid var(--border-primary);
+}
+
+.messageInputMobile {
+  flex: 1;
+  max-width: 100%;
+  padding: 10px 16px;
+  border-radius: 24px;
+  font-size: 1rem;
+  border: 1px solid var(--border-secondary);
+  background: var(--bg-secondary);
+}
+
+.messageInputMobile:focus {
+  border-color: var(--azure);
+}
+
+/* Mobile Attach Button */
+.mobileAttachButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.mobileAttachButton:hover,
+.mobileAttachButtonActive {
+  color: var(--azure);
+}
+
+.mobileAttachButtonActive {
+  transform: rotate(45deg);
+}
+
+/* Mobile Send Button */
+.mobileSendButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--azure);
+  color: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(24, 128, 234, 0.3);
+}
+
+.mobileSendButton:hover {
+  background: var(--azure-dark);
+  transform: scale(1.05);
+}
+
+.mobileSendButton:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Mic Button */
+.mobileMicButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.mobileMicButton:hover {
+  color: var(--azure);
+}
+
+.mobileMicButtonActive {
+  background: var(--azure);
+  color: var(--white);
+  animation: micPulse 2s ease-in-out infinite;
+}
+
+/* Mobile FAB (Floating Action Button) */
+.mobileFab {
+  position: absolute;
+  bottom: 24px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: var(--azure);
+  color: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(24, 128, 234, 0.4);
+  transition: all 0.2s ease;
+  z-index: 50;
+}
+
+.mobileFab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(24, 128, 234, 0.5);
+}
+
+.mobileFab:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Attachment Bottom Sheet */
+.mobileAttachmentOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+.mobileAttachmentSheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface-primary);
+  border-radius: 20px 20px 0 0;
+  padding: 12px 16px 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 101;
+  animation: slideUpSheet 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideUpSheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mobileAttachmentSheetHandle {
+  width: 40px;
+  height: 4px;
+  background: var(--border-secondary);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+.mobileAttachmentGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.mobileAttachmentOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobileAttachmentOption:active {
+  transform: scale(0.95);
+}
+
+.mobileAttachmentOption span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+}
+
+.mobileAttachmentIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Document Attachment */
+.documentAttachmentMobile {
+  padding: 10px;
+  border-radius: 12px;
+  margin: 4px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 8px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.documentAttachmentMobile .documentIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.documentAttachmentMobile .documentIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.documentAttachmentMobile .documentName {
+  font-size: 0.8125rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.documentAttachmentMobile .documentSize {
+  font-size: 0.6875rem;
+}
+
+.documentAttachmentMobile .documentInfo {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.documentAttachmentMobile .documentActions {
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.documentAttachmentMobile .downloadButton,
+.documentAttachmentMobile .viewModalButton {
+  width: 28px;
+  height: 28px;
+}
+
+.documentAttachmentMobile .documentArrow {
+  width: 14px;
+  height: 14px;
+}
+
+/* Message timestamp for mobile - inline style like WhatsApp */
+.messageMobile .messageTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  float: right;
+  margin-left: 8px;
+  margin-top: 4px;
+  position: relative;
+  bottom: -4px;
+}
+
+/* Double check marks for sent messages */
+.messageMobile.messageOwn .messageTime::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath d='M1 5l3 3 7-7M5 5l3 3 7-7' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Typing indicator animation */
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+.typingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--surface-primary);
+  border-radius: 18px 18px 18px 4px;
+  width: fit-content;
+}
+
+.typingDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typingDot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Mobile scroll optimization */
+.messagesContainerMobile {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Mobile haptic-like feedback for buttons */
+@media (hover: none) and (pointer: coarse) {
+  .mobileAttachButton:active,
+  .mobileSendButton:active,
+  .mobileMicButton:active,
+  .mobileFab:active,
+  .mobileBackButton:active {
+    transform: scale(0.92);
+  }
+  
+  .chatItem:active {
+    background: var(--bg-hover);
+    transition: background 0.1s ease;
+  }
+}
+
+/* Mobile Chat Item Styles */
 @media (max-width: 768px) {
-  .chatsList {
-    width: 100%;
+  /* Mobile message width adjustments */
+  .message {
+    max-width: 90%;
   }
 
-  .chatWindow {
-    display: none;
+  /* Message content needs to expand for documents */
+  .messageContent {
+    overflow: visible;
   }
 
-  .chatWindow.active {
+  /* Document attachments need compact layout on mobile */
+  .documentAttachment {
+    padding: 10px;
+    gap: 8px;
+    margin: 4px 0;
+    min-height: 56px;
     display: flex;
+    align-items: center;
   }
 
-  .chatsList.hidden {
-    display: none;
+  .documentIcon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
   }
 
+  .documentIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .documentName {
+    font-size: 0.8125rem;
+  }
+
+  .documentSize {
+    font-size: 0.6875rem;
+  }
+
+  .documentActions {
+    gap: 4px;
+  }
+
+  .downloadButton,
+  .viewModalButton {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+
+  .downloadButton svg,
+  .viewModalButton svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .documentArrow {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+  }
+
+  .chatItem {
+    padding: 12px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border-primary);
+    gap: 12px;
+  }
+
+  .chatItem:active {
+    background: var(--bg-hover);
+  }
+
+  .chatInfo {
+    padding-right: 0;
+  }
+
+  .chatName {
+    font-size: 1.0625rem;
+    filter: none;
+  }
+
+  .chatLastMessage {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+  }
+
+  .chatTimestamp {
+    font-size: 0.75rem;
+    filter: none;
+    color: var(--text-tertiary);
+  }
+
+  .unreadBadge {
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+
+  .chatsListHeader {
+    padding: 12px 16px;
+    background: var(--azure);
+    border-bottom: none;
+  }
+
+  .chatsListTitle {
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .chatsListHeaderButton {
+    background: transparent;
+    border-color: transparent;
+    color: var(--white);
+  }
+
+  .chatsListHeaderButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+    color: var(--white);
+  }
+
+  .chatsListHeaderButtonActive {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .chatsListSearchInput {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: transparent;
+    color: var(--white);
+  }
+
+  .chatsListSearchInput::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .chatsListSearchInput:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .chatsListSearchClear {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .chatsListSearchClear:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .chatsListContent {
+    padding: 0;
+    gap: 0;
+  }
+
+  /* Modal styles for mobile */
   .modalContent {
     max-width: 100%;
     max-height: 100vh;
+    max-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     border-radius: 0;
     margin: 0;
   }
 
   .modalOverlay {
     padding: 0;
+    height: 100vh;
+    height: 100dvh;
   }
 
   .modalHeader {
     padding: 12px 16px;
+    background: var(--azure);
+    border-bottom: none;
   }
 
   .modalTitle {
     font-size: 1rem;
+    color: var(--white);
+  }
+
+  .modalActionButton {
+    background: transparent;
+    border-color: transparent;
+    color: var(--white);
+  }
+
+  .modalActionButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
+    color: var(--white);
   }
 
   .modalBody {
+    padding: 12px;
+    overflow-x: hidden;
+  }
+
+  /* Document page fixes for mobile modal */
+  .modalBody .documentPage {
+    min-height: auto;
     padding: 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .modalBody .documentHeader {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .modalBody .documentHeader h4 {
+    font-size: 1rem;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .modalBody .documentBody {
+    margin: 16px 0;
+  }
+
+  .modalBody .documentParagraph {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin: 0 0 10px 0;
+  }
+
+  /* Table responsive for mobile */
+  .modalBody .documentTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    margin: 12px -12px;
+    width: calc(100% + 24px);
+  }
+
+  .modalBody .documentTable th,
+  .modalBody .documentTable td {
+    padding: 8px 10px;
+    min-width: 70px;
+  }
+
+  /* Pre-formatted text for mobile */
+  .modalBody .documentPre {
+    font-size: 0.6875rem;
+    padding: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  /* Document viewer hidden on mobile */
+  .documentViewer {
+    display: none;
+  }
+
+  /* Empty chat styles */
+  .emptyChat {
+    display: none;
+  }
+
+  /* User selection modal on mobile */
+  .usersList {
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+  }
+
+  .userItem {
+    padding: 14px 12px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  .userItem:active {
+    background: var(--bg-hover);
+  }
+
+  .userAvatarInitial {
+    width: 48px;
+    height: 48px;
+    font-size: 1.125rem;
+  }
+
+  .userStatusIndicator {
+    width: 14px;
+    height: 14px;
+  }
+
+  .userName {
+    font-size: 1rem;
+  }
+
+  .userEmail {
+    font-size: 0.8125rem;
+  }
+
+  .userSearchInput {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 24px;
+  }
+}
+
+/* Dark mode mobile adjustments */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  .mobileAvatarInitial,
+  .chatHeaderAvatarInitial {
+    background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  }
+
+  .messagesContainerMobile {
+    background-color: #0a0a0a;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(24, 128, 234, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(24, 128, 234, 0.05) 0%, transparent 50%);
+  }
+
+  .mobileAttachmentSheet {
+    background: #1a1a1a;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobileAttachmentGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .mobileAttachmentIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mobileAttachmentOption {
+    padding: 8px;
+  }
+
+  .mobileAttachmentSheet {
+    padding: 8px 16px 16px;
+  }
+
+  .chatsListContent {
+    max-height: calc(100vh - 60px);
+    max-height: calc(100dvh - 60px);
   }
 }
 

@@ -1,0 +1,133 @@
+.misComisiones {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Summary Cards */
+.summaryCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .summaryCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summaryCard {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summaryCard.pending {
+  border-left: 3px solid var(--warning);
+}
+
+.summaryCard.paid {
+  border-left: 3px solid var(--success);
+}
+
+.summaryLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summaryValue {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.summaryCard.pending .summaryValue {
+  color: var(--warning);
+}
+
+.summaryCard.paid .summaryValue {
+  color: var(--success);
+}
+
+/* Table Section */
+.tableSection {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.tableTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px 0;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+/* Table Cells */
+.clientName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.contractValue {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.commissionPercent {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--azure);
+}
+
+.earned {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.statusCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statusBadge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.statusBadge.paid {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.statusBadge.pending {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.paidDate {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+

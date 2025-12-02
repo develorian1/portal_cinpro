@@ -21,15 +21,23 @@
   animation-delay: 0.25s;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .kpiStrip {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .kpiStrip {
+    gap: 12px;
+    margin-bottom: 12px;
   }
 }
 
 @media (max-width: 640px) {
   .kpiStrip {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 }
 

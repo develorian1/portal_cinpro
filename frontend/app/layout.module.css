@@ -26,3 +26,21 @@
     margin-left: var(--sidebar-collapsed);
   }
 }
+
+/* Mobile: sidebar is completely hidden, so no margin needed */
+@media (max-width: 768px) {
+  .mainWrapper,
+  .mainWrapperCollapsed {
+    margin-left: 0;
+  }
+
+  .mainContent {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mainContent {
+    padding: 12px;
+  }
+}

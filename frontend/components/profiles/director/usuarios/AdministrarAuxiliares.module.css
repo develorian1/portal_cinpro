@@ -117,3 +117,57 @@
   background: var(--bg-secondary);
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .tableContainer {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .nameCell {
+    gap: 8px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .pending,
+  .pendingHigh {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .actionButtons {
+    gap: 4px;
+  }
+
+  .actionBtn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  .workload,
+  .chief {
+    font-size: 0.8rem;
+  }
+}
+

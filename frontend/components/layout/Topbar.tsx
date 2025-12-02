@@ -19,6 +19,9 @@ import {
   ClientContabilidadesDropdown,
   ClientConfiguracionDropdown,
   AuxiliarClientesDropdown,
+  GerenteSupervisionDropdown,
+  GerenteEstadisticasDropdown,
+  GerenteMensajesDropdown,
 } from '@/components/shared';
 import styles from './Topbar.module.css';
 
@@ -28,6 +31,7 @@ interface TopbarProps {
   profile?: ProfileType;
   userName?: string;
   userInitials?: string;
+  onMobileMenuToggle?: () => void;
 }
 
 interface SearchResult {
@@ -43,6 +47,7 @@ export default function Topbar({
   profile = 'director',
   userName,
   userInitials,
+  onMobileMenuToggle,
 }: TopbarProps) {
   const { activeItem } = useNavigation();
   const { theme, toggleTheme } = useTheme();
@@ -57,14 +62,16 @@ export default function Topbar({
   const [userStatus, setUserStatus] = useState<UserStatus>('activo');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const searchBlurTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const isGerentePage = profile === 'gerente';
+
   const isFinanzasPage =
     activeItem === 'finanzas' ||
-    activeItem === 'finanzas-receivables' ||
-    activeItem === 'finanzas-payables' ||
+    activeItem === 'finanzas-aging' ||
+    activeItem === 'finanzas-debtors' ||
+    activeItem === 'finanzas-commissions' ||
+    activeItem === 'finanzas-expenses' ||
     activeItem === 'finanzas-reports';
 
   const isAdminClientesPage =
@@ -118,6 +125,14 @@ export default function Topbar({
   const isAuxiliarClientPage =
     isAccountantPage && activeItem === 'clientes' && Boolean(selectedClientId);
 
+  // Gerente profile specific pages
+  const isGerenteSupervisionPage =
+    isGerentePage && (activeItem === 'supervision' || activeItem === 'supervision-tareas');
+  const isGerenteEstadisticasPage =
+    isGerentePage && (activeItem === 'estadisticas' || activeItem === 'estadisticas-comisiones');
+  const isGerenteMensajesPage =
+    isGerentePage && (activeItem === 'mensajes' || activeItem === 'mensajes-calendario');
+
   const profileInfo = PROFILE_TYPES[profile];
   const displayName = userName || `${profileInfo.displayName} Usuario`;
   const initials = userInitials || profileInfo.displayName.substring(0, 2).toUpperCase();
@@ -152,10 +167,9 @@ export default function Topbar({
   }, []);
 
   // Build omnibox results whenever query or clients change
-  useEffect(() => {
+  const searchResults = useMemo((): SearchResult[] => {
     if (!searchQuery || searchQuery.trim().length < 2) {
-      setSearchResults([]);
-      return;
+      return [];
     }
 
     const normalized = searchQuery.trim().toLowerCase();
@@ -216,7 +230,7 @@ export default function Topbar({
       });
     });
 
-    setSearchResults(results.slice(0, 6));
+    return results.slice(0, 6);
   }, [clients, searchQuery]);
 
 
@@ -235,7 +249,6 @@ export default function Topbar({
     (result: SearchResult) => {
       goToClientWorkspace(result.clientId, result.tab);
       setSearchQuery('');
-      setSearchResults([]);
       setSearchFocused(false);
     },
     [goToClientWorkspace]
@@ -244,16 +257,37 @@ export default function Topbar({
 
   return (
     <header className={styles.topbar}>
+      {/* Mobile burger menu */}
+      <div className={styles.topbarLeft}>
+        {onMobileMenuToggle && (
+          <button 
+            className={styles.mobileMenuBtn} 
+            onClick={onMobileMenuToggle}
+            aria-label="Toggle menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        )}
+      </div>
+
       <div className={styles.topbarCenter}>
         {isAuxiliarClientPage && <AuxiliarClientesDropdown />}
         {isAdminClientesPage && <AdminClientesDropdown />}
         {isAdminFinanzasPage && <AdminFinanzasDropdown />}
         {isFinanzasPage && !isAdminFinanzasPage && <FinanzasDropdown />}
-        {isEstadisticasPage && <EstadisticasDropdown profile={profile} />}
+        {isEstadisticasPage && !isGerentePage && <EstadisticasDropdown profile={profile} />}
         {isAdminUsuariosPage && profile === 'administrador' && <AdminUsuariosDropdown />}
         {isUsuariosPage && profile !== 'administrador' && <UsuariosDropdown />}
         {isClientContabilidadesPage && profile === 'cliente' && <ClientContabilidadesDropdown />}
         {isClientConfiguracionPage && profile === 'cliente' && <ClientConfiguracionDropdown />}
+        {/* Gerente Profile Dropdowns */}
+        {isGerenteSupervisionPage && <GerenteSupervisionDropdown />}
+        {isGerenteEstadisticasPage && <GerenteEstadisticasDropdown />}
+        {isGerenteMensajesPage && <GerenteMensajesDropdown />}
         <div className={styles.searchContainer}>
           <svg
             className={styles.searchIcon}
@@ -283,7 +317,6 @@ export default function Topbar({
             onBlur={() => {
               searchBlurTimeoutRef.current = setTimeout(() => {
                 setSearchFocused(false);
-                setSearchResults([]);
               }, 150);
             }}
             onKeyDown={(event) => {

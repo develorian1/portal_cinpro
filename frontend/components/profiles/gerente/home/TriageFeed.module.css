@@ -1,0 +1,293 @@
+.triageFeed {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.title svg {
+  color: var(--azure);
+}
+
+.count {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  background: var(--bg-tertiary);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-primary);
+  vertical-align: top;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover {
+  background: var(--bg-secondary);
+}
+
+/* Client Cell */
+.clientCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clientName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.clientRfc {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+}
+
+/* Transaction Cell */
+.transactionCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bankDesc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: monospace;
+  background: var(--bg-tertiary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transactionMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.amount {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Suggestion Cell */
+.suggestionCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.invoiceRef {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--azure);
+}
+
+.category {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.matchBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.matchHigh {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.matchMedium {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.matchLow {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.approveBtn,
+.rejectBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.approveBtn {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.approveBtn:hover {
+  background: var(--success);
+  color: var(--white);
+}
+
+.rejectBtn {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.rejectBtn:hover {
+  background: var(--danger);
+  color: var(--white);
+}
+
+/* Reject Form */
+.rejectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rejectInput {
+  padding: 8px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  width: 180px;
+}
+
+.rejectInput:focus {
+  outline: none;
+  border-color: var(--azure);
+}
+
+.rejectActions {
+  display: flex;
+  gap: 6px;
+}
+
+.confirmBtn,
+.cancelBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirmBtn {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.confirmBtn:hover {
+  background: var(--success);
+  color: var(--white);
+}
+
+.cancelBtn {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+}
+
+.cancelBtn:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: var(--text-tertiary);
+}
+
+.emptyState svg {
+  margin-bottom: 16px;
+  color: var(--success);
+}
+
+.emptyState p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+

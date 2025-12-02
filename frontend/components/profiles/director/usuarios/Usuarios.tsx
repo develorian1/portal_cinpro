@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { useUsuarios } from '@/contexts/UsuariosContext';
-import { RefreshButton } from '@/components/shared';
 import AdministrarAuxiliares from './AdministrarAuxiliares';
 import AdministrarAdmins from './AdministrarAdmins';
 import AdministrarJefes from './AdministrarJefes';
@@ -14,7 +13,7 @@ import styles from './Usuarios.module.css';
 
 export default function Usuarios() {
   const { activeItem } = useNavigation();
-  const { isRefreshing, refresh } = useUsuarios();
+  const { refresh } = useUsuarios();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   // Determine which tab to show based on activeItem
@@ -81,10 +80,6 @@ export default function Usuarios() {
         {/* Top Bar Context (Zone 2) */}
         <div className={styles.topBar}>
           <div className={styles.topBarActions}>
-            <RefreshButton 
-              onClick={refresh}
-              isRefreshing={isRefreshing}
-            />
             <button 
               className={styles.createBtn}
               onClick={handleCreateNewUser}

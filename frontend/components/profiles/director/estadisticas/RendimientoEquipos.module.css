@@ -182,3 +182,87 @@
   transition: color 0.3s ease;
 }
 
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .pieChartContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rendimientoEquipos {
+    gap: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sectorCard {
+    padding: 16px;
+  }
+
+  .sectorName {
+    font-size: 1.1rem;
+  }
+
+  .workloadCard {
+    padding: 16px;
+  }
+
+  .cardTitle {
+    font-size: 1.25rem;
+  }
+
+  .pieChart {
+    width: 200px;
+    height: 200px;
+  }
+
+  .pieLegend {
+    min-width: 100%;
+  }
+
+  .metricValue {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectorCard,
+  .workloadCard {
+    padding: 14px;
+  }
+
+  .pieChart {
+    width: 180px;
+    height: 180px;
+  }
+
+  .legendLabel {
+    font-size: 0.85rem;
+  }
+
+  .legendValue {
+    font-size: 0.8rem;
+  }
+
+  .metric {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+

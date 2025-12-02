@@ -10,10 +10,18 @@ import styles from './Sidebar.module.css';
 interface SidebarProps {
   profile?: ProfileType;
   collapsed?: boolean;
+  mobileOpen?: boolean;
   onToggleSidebar?: () => void;
+  onMobileClose?: () => void;
 }
 
-export default function Sidebar({ profile = 'director', collapsed = false, onToggleSidebar }: SidebarProps) {
+export default function Sidebar({ 
+  profile = 'director', 
+  collapsed = false, 
+  mobileOpen = false,
+  onToggleSidebar,
+  onMobileClose 
+}: SidebarProps) {
   const { activeItem, setActiveItem } = useNavigation();
 
   // Memoize navItems to prevent recreation on every render
@@ -105,22 +113,54 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
     });
   };
 
+  const handleNavItemClick = (itemId: string, hasSubItems: boolean) => {
+    if (hasSubItems) {
+      toggleSubMenu(itemId);
+    } else {
+      setActiveItem(itemId);
+      // Close mobile sidebar when navigating
+      if (onMobileClose) {
+        onMobileClose();
+      }
+    }
+  };
+
   return (
-    <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''}`}>
-      <div className={styles.sidebarHeader}>
-        <div className={styles.logo}>
-          <img src="/assets/logos/logo_cinpro.png" alt="CINPRO Logo" />
+    <>
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div 
+          className={styles.mobileOverlay} 
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
+      )}
+      
+      <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''} ${mobileOpen ? styles.mobileOpen : ''}`}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.logo}>
+            <img src="/assets/logos/logo_cinpro.png" alt="CINPRO Logo" />
+          </div>
+          {/* Desktop toggle button */}
+          {onToggleSidebar && (
+            <button className={styles.toggleBtn} onClick={onToggleSidebar}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          )}
+          {/* Mobile close button */}
+          {onMobileClose && (
+            <button className={styles.mobileCloseBtn} onClick={onMobileClose} aria-label="Close menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
         </div>
-        {onToggleSidebar && (
-          <button className={styles.toggleBtn} onClick={onToggleSidebar}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
-        )}
-      </div>
 
       <nav className={styles.sidebarNav}>
         {navItems.map((item) => {
@@ -133,13 +173,7 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
               <Tooltip content={item.label} position="right" disabled={!collapsed}>
                 <a
                   className={`${styles.navItem} ${isActive ? styles.active : ''} ${hasSubItems ? styles.hasSubItems : ''}`}
-                  onClick={() => {
-                    if (hasSubItems) {
-                      toggleSubMenu(item.id);
-                    } else {
-                      setActiveItem(item.id);
-                    }
-                  }}
+                  onClick={() => handleNavItemClick(item.id, hasSubItems)}
                 >
                   {item.icon}
                   <span>{item.label}</span>
@@ -164,7 +198,10 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
                     <Tooltip key={subItem.id} content={subItem.label} position="right" disabled={!collapsed}>
                       <a
                         className={`${styles.subNavItem} ${activeItem === subItem.id ? styles.active : ''}`}
-                        onClick={() => setActiveItem(subItem.id)}
+                        onClick={() => {
+                          setActiveItem(subItem.id);
+                          if (onMobileClose) onMobileClose();
+                        }}
                       >
                         {subItem.icon}
                         <span>{subItem.label}</span>
@@ -182,6 +219,7 @@ export default function Sidebar({ profile = 'director', collapsed = false, onTog
         <p className={styles.footerText}>Powered by Aletheia Solutions</p>
       </div>
     </aside>
+    </>
   );
 }
 

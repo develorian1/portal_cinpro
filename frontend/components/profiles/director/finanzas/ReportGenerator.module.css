@@ -218,17 +218,236 @@
   background: #059669;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .reportGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .reportGenerator {
+    padding: 16px;
+  }
+
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  /* Touch-friendly cards - min 44px touch area */
+  .reportCard {
+    padding: 16px;
+    gap: 12px;
+    min-height: 72px;
+  }
+
+  .reportIcon {
+    font-size: 2rem;
+  }
+
+  .reportName {
+    font-size: 1.1rem;
   }
 
   .dateRangeSelector {
     flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
   }
 
   .downloadOptions {
     flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Touch-friendly buttons - min 44px height */
+  .downloadBtn {
+    padding: 14px 20px;
+    min-height: 48px;
+  }
+
+  .configHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* Touch-friendly cancel button */
+  .cancelBtn {
+    align-self: flex-end;
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .reportGenerator {
+    padding: 14px;
+  }
+
+  .reportGrid {
+    gap: 12px;
+  }
+
+  .reportCard {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .reportIcon {
+    font-size: 1.75rem;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .reportName {
+    font-size: 1rem;
+  }
+
+  .reportDescription {
+    font-size: 0.8rem;
+  }
+
+  .reportArrow {
+    font-size: 1.25rem;
+  }
+
+  .reportConfig {
+    padding: 16px;
+  }
+
+  .configTitle {
+    font-size: 1.25rem;
+  }
+
+  .dateField label {
+    font-size: 0.8rem;
+  }
+
+  /* Touch-friendly date inputs */
+  .dateInput {
+    padding: 12px 14px;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .downloadBtn {
+    font-size: 0.95rem;
+  }
+
+  .downloadBtn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reportGenerator {
+    padding: 12px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .reportGrid {
+    gap: 10px;
+  }
+
+  .reportCard {
+    padding: 12px;
+    min-height: 64px;
+  }
+
+  .reportIcon {
+    font-size: 1.5rem;
+    width: 36px;
+  }
+
+  .reportInfo {
+    min-width: 0;
+  }
+
+  .reportName {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .reportDescription {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .reportArrow {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .reportConfig {
+    padding: 14px;
+  }
+
+  .configHeader {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .configTitle {
+    font-size: 1.1rem;
+  }
+
+  .cancelBtn {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+    min-height: 40px;
+  }
+
+  .dateRangeSelector {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .dateField label {
+    font-size: 0.75rem;
+  }
+
+  .dateInput {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    min-height: 42px;
+  }
+
+  .downloadOptions {
+    gap: 8px;
+  }
+
+  .downloadBtn {
+    padding: 12px 16px;
+    min-height: 46px;
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .downloadBtn svg {
+    width: 16px;
+    height: 16px;
   }
 }
 

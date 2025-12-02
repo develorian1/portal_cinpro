@@ -66,3 +66,34 @@
   color: var(--danger);
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .kpiCard {
+    padding: 14px;
+  }
+
+  .kpiValue {
+    font-size: 1.5rem;
+    height: 2rem;
+  }
+
+  .kpiLabel {
+    font-size: 0.75rem;
+  }
+
+  .kpiChange {
+    margin-top: 8px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .kpiCard {
+    padding: 12px;
+  }
+
+  .kpiValue {
+    font-size: 1.35rem;
+  }
+}
+

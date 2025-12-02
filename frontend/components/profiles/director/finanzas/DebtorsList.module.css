@@ -87,3 +87,87 @@
   color: var(--white);
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .tableContainer {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .notifyBtn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .debtorsList {
+    border: none;
+    background: transparent;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .tableContainer {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    height: auto;
+  }
+
+  .clientLink {
+    font-size: 0.95rem;
+    word-break: break-word;
+  }
+
+  .groupBadge {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+
+  .amount,
+  .amountOverdue {
+    font-size: 1rem;
+  }
+
+  .daysLate,
+  .daysOnTime {
+    font-size: 0.9rem;
+  }
+
+  /* Touch-friendly button - min 44px touch target */
+  .notifyBtn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .clientLink {
+    font-size: 0.9rem;
+  }
+
+  .groupBadge {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+
+  .amount,
+  .amountOverdue {
+    font-size: 0.95rem;
+  }
+}
+
