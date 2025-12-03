@@ -256,3 +256,4 @@ export default function ClientDetailView({ client, details, onBack }: ClientDeta
   );
 }
 
+
