@@ -1,0 +1,149 @@
+.taskCard {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskCard:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--azure);
+}
+
+.taskCard.overdue {
+  border-left: 4px solid var(--danger);
+  background: rgba(239, 68, 68, 0.02);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.priorityBadge {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priorityCritical {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.priorityHigh {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.priorityMedium {
+  background: rgba(24, 128, 234, 0.1);
+  color: var(--azure);
+}
+
+.priorityLow {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.typeBadge {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.statusSelect {
+  padding: 6px 10px;
+  font-size: 0.875rem;
+  min-width: 140px;
+}
+
+.taskTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.taskDescription {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-primary);
+}
+
+.metaItem {
+  display: flex;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+
+.metaLabel {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.metaValue {
+  color: var(--text-secondary);
+}
+
+.dueDate {
+  color: var(--text-secondary);
+}
+
+.overdueDate {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.completedDate {
+  color: var(--success);
+  font-weight: 500;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-primary);
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-primary);
+}
+

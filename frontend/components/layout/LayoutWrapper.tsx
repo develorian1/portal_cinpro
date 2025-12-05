@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useProfile } from '@/contexts/ProfileContext';
 import { useNavigation } from '@/contexts/NavigationContext';
 import Sidebar from './Sidebar';
@@ -15,6 +15,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
 
   // Detect mobile viewport
   useEffect(() => {
@@ -60,12 +61,66 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return () => window.removeEventListener('openMobileSidebar', handleOpenSidebar);
   }, []);
 
+  // Track sidebar width and update CSS variable for main content positioning
+  useEffect(() => {
+    if (isMobile) {
+      // On mobile, sidebar is hidden, so no margin needed
+      document.documentElement.style.setProperty('--sidebar-actual-width', '0px');
+      return;
+    }
+
+    const updateSidebarWidth = () => {
+      const sidebar = sidebarRef.current;
+      if (sidebar) {
+        const width = sidebar.offsetWidth;
+        document.documentElement.style.setProperty('--sidebar-actual-width', `${width}px`);
+      }
+    };
+
+    // Initial update with a small delay to ensure sidebar is rendered
+    const timeoutId = setTimeout(() => {
+      updateSidebarWidth();
+    }, 0);
+
+    // Use ResizeObserver to track sidebar width changes
+    let resizeObserver: ResizeObserver | null = null;
+    if (sidebarRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateSidebarWidth();
+      });
+      resizeObserver.observe(sidebarRef.current);
+    }
+
+    // Also listen for transition end to catch width changes
+    const handleTransitionEnd = (e: TransitionEvent) => {
+      // Only handle width transitions
+      if (e.propertyName === 'width') {
+        updateSidebarWidth();
+      }
+    };
+
+    if (sidebarRef.current) {
+      sidebarRef.current.addEventListener('transitionend', handleTransitionEnd);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+      if (sidebarRef.current) {
+        sidebarRef.current.removeEventListener('transitionend', handleTransitionEnd);
+      }
+    };
+  }, [collapsed, isMobile]);
+
   // Hide AIAssistant on mobile when in Mensajes section (to avoid UI conflict)
   const shouldShowAIAssistant = profile !== 'cliente' && !(isMobile && activeItem === 'mensajes');
 
   return (
     <NotificationProvider>
       <Sidebar
+        ref={sidebarRef}
         profile={profile}
         collapsed={collapsed}
         mobileOpen={mobileOpen}

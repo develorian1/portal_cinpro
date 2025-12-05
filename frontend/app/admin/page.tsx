@@ -7,6 +7,7 @@ import { Estadisticas } from '@/components/profiles/administrador/estadisticas';
 import { Comunicacion } from '@/components/profiles/administrador/comunicacion';
 import { Calendario } from '@/components/profiles/administrador/calendario';
 import { Mensajes } from '@/components/profiles/administrador/mensajes';
+import { Tareas } from '@/components/profiles/administrador/tareas';
 import Home from '@/components/profiles/administrador/home';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
@@ -67,6 +68,15 @@ export default function AdminPage() {
     return (
       <SectionErrorBoundary sectionName="Estadísticas">
         <Estadisticas />
+      </SectionErrorBoundary>
+    );
+  }
+
+  // Render Tareas section
+  if (activeItem === 'tareas' || activeItem.startsWith('tareas-')) {
+    return (
+      <SectionErrorBoundary sectionName="Tareas">
+        <Tareas />
       </SectionErrorBoundary>
     );
   }

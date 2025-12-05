@@ -1,5 +1,5 @@
 .mainWrapper {
-  margin-left: var(--sidebar-width);
+  margin-left: var(--sidebar-actual-width, var(--sidebar-width));
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
 }
 
 .mainWrapperCollapsed {
-  margin-left: var(--sidebar-collapsed);
+  margin-left: var(--sidebar-actual-width, var(--sidebar-collapsed));
 }
 
 .mainContent {

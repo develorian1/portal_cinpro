@@ -1,0 +1,93 @@
+{
+  "misTareas": [
+    {
+      "id": "task-sys-aux-001",
+      "type": "reconciliation",
+      "source": "system",
+      "priority": "high",
+      "title": "Conciliar estado de cuenta - Cliente ABC",
+      "description": "Realizar conciliación bancaria del mes de enero para Cliente ABC",
+      "status": "pending",
+      "createdAt": "2025-01-15T09:00:00Z",
+      "dueDate": "2025-01-20T17:00:00Z",
+      "clientId": "abc-001",
+      "clientName": "ABC Corporation",
+      "assignedTo": "auxiliar-001"
+    },
+    {
+      "id": "task-sys-aux-002",
+      "type": "invoice-processing",
+      "source": "system",
+      "priority": "medium",
+      "title": "Procesar facturas pendientes - Cliente XYZ",
+      "description": "Procesar y validar 25 facturas recibidas del SAT",
+      "status": "in-progress",
+      "createdAt": "2025-01-12T08:00:00Z",
+      "dueDate": "2025-01-18T12:00:00Z",
+      "clientId": "xyz-001",
+      "clientName": "XYZ Industries",
+      "assignedTo": "auxiliar-001"
+    },
+    {
+      "id": "task-sys-aux-003",
+      "type": "bank-statement",
+      "source": "system",
+      "priority": "high",
+      "title": "Revisar estado de cuenta bancario",
+      "description": "Validar transacciones del estado de cuenta del mes",
+      "status": "pending",
+      "createdAt": "2025-01-14T10:00:00Z",
+      "dueDate": "2025-01-19T17:00:00Z",
+      "clientId": "def-001",
+      "clientName": "DEF Solutions",
+      "assignedTo": "auxiliar-001"
+    },
+    {
+      "id": "task-sys-aux-004",
+      "type": "cfdi-validation",
+      "source": "system",
+      "priority": "low",
+      "title": "Validar CFDI recibidos",
+      "description": "Validar y catalogar CFDI recibidos durante la semana",
+      "status": "pending",
+      "createdAt": "2025-01-13T11:00:00Z",
+      "dueDate": "2025-01-22T17:00:00Z",
+      "assignedTo": "auxiliar-001"
+    }
+  ],
+  "asignadasPorSuperior": [
+    {
+      "id": "task-sup-aux-001",
+      "type": "reconciliation",
+      "source": "superior",
+      "priority": "critical",
+      "title": "Conciliación urgente - Cliente Premium",
+      "description": "Completar conciliación pendiente con prioridad alta",
+      "status": "pending",
+      "createdAt": "2025-01-13T10:00:00Z",
+      "dueDate": "2025-01-17T12:00:00Z",
+      "clientId": "premium-001",
+      "clientName": "Premium Corp",
+      "assignedTo": "auxiliar-001",
+      "assignedBy": "gerente-001",
+      "assignedByName": "Juan Pérez"
+    },
+    {
+      "id": "task-sup-aux-002",
+      "type": "tax-filing",
+      "source": "superior",
+      "priority": "high",
+      "title": "Preparar declaración mensual",
+      "description": "Preparar y revisar declaración mensual del SAT para cliente",
+      "status": "in-progress",
+      "createdAt": "2025-01-11T14:00:00Z",
+      "dueDate": "2025-01-16T17:00:00Z",
+      "clientId": "corp-001",
+      "clientName": "Corporation Ltd",
+      "assignedTo": "auxiliar-001",
+      "assignedBy": "gerente-001",
+      "assignedByName": "Juan Pérez"
+    }
+  ]
+}
+

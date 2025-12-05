@@ -36,7 +36,6 @@ type SortDirection = 'asc' | 'desc';
 export default function MasterStatusList({ clients, onSelectClient }: MasterStatusListProps) {
   const [sortField, setSortField] = useState<SortField>('entityName');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('es-MX', {
@@ -77,13 +76,8 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
     }
   };
 
-  const filteredAndSortedClients = useMemo(() => {
+  const sortedClients = useMemo(() => {
     let result = [...clients];
-
-    // Filter
-    if (filterStatus !== 'all') {
-      result = result.filter((c) => c.taxStatus === filterStatus);
-    }
 
     // Sort
     result.sort((a, b) => {
@@ -106,7 +100,7 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
     });
 
     return result;
-  }, [clients, filterStatus, sortField, sortDirection]);
+  }, [clients, sortField, sortDirection]);
 
   const columns: TableColumn<Client>[] = [
     {
@@ -225,27 +219,8 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
 
   return (
     <div className={styles.masterStatusList}>
-      <div className={styles.toolbar}>
-        <div className={styles.filterGroup}>
-          <label className={styles.filterLabel}>Estado:</label>
-          <select
-            className={styles.filterSelect}
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-          >
-            <option value="all">Todos</option>
-            <option value="filed">Al día</option>
-            <option value="pending">Pendiente</option>
-            <option value="overdue">Vencido</option>
-          </select>
-        </div>
-        <span className={styles.clientCount}>
-          {filteredAndSortedClients.length} clientes
-        </span>
-      </div>
-
       <Table
-        data={filteredAndSortedClients}
+        data={sortedClients}
         columns={columns}
         keyExtractor={(client) => client.id}
         emptyMessage="No hay clientes que mostrar"
@@ -254,5 +229,6 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
     </div>
   );
 }
+
 
 

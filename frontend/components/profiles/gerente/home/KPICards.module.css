@@ -1,7 +1,36 @@
-.kpiGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.kpiContainer {
+  display: flex;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.kpiContainer > * {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .kpiContainer {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .kpiContainer > * {
+    min-width: 150px;
+    flex: 1 1 calc(50% - 6px);
+  }
+}
+
+@media (max-width: 640px) {
+  .kpiContainer {
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  .kpiContainer > * {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
 }
 

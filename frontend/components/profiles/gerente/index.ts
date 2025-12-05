@@ -5,3 +5,4 @@ export { Estadisticas } from './estadisticas';
 export { Comunicacion } from './comunicacion';
 
 
+

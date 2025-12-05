@@ -21,7 +21,6 @@ import {
   AuxiliarClientesDropdown,
   GerenteSupervisionDropdown,
   GerenteEstadisticasDropdown,
-  GerenteMensajesDropdown,
 } from '@/components/shared';
 import styles from './Topbar.module.css';
 
@@ -130,8 +129,6 @@ export default function Topbar({
     isGerentePage && (activeItem === 'supervision' || activeItem === 'supervision-tareas');
   const isGerenteEstadisticasPage =
     isGerentePage && (activeItem === 'estadisticas' || activeItem === 'estadisticas-comisiones');
-  const isGerenteMensajesPage =
-    isGerentePage && (activeItem === 'mensajes' || activeItem === 'mensajes-calendario');
 
   const profileInfo = PROFILE_TYPES[profile];
   const displayName = userName || `${profileInfo.displayName} Usuario`;
@@ -287,7 +284,6 @@ export default function Topbar({
         {/* Gerente Profile Dropdowns */}
         {isGerenteSupervisionPage && <GerenteSupervisionDropdown />}
         {isGerenteEstadisticasPage && <GerenteEstadisticasDropdown />}
-        {isGerenteMensajesPage && <GerenteMensajesDropdown />}
         <div className={styles.searchContainer}>
           <svg
             className={styles.searchIcon}

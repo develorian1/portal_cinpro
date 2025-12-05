@@ -1,0 +1,42 @@
+{
+  "misTareas": [
+    {
+      "id": "task-sys-dir-001",
+      "type": "report-generation",
+      "source": "system",
+      "priority": "critical",
+      "title": "Revisar informe ejecutivo mensual",
+      "description": "Analizar y aprobar informe consolidado de operaciones",
+      "status": "pending",
+      "createdAt": "2025-01-15T09:00:00Z",
+      "dueDate": "2025-01-20T17:00:00Z",
+      "assignedTo": "director-001"
+    },
+    {
+      "id": "task-sys-dir-002",
+      "type": "team-management",
+      "source": "system",
+      "priority": "high",
+      "title": "Reunión de revisión trimestral",
+      "description": "Preparar agenda y materiales para reunión con directivos",
+      "status": "in-progress",
+      "createdAt": "2025-01-10T08:00:00Z",
+      "dueDate": "2025-01-25T10:00:00Z",
+      "assignedTo": "director-001"
+    },
+    {
+      "id": "task-sys-dir-003",
+      "type": "document-review",
+      "source": "system",
+      "priority": "medium",
+      "title": "Revisar políticas de cumplimiento",
+      "description": "Actualizar y validar políticas internas de cumplimiento fiscal",
+      "status": "pending",
+      "createdAt": "2025-01-13T11:00:00Z",
+      "dueDate": "2025-01-30T17:00:00Z",
+      "assignedTo": "director-001"
+    }
+  ],
+  "asignadasPorSuperior": []
+}
+

@@ -1,0 +1,49 @@
+.tareasContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  height: 100%;
+  padding: 24px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .tareasContainer {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 16px;
+}
+
+.errorState p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--danger);
+}
+
+.retryButton {
+  padding: 10px 20px;
+  background: var(--azure);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.retryButton:hover {
+  background: var(--azure-dark);
+}
+

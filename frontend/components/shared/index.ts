@@ -19,4 +19,6 @@ export { default as GerenteMensajesDropdown } from './GerenteMensajesDropdown';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as SectionErrorBoundary } from './SectionErrorBoundary';
 export { default as ToastContainer } from './ToastContainer';
+export { default as SecurityProtection } from './SecurityProtection';
+export { Tareas, TaskList, TaskCard } from './tareas';
 

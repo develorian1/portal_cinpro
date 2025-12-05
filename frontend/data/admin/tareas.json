@@ -1,0 +1,73 @@
+{
+  "misTareas": [
+    {
+      "id": "task-sys-001",
+      "type": "payment-verification",
+      "source": "system",
+      "priority": "high",
+      "title": "Verificar pagos pendientes - Enero 2025",
+      "description": "Revisar y aprobar 15 pagos pendientes de clientes corporativos",
+      "status": "pending",
+      "createdAt": "2025-01-15T09:00:00Z",
+      "dueDate": "2025-01-20T17:00:00Z",
+      "assignedTo": "admin-001"
+    },
+    {
+      "id": "task-sys-002",
+      "type": "report-generation",
+      "source": "system",
+      "priority": "medium",
+      "title": "Generar reporte mensual de finanzas",
+      "description": "Preparar reporte consolidado de ingresos y gastos del mes",
+      "status": "in-progress",
+      "createdAt": "2025-01-10T08:00:00Z",
+      "dueDate": "2025-01-18T12:00:00Z",
+      "assignedTo": "admin-001"
+    },
+    {
+      "id": "task-sys-003",
+      "type": "client-onboarding",
+      "source": "system",
+      "priority": "high",
+      "title": "Onboarding nuevo cliente - TechCorp",
+      "description": "Completar proceso de incorporación y configuración inicial",
+      "status": "pending",
+      "createdAt": "2025-01-14T10:00:00Z",
+      "dueDate": "2025-01-22T17:00:00Z",
+      "clientId": "techcorp-001",
+      "clientName": "TechCorp S.A.",
+      "assignedTo": "admin-001"
+    }
+  ],
+  "asignadasPorSuperior": [
+    {
+      "id": "task-sup-001",
+      "type": "report-generation",
+      "source": "superior",
+      "priority": "critical",
+      "title": "Informe financiero Q4 2024",
+      "description": "Preparar informe financiero consolidado para la junta directiva",
+      "status": "pending",
+      "createdAt": "2025-01-12T10:00:00Z",
+      "dueDate": "2025-01-18T12:00:00Z",
+      "assignedTo": "admin-001",
+      "assignedBy": "director-001",
+      "assignedByName": "Carlos Rodríguez"
+    },
+    {
+      "id": "task-sup-002",
+      "type": "team-management",
+      "source": "superior",
+      "priority": "high",
+      "title": "Revisar desempeño del equipo de gerentes",
+      "description": "Evaluar métricas y preparar informe de rendimiento",
+      "status": "in-progress",
+      "createdAt": "2025-01-11T14:00:00Z",
+      "dueDate": "2025-01-25T17:00:00Z",
+      "assignedTo": "admin-001",
+      "assignedBy": "director-001",
+      "assignedByName": "Carlos Rodríguez"
+    }
+  ]
+}
+

@@ -43,6 +43,16 @@ export const directorNavItems: NavItem[] = [
     ),
   },
   {
+    id: 'tareas',
+    label: 'Tareas',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+  },
+  {
     id: 'usuarios',
     label: 'Administrar Usuarios',
     icon: (
@@ -159,6 +169,16 @@ export const administradorNavItems: NavItem[] = [
     ),
   },
   {
+    id: 'tareas',
+    label: 'Tareas',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+  },
+  {
     id: 'comunicacion',
     label: 'Comunicación',
     icon: (
@@ -240,6 +260,16 @@ export const gerenteNavItems: NavItem[] = [
     ),
   },
   {
+    id: 'tareas',
+    label: 'Tareas',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+  },
+  {
     id: 'mensajes',
     label: 'Mensajes',
     icon: (
@@ -290,8 +320,8 @@ export const auxiliarNavItems: NavItem[] = [
     ),
   },
   {
-    id: 'tareas-pendientes',
-    label: 'Tareas Pendientes',
+    id: 'tareas',
+    label: 'Tareas',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 11l3 3L22 4" />

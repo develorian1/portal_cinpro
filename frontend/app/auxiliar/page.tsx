@@ -6,7 +6,7 @@ import { Mensajes } from '@/components/profiles/auxiliar/mensajes';
 import { Calendario } from '@/components/profiles/auxiliar/calendario';
 import { PedidosFacturas } from '@/components/profiles/auxiliar/pedidos-facturas';
 import { ProcesamientoPDF } from '@/components/profiles/auxiliar/procesamiento-pdf';
-import { TareasPendientes } from '@/components/profiles/auxiliar/tareas-pendientes';
+import { Tareas } from '@/components/profiles/auxiliar/tareas';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
 
@@ -40,11 +40,11 @@ export default function AuxiliarPage() {
     );
   }
 
-  // Render Tareas Pendientes section
-  if (activeItem === 'tareas-pendientes') {
+  // Render Tareas section
+  if (activeItem === 'tareas' || activeItem.startsWith('tareas-')) {
     return (
-      <SectionErrorBoundary sectionName="Tareas Pendientes">
-        <TareasPendientes />
+      <SectionErrorBoundary sectionName="Tareas">
+        <Tareas />
       </SectionErrorBoundary>
     );
   }

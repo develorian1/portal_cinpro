@@ -6,7 +6,7 @@ import { HomeProvider } from '@/contexts/HomeContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { UsuariosProvider } from '@/contexts/UsuariosContext';
 import { ToastProvider } from '@/contexts/ToastContext';
-import { ErrorBoundary, ToastContainer } from '@/components/shared';
+import { ErrorBoundary, ToastContainer, SecurityProtection } from '@/components/shared';
 import '../styles/globals.css';
 
 const dmSans = DM_Sans({
@@ -34,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${dmSans.variable} ${inter.variable}`}>
+        <SecurityProtection />
         <ErrorBoundary>
           <ThemeProvider>
             <ToastProvider>

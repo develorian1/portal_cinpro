@@ -1,0 +1,71 @@
+{
+  "misTareas": [
+    {
+      "id": "task-sys-ger-001",
+      "type": "team-management",
+      "source": "system",
+      "priority": "high",
+      "title": "Revisar trabajo de auxiliares - Semana 3",
+      "description": "Supervisar y validar conciliaciones realizadas por el equipo",
+      "status": "pending",
+      "createdAt": "2025-01-15T09:00:00Z",
+      "dueDate": "2025-01-19T17:00:00Z",
+      "assignedTo": "gerente-001"
+    },
+    {
+      "id": "task-sys-ger-002",
+      "type": "report-generation",
+      "source": "system",
+      "priority": "medium",
+      "title": "Reporte de productividad del grupo",
+      "description": "Generar reporte semanal de productividad y métricas del equipo",
+      "status": "in-progress",
+      "createdAt": "2025-01-12T08:00:00Z",
+      "dueDate": "2025-01-17T12:00:00Z",
+      "assignedTo": "gerente-001"
+    },
+    {
+      "id": "task-sys-ger-003",
+      "type": "document-review",
+      "source": "system",
+      "priority": "high",
+      "title": "Validar declaraciones fiscales pendientes",
+      "description": "Revisar y aprobar 8 declaraciones fiscales antes del vencimiento",
+      "status": "pending",
+      "createdAt": "2025-01-14T10:00:00Z",
+      "dueDate": "2025-01-21T17:00:00Z",
+      "assignedTo": "gerente-001"
+    }
+  ],
+  "asignadasPorSuperior": [
+    {
+      "id": "task-sup-ger-001",
+      "type": "report-generation",
+      "source": "superior",
+      "priority": "critical",
+      "title": "Informe de estado de clientes asignados",
+      "description": "Preparar informe detallado del estado de todos los clientes del grupo",
+      "status": "pending",
+      "createdAt": "2025-01-13T10:00:00Z",
+      "dueDate": "2025-01-18T12:00:00Z",
+      "assignedTo": "gerente-001",
+      "assignedBy": "admin-001",
+      "assignedByName": "María González"
+    },
+    {
+      "id": "task-sup-ger-002",
+      "type": "team-management",
+      "source": "superior",
+      "priority": "high",
+      "title": "Capacitación del equipo en nuevas normativas",
+      "description": "Organizar sesión de capacitación sobre cambios en normativas fiscales",
+      "status": "pending",
+      "createdAt": "2025-01-11T14:00:00Z",
+      "dueDate": "2025-01-24T17:00:00Z",
+      "assignedTo": "gerente-001",
+      "assignedBy": "admin-001",
+      "assignedByName": "María González"
+    }
+  ]
+}
+

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, forwardRef } from 'react';
 import { ProfileType } from '@/types/profile';
 import { getNavItemsForProfile } from '@/config/navigation';
 import { useNavigation } from '@/contexts/NavigationContext';
@@ -15,13 +15,13 @@ interface SidebarProps {
   onMobileClose?: () => void;
 }
 
-export default function Sidebar({ 
+const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar({ 
   profile = 'director', 
   collapsed = false, 
   mobileOpen = false,
   onToggleSidebar,
   onMobileClose 
-}: SidebarProps) {
+}, ref) {
   const { activeItem, setActiveItem } = useNavigation();
 
   // Memoize navItems to prevent recreation on every render
@@ -136,7 +136,7 @@ export default function Sidebar({
         />
       )}
       
-      <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''} ${mobileOpen ? styles.mobileOpen : ''}`}>
+      <aside ref={ref} className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''} ${mobileOpen ? styles.mobileOpen : ''}`}>
         <div className={styles.sidebarHeader}>
           <div className={styles.logo}>
             <img src="/assets/logos/logo_cinpro.png" alt="CINPRO Logo" />
@@ -221,5 +221,7 @@ export default function Sidebar({
     </aside>
     </>
   );
-}
+});
+
+export default Sidebar;
 

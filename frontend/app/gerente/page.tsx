@@ -4,7 +4,8 @@ import { Home } from '@/components/profiles/gerente/home';
 import { Clientes } from '@/components/profiles/gerente/clientes';
 import { Supervision } from '@/components/profiles/gerente/supervision';
 import { Estadisticas } from '@/components/profiles/gerente/estadisticas';
-import { Comunicacion } from '@/components/profiles/gerente/comunicacion';
+import { Tareas } from '@/components/profiles/gerente/tareas';
+import Mensajes from '@/components/shared/mensajes/Mensajes';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { SectionErrorBoundary } from '@/components/shared';
 
@@ -38,11 +39,20 @@ export default function GerentePage() {
     );
   }
 
-  // Render Mensajes/Comunicacion section
-  if (activeItem === 'mensajes' || activeItem.startsWith('mensajes-')) {
+  // Render Tareas section
+  if (activeItem === 'tareas' || activeItem.startsWith('tareas-')) {
     return (
-      <SectionErrorBoundary sectionName="Comunicación">
-        <Comunicacion />
+      <SectionErrorBoundary sectionName="Tareas">
+        <Tareas />
+      </SectionErrorBoundary>
+    );
+  }
+
+  // Render Mensajes section
+  if (activeItem === 'mensajes') {
+    return (
+      <SectionErrorBoundary sectionName="Mensajes">
+        <Mensajes />
       </SectionErrorBoundary>
     );
   }
