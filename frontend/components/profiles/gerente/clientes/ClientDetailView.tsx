@@ -62,12 +62,12 @@ interface ClientDetails {
 interface ClientDetailViewProps {
   client: Client;
   details: ClientDetails;
-  onBack: () => void;
+  onClose: () => void;
 }
 
 type DetailTab = 'ledger' | 'documents' | 'chat';
 
-export default function ClientDetailView({ client, details, onBack }: ClientDetailViewProps) {
+export default function ClientDetailView({ client, details, onClose }: ClientDetailViewProps) {
   const [activeTab, setActiveTab] = useState<DetailTab>('ledger');
 
   const formatCurrency = (amount: number) => {
@@ -105,11 +105,11 @@ export default function ClientDetailView({ client, details, onBack }: ClientDeta
     <div className={styles.clientDetailView}>
       {/* Header */}
       <div className={styles.header}>
-        <button className={styles.backBtn} onClick={onBack}>
+        <button className={styles.closeBtn} onClick={onClose} aria-label="Cerrar">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="15 18 9 12 15 6" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-          Volver
         </button>
 
         <div className={styles.clientHeader}>
@@ -225,23 +225,13 @@ export default function ClientDetailView({ client, details, onBack }: ClientDeta
           <div className={styles.chatTab}>
             {details.chatLog.map((entry) => (
               <div key={entry.id} className={styles.chatEntry}>
-                <div className={styles.chatQuestion}>
-                  <div className={styles.chatBubble}>
-                    <span className={styles.chatIcon}>👤</span>
-                    <div className={styles.chatContent}>
-                      <p>{entry.message}</p>
-                      <span className={styles.chatTime}>{formatDateTime(entry.timestamp)}</span>
-                    </div>
-                  </div>
+                <div className={styles.chatMessage}>
+                  <strong>Usuario:</strong> {entry.message}
                 </div>
-                <div className={styles.chatAnswer}>
-                  <div className={styles.chatBubble}>
-                    <span className={styles.chatIcon}>🤖</span>
-                    <div className={styles.chatContent}>
-                      <p>{entry.response}</p>
-                    </div>
-                  </div>
+                <div className={styles.chatResponse}>
+                  <strong>Asistente:</strong> {entry.response}
                 </div>
+                <div className={styles.chatTime}>{formatDateTime(entry.timestamp)}</div>
               </div>
             ))}
             {details.chatLog.length === 0 && (

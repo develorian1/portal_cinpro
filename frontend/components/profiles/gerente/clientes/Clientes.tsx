@@ -1,9 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import MasterStatusList from './MasterStatusList';
 import ClientDetailView from './ClientDetailView';
 import clientStatusData from '@/data/gerente/clientStatus.json';
+import ledgerData from '@/data/gerente/ledger.json';
+import documentsData from '@/data/gerente/documents.json';
+import chatLogData from '@/data/gerente/chatLog.json';
 import styles from './Clientes.module.css';
 
 interface Client {
@@ -33,11 +36,11 @@ export default function Clientes() {
 
   const clientDetails = useMemo(() => {
     if (!selectedClient) return null;
-    const details = clientStatusData.clientDetails[selectedClient.id as keyof typeof clientStatusData.clientDetails];
-    return details || {
-      ledger: [],
-      documents: [],
-      chatLog: [],
+    const clientId = selectedClient.id;
+    return {
+      ledger: (ledgerData as Record<string, any>)[clientId] || [],
+      documents: (documentsData as Record<string, any>)[clientId] || [],
+      chatLog: (chatLogData as Record<string, any>)[clientId] || [],
     };
   }, [selectedClient]);
 
@@ -45,24 +48,49 @@ export default function Clientes() {
     setSelectedClient(client);
   };
 
-  const handleBack = () => {
+  const handleCloseModal = useCallback(() => {
     setSelectedClient(null);
-  };
+  }, []);
+
+  // Prevent body scroll when modal is open and handle ESC key
+  useEffect(() => {
+    if (selectedClient) {
+      document.body.style.overflow = 'hidden';
+      
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          handleCloseModal();
+        }
+      };
+      
+      document.addEventListener('keydown', handleEscape);
+      return () => {
+        document.body.style.overflow = 'unset';
+        document.removeEventListener('keydown', handleEscape);
+      };
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedClient, handleCloseModal]);
 
   return (
     <div className={styles.clientes}>
-      {selectedClient && clientDetails ? (
-        <ClientDetailView
-          client={selectedClient}
-          details={clientDetails}
-          onBack={handleBack}
+      <div className={styles.clientesContent}>
+        <MasterStatusList
+          clients={clients}
+          onSelectClient={handleSelectClient}
         />
-      ) : (
-        <div className={styles.clientesContent}>
-          <MasterStatusList
-            clients={clients}
-            onSelectClient={handleSelectClient}
-          />
+      </div>
+
+      {selectedClient && clientDetails && (
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+          <div className={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
+            <ClientDetailView
+              client={selectedClient}
+              details={clientDetails}
+              onClose={handleCloseModal}
+            />
+          </div>
         </div>
       )}
     </div>

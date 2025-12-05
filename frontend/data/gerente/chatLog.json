@@ -1,0 +1,131 @@
+{
+  "client-001": [
+    {
+      "id": "chat-001",
+      "timestamp": "2025-01-28T14:35:00Z",
+      "type": "ai_query",
+      "message": "¿Cuál es el estatus de mi declaración de enero?",
+      "response": "Su declaración mensual de enero está en proceso. El 78% de las transacciones han sido conciliadas."
+    },
+    {
+      "id": "chat-002",
+      "timestamp": "2025-01-25T10:20:00Z",
+      "type": "ai_query",
+      "message": "Necesito el XML de la factura F-2025-0234",
+      "response": "He enviado el archivo XML a su correo electrónico registrado."
+    }
+  ],
+  "client-002": [
+    {
+      "id": "chat-003",
+      "timestamp": "2025-01-27T16:50:00Z",
+      "type": "ai_query",
+      "message": "¿Por qué mi factura está pendiente?",
+      "response": "Su factura F-2025-0187 está pendiente de pago. El cliente tiene hasta el 5 de febrero para realizar el pago."
+    },
+    {
+      "id": "chat-004",
+      "timestamp": "2025-01-20T09:15:00Z",
+      "type": "ai_query",
+      "message": "Necesito actualizar mis datos de contacto",
+      "response": "Puede actualizar sus datos de contacto desde el panel de configuración o contactando a su contador asignado."
+    }
+  ],
+  "client-003": [
+    {
+      "id": "chat-005",
+      "timestamp": "2025-01-26T09:20:00Z",
+      "type": "ai_query",
+      "message": "¿Cuándo recibiré el comprobante de pago?",
+      "response": "El comprobante de pago será enviado automáticamente una vez que se confirme la recepción del pago en nuestro sistema."
+    },
+    {
+      "id": "chat-006",
+      "timestamp": "2025-01-22T14:30:00Z",
+      "type": "ai_query",
+      "message": "Necesito una factura con descripción detallada",
+      "response": "Puedo generar una factura con descripción detallada. ¿Qué información específica desea incluir?"
+    }
+  ],
+  "client-004": [
+    {
+      "id": "chat-007",
+      "timestamp": "2025-01-25T11:25:00Z",
+      "type": "ai_query",
+      "message": "Mi factura está vencida, ¿qué debo hacer?",
+      "response": "Tiene una factura vencida del mes de noviembre. Le recomiendo contactar a su contador asignado para establecer un plan de pago."
+    },
+    {
+      "id": "chat-008",
+      "timestamp": "2025-01-15T08:45:00Z",
+      "type": "ai_query",
+      "message": "¿Cómo puedo ver el historial de pagos?",
+      "response": "Puede ver el historial completo de pagos en la sección de documentos de su panel de cliente."
+    }
+  ],
+  "client-005": [
+    {
+      "id": "chat-009",
+      "timestamp": "2025-01-24T08:05:00Z",
+      "type": "ai_query",
+      "message": "Necesito el reporte mensual de ingresos",
+      "response": "El reporte mensual de ingresos está disponible en su panel. Puedo enviarlo por correo si lo requiere."
+    },
+    {
+      "id": "chat-010",
+      "timestamp": "2025-01-20T10:30:00Z",
+      "type": "ai_query",
+      "message": "¿Puedo cambiar la fecha de facturación?",
+      "response": "Sí, puede solicitar un cambio en la fecha de facturación contactando a su contador asignado."
+    }
+  ],
+  "client-006": [
+    {
+      "id": "chat-011",
+      "timestamp": "2025-01-23T10:35:00Z",
+      "type": "ai_query",
+      "message": "Mi balance aparece negativo, ¿es correcto?",
+      "response": "Sí, su balance negativo indica que tiene un crédito pendiente. Esto se debe a un pago parcial recibido."
+    },
+    {
+      "id": "chat-012",
+      "timestamp": "2025-01-18T15:20:00Z",
+      "type": "ai_query",
+      "message": "Necesito facturar servicios adicionales",
+      "response": "Puedo ayudarle a generar una factura adicional. ¿Qué servicios desea facturar?"
+    }
+  ],
+  "client-007": [
+    {
+      "id": "chat-013",
+      "timestamp": "2025-01-22T15:50:00Z",
+      "type": "ai_query",
+      "message": "¿Cuál es el proceso para facturar equipamiento médico?",
+      "response": "Para facturar equipamiento médico, necesita proporcionar la descripción del equipo, valor y fecha de adquisición. Puedo ayudarle con el proceso."
+    },
+    {
+      "id": "chat-014",
+      "timestamp": "2025-01-18T11:10:00Z",
+      "type": "ai_query",
+      "message": "Necesito el resumen anual de facturación",
+      "response": "El resumen anual de facturación está disponible en su panel. Puedo generarlo y enviarlo por correo electrónico."
+    }
+  ],
+  "client-008": [
+    {
+      "id": "chat-015",
+      "timestamp": "2025-01-21T12:05:00Z",
+      "type": "ai_query",
+      "message": "Tengo una factura vencida, ¿cómo la pago?",
+      "response": "Puede realizar el pago de su factura vencida a través de transferencia bancaria o contactando a su contador para otras opciones de pago."
+    },
+    {
+      "id": "chat-016",
+      "timestamp": "2025-01-12T09:00:00Z",
+      "type": "ai_query",
+      "message": "¿Puedo ver mis facturas anteriores?",
+      "response": "Sí, todas sus facturas anteriores están disponibles en la sección de documentos de su panel de cliente."
+    }
+  ]
+}
+

@@ -1,0 +1,219 @@
+{
+  "client-001": [
+    {
+      "id": "rec-001",
+      "date": "2025-01-28",
+      "description": "Pago recibido - Factura F-2025-0234",
+      "debit": 0,
+      "credit": 45000,
+      "balance": 245000.50,
+      "status": "reconciled",
+      "confidenceScore": 0.95
+    },
+    {
+      "id": "rec-002",
+      "date": "2025-01-25",
+      "description": "Factura emitida - Servicios enero",
+      "debit": 85000,
+      "credit": 0,
+      "balance": 290000.50,
+      "status": "reconciled",
+      "confidenceScore": 1.0
+    },
+    {
+      "id": "rec-003",
+      "date": "2025-01-20",
+      "description": "Pago parcial recibido",
+      "debit": 0,
+      "credit": 35000,
+      "balance": 205000.50,
+      "status": "reconciled",
+      "confidenceScore": 0.88
+    }
+  ],
+  "client-002": [
+    {
+      "id": "rec-004",
+      "date": "2025-01-27",
+      "description": "Factura pendiente - Servicios diciembre",
+      "debit": 42000,
+      "credit": 0,
+      "balance": -15200.00,
+      "status": "pending",
+      "confidenceScore": 0.92
+    },
+    {
+      "id": "rec-005",
+      "date": "2025-01-20",
+      "description": "Pago recibido parcial",
+      "debit": 0,
+      "credit": 26800,
+      "balance": 26800.00,
+      "status": "reconciled",
+      "confidenceScore": 0.85
+    }
+  ],
+  "client-003": [
+    {
+      "id": "rec-006",
+      "date": "2025-01-26",
+      "description": "Factura emitida - Análisis clínicos",
+      "debit": 125000,
+      "credit": 0,
+      "balance": 567800.25,
+      "status": "reconciled",
+      "confidenceScore": 0.98
+    },
+    {
+      "id": "rec-007",
+      "date": "2025-01-22",
+      "description": "Pago recibido - Factura F-2025-0189",
+      "debit": 0,
+      "credit": 98000,
+      "balance": 442800.25,
+      "status": "reconciled",
+      "confidenceScore": 0.95
+    },
+    {
+      "id": "rec-008",
+      "date": "2025-01-18",
+      "description": "Factura emitida - Servicios especializados",
+      "debit": 150000,
+      "credit": 0,
+      "balance": 540800.25,
+      "status": "reconciled",
+      "confidenceScore": 1.0
+    }
+  ],
+  "client-004": [
+    {
+      "id": "rec-009",
+      "date": "2025-01-25",
+      "description": "Factura vencida - Servicios noviembre",
+      "debit": 35000,
+      "credit": 0,
+      "balance": 89500.00,
+      "status": "overdue",
+      "confidenceScore": 0.75
+    },
+    {
+      "id": "rec-010",
+      "date": "2025-01-15",
+      "description": "Pago parcial recibido",
+      "debit": 0,
+      "credit": 54500,
+      "balance": 54500.00,
+      "status": "reconciled",
+      "confidenceScore": 0.82
+    }
+  ],
+  "client-005": [
+    {
+      "id": "rec-011",
+      "date": "2025-01-24",
+      "description": "Factura emitida - Consultas médicas",
+      "debit": 78000,
+      "credit": 0,
+      "balance": 320150.75,
+      "status": "reconciled",
+      "confidenceScore": 0.96
+    },
+    {
+      "id": "rec-012",
+      "date": "2025-01-20",
+      "description": "Pago recibido - Factura F-2025-0156",
+      "debit": 0,
+      "credit": 78000,
+      "balance": 242150.75,
+      "status": "reconciled",
+      "confidenceScore": 0.94
+    },
+    {
+      "id": "rec-013",
+      "date": "2025-01-15",
+      "description": "Factura emitida - Servicios de emergencia",
+      "debit": 95000,
+      "credit": 0,
+      "balance": 320150.75,
+      "status": "reconciled",
+      "confidenceScore": 0.99
+    }
+  ],
+  "client-006": [
+    {
+      "id": "rec-014",
+      "date": "2025-01-23",
+      "description": "Factura pendiente - Tratamientos dentales",
+      "debit": 28000,
+      "credit": 0,
+      "balance": -8750.00,
+      "status": "pending",
+      "confidenceScore": 0.88
+    },
+    {
+      "id": "rec-015",
+      "date": "2025-01-18",
+      "description": "Pago recibido parcial",
+      "debit": 0,
+      "credit": 19250,
+      "balance": 19250.00,
+      "status": "reconciled",
+      "confidenceScore": 0.80
+    }
+  ],
+  "client-007": [
+    {
+      "id": "rec-016",
+      "date": "2025-01-22",
+      "description": "Factura emitida - Servicios hospitalarios",
+      "debit": 145000,
+      "credit": 0,
+      "balance": 892300.00,
+      "status": "reconciled",
+      "confidenceScore": 1.0
+    },
+    {
+      "id": "rec-017",
+      "date": "2025-01-18",
+      "description": "Pago recibido - Factura F-2025-0123",
+      "debit": 0,
+      "credit": 145000,
+      "balance": 747300.00,
+      "status": "reconciled",
+      "confidenceScore": 0.97
+    },
+    {
+      "id": "rec-018",
+      "date": "2025-01-15",
+      "description": "Factura emitida - Equipamiento médico",
+      "debit": 250000,
+      "credit": 0,
+      "balance": 892300.00,
+      "status": "reconciled",
+      "confidenceScore": 0.98
+    }
+  ],
+  "client-008": [
+    {
+      "id": "rec-019",
+      "date": "2025-01-21",
+      "description": "Factura vencida - Análisis de laboratorio",
+      "debit": 52000,
+      "credit": 0,
+      "balance": 45600.50,
+      "status": "overdue",
+      "confidenceScore": 0.70
+    },
+    {
+      "id": "rec-020",
+      "date": "2025-01-12",
+      "description": "Pago parcial recibido",
+      "debit": 0,
+      "credit": 6400,
+      "balance": -6400.00,
+      "status": "reconciled",
+      "confidenceScore": 0.78
+    }
+  ]
+}
+

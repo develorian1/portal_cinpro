@@ -200,21 +200,6 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
         </div>
       ),
     },
-    {
-      key: 'action',
-      header: '',
-      render: (client) => (
-        <button
-          className={styles.drillDownBtn}
-          onClick={() => onSelectClient(client)}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-          Ver detalle
-        </button>
-      ),
-    },
   ];
 
   return (
@@ -225,6 +210,7 @@ export default function MasterStatusList({ clients, onSelectClient }: MasterStat
         keyExtractor={(client) => client.id}
         emptyMessage="No hay clientes que mostrar"
         containerClassName={styles.tableContainer}
+        onRowClick={(client) => onSelectClient(client)}
       />
     </div>
   );

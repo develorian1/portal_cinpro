@@ -1,0 +1,199 @@
+{
+  "client-001": [
+    {
+      "id": "doc-001",
+      "type": "CFDI",
+      "folio": "F-2025-0234",
+      "uuid": "ABC123-DEF456-GHI789",
+      "date": "2025-01-15",
+      "amount": 85000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-002",
+      "type": "CFDI",
+      "folio": "F-2025-0198",
+      "uuid": "JKL012-MNO345-PQR678",
+      "date": "2025-01-10",
+      "amount": 42000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-003",
+      "type": "Complemento de Pago",
+      "folio": "CP-2025-0045",
+      "uuid": "STU901-VWX234-YZA567",
+      "date": "2025-01-08",
+      "amount": 35000,
+      "status": "valid"
+    }
+  ],
+  "client-002": [
+    {
+      "id": "doc-004",
+      "type": "CFDI",
+      "folio": "F-2025-0187",
+      "uuid": "BCD234-EFG567-HIJ890",
+      "date": "2025-01-12",
+      "amount": 42000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-005",
+      "type": "CFDI",
+      "folio": "F-2024-1256",
+      "uuid": "CDE345-FGH678-IJK901",
+      "date": "2024-12-28",
+      "amount": 38000,
+      "status": "valid"
+    }
+  ],
+  "client-003": [
+    {
+      "id": "doc-006",
+      "type": "CFDI",
+      "folio": "F-2025-0201",
+      "uuid": "DEF456-GHI789-JKL012",
+      "date": "2025-01-18",
+      "amount": 125000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-007",
+      "type": "CFDI",
+      "folio": "F-2025-0167",
+      "uuid": "EFG567-HIJ890-KLM123",
+      "date": "2025-01-10",
+      "amount": 98000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-008",
+      "type": "CFDI",
+      "folio": "F-2025-0145",
+      "uuid": "FGH678-IJK901-LMN234",
+      "date": "2025-01-05",
+      "amount": 150000,
+      "status": "valid"
+    }
+  ],
+  "client-004": [
+    {
+      "id": "doc-009",
+      "type": "CFDI",
+      "folio": "F-2024-1189",
+      "uuid": "GHI789-JKL012-MNO345",
+      "date": "2024-11-25",
+      "amount": 35000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-010",
+      "type": "CFDI",
+      "folio": "F-2025-0098",
+      "uuid": "HIJ890-KLM123-NOP456",
+      "date": "2025-01-08",
+      "amount": 28000,
+      "status": "valid"
+    }
+  ],
+  "client-005": [
+    {
+      "id": "doc-011",
+      "type": "CFDI",
+      "folio": "F-2025-0198",
+      "uuid": "IJK901-LMN234-OPQ567",
+      "date": "2025-01-15",
+      "amount": 78000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-012",
+      "type": "CFDI",
+      "folio": "F-2025-0156",
+      "uuid": "JKL012-MNO345-PQR678",
+      "date": "2025-01-12",
+      "amount": 78000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-013",
+      "type": "CFDI",
+      "folio": "F-2025-0134",
+      "uuid": "KLM123-NOP456-QRS789",
+      "date": "2025-01-08",
+      "amount": 95000,
+      "status": "valid"
+    }
+  ],
+  "client-006": [
+    {
+      "id": "doc-014",
+      "type": "CFDI",
+      "folio": "F-2025-0176",
+      "uuid": "LMN234-OPQ567-RST890",
+      "date": "2025-01-15",
+      "amount": 28000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-015",
+      "type": "CFDI",
+      "folio": "F-2025-0123",
+      "uuid": "MNO345-PQR678-STU901",
+      "date": "2025-01-10",
+      "amount": 22000,
+      "status": "valid"
+    }
+  ],
+  "client-007": [
+    {
+      "id": "doc-016",
+      "type": "CFDI",
+      "folio": "F-2025-0212",
+      "uuid": "NOP456-QRS789-TUV012",
+      "date": "2025-01-18",
+      "amount": 145000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-017",
+      "type": "CFDI",
+      "folio": "F-2025-0123",
+      "uuid": "OPQ567-RST890-UVW123",
+      "date": "2025-01-10",
+      "amount": 145000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-018",
+      "type": "CFDI",
+      "folio": "F-2025-0089",
+      "uuid": "PQR678-STU901-VWX234",
+      "date": "2025-01-05",
+      "amount": 250000,
+      "status": "valid"
+    }
+  ],
+  "client-008": [
+    {
+      "id": "doc-019",
+      "type": "CFDI",
+      "folio": "F-2024-1098",
+      "uuid": "QRS789-TUV012-WXY345",
+      "date": "2024-12-20",
+      "amount": 52000,
+      "status": "valid"
+    },
+    {
+      "id": "doc-020",
+      "type": "CFDI",
+      "folio": "F-2025-0056",
+      "uuid": "RST890-UVW123-XYZ456",
+      "date": "2025-01-05",
+      "amount": 32000,
+      "status": "valid"
+    }
+  ]
+}
+

@@ -2,34 +2,41 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--bg-secondary);
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 /* Header */
 .header {
+  position: relative;
   background: var(--surface-primary);
   border-bottom: 1px solid var(--border-primary);
   padding: 20px 24px;
 }
 
-.backBtn {
-  display: inline-flex;
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s;
-  margin-bottom: 16px;
+  z-index: 10;
 }
 
-.backBtn:hover {
+.closeBtn:hover {
   background: var(--bg-tertiary);
   color: var(--text-primary);
+  border-color: var(--border-secondary);
 }
 
 .clientHeader {
@@ -135,6 +142,7 @@
   flex: 1;
   overflow: auto;
   padding: 24px;
+  max-height: calc(100vh - 200px);
 }
 
 /* Ledger Tab */
@@ -320,66 +328,48 @@
 .chatTab {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .chatEntry {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-primary);
 }
 
-.chatQuestion,
-.chatAnswer {
-  display: flex;
+.chatEntry:last-child {
+  border-bottom: none;
 }
 
-.chatQuestion {
-  justify-content: flex-end;
-}
-
-.chatAnswer {
-  justify-content: flex-start;
-}
-
-.chatBubble {
-  display: flex;
-  gap: 12px;
-  max-width: 80%;
-}
-
-.chatQuestion .chatBubble {
-  flex-direction: row-reverse;
-}
-
-.chatIcon {
-  font-size: 1.5rem;
-}
-
-.chatContent {
-  background: var(--surface-primary);
-  border: 1px solid var(--border-primary);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-}
-
-.chatQuestion .chatContent {
-  background: var(--azure);
-  border-color: var(--azure);
-  color: var(--white);
-}
-
-.chatContent p {
-  margin: 0;
+.chatMessage {
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.chatMessage strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.chatResponse {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.chatResponse strong {
+  color: var(--text-tertiary);
+  font-weight: 600;
 }
 
 .chatTime {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.7rem;
-  opacity: 0.7;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  margin-left: 16px;
 }
 
 .emptyChat {
