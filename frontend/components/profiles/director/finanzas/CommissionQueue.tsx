@@ -96,6 +96,7 @@ export default function CommissionQueue() {
           type="checkbox"
           checked={selectedCommissions.size === commissions.length && commissions.length > 0}
           onChange={toggleSelectAll}
+          onClick={(e) => e.stopPropagation()}
           className={styles.checkbox}
         />
       ),
@@ -105,6 +106,7 @@ export default function CommissionQueue() {
           type="checkbox"
           checked={selectedCommissions.has(commission.id)}
           onChange={() => toggleSelection(commission.id)}
+          onClick={(e) => e.stopPropagation()}
           className={styles.checkbox}
         />
       ),
@@ -165,6 +167,7 @@ export default function CommissionQueue() {
         columns={columns}
         keyExtractor={(commission) => commission.id}
         containerClassName={styles.tableContainer}
+        onRowClick={(commission) => toggleSelection(commission.id)}
       />
 
       {commissions.length > 0 && (

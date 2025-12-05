@@ -108,19 +108,6 @@ export default function CreateAuxiliarModal({
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <div>
-            <h2 className={styles.modalTitle}>Crear Nuevo Auxiliar</h2>
-            <p className={styles.modalSubtitle}>Completa el formulario para crear un nuevo auxiliar</p>
-          </div>
-          <button className={styles.closeBtn} onClick={onClose} type="button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
-
         <form className={styles.modalContent} onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>

@@ -35,6 +35,29 @@
   flex-shrink: 0;
 }
 
+.refreshContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.refreshLegend {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  white-space: nowrap;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .refreshBtn {
   display: flex;
   align-items: center;

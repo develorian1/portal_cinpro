@@ -36,6 +36,15 @@ export interface Tarea {
 
   notes?: string;
   tags?: string[];
+  comments?: TaskComment[];
+}
+
+export interface TaskComment {
+  id: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string; // ISO date
 }
 
 export interface TareasResponse {

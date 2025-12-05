@@ -32,10 +32,12 @@
   overflow-y: auto;
   animation: slideUp 0.3s ease-out;
   transition: background-color 0.3s ease;
+  scrollbar-width: none;
 }
 
 .modal::-webkit-scrollbar {
-  width: 6px;
+  display: none;
+  width: 0;
 }
 
 .modal::-webkit-scrollbar-track {

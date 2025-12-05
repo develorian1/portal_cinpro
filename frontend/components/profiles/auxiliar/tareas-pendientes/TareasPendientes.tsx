@@ -307,7 +307,7 @@ export default function TareasPendientes() {
               {tasksByStatus.pending.map((task) => (
                 <div
                   key={task.id}
-                  className={`${styles.kanbanCard} ${isOverdue(task.dueDate) ? styles.overdue : ''}`}
+                  className={`${styles.kanbanCard} ${styles.statusPending} ${isOverdue(task.dueDate) ? styles.overdue : ''}`}
                 >
                   <div className={styles.cardHeader}>
                     <span className={styles.cardType}>{getTaskTypeLabel(task.type)}</span>
@@ -338,7 +338,7 @@ export default function TareasPendientes() {
             </h3>
             <div className={styles.kanbanColumnBody}>
               {tasksByStatus['in-progress'].map((task) => (
-                <div key={task.id} className={styles.kanbanCard}>
+                <div key={task.id} className={`${styles.kanbanCard} ${styles.statusInProgress}`}>
                   <div className={styles.cardHeader}>
                     <span className={styles.cardType}>{getTaskTypeLabel(task.type)}</span>
                     <span className={`${styles.priorityBadge} ${getPriorityClass(task.priority)}`}>
@@ -366,7 +366,7 @@ export default function TareasPendientes() {
             </h3>
             <div className={styles.kanbanColumnBody}>
               {tasksByStatus.completed.map((task) => (
-                <div key={task.id} className={`${styles.kanbanCard} ${styles.completedCard}`}>
+                <div key={task.id} className={`${styles.kanbanCard} ${styles.statusCompleted}`}>
                   <div className={styles.cardHeader}>
                     <span className={styles.cardType}>{getTaskTypeLabel(task.type)}</span>
                     <span className={`${styles.statusBadge} ${styles.statusCompleted}`}>
@@ -388,7 +388,7 @@ export default function TareasPendientes() {
             </h3>
             <div className={styles.kanbanColumnBody}>
               {tasksByStatus.deferred.map((task) => (
-                <div key={task.id} className={styles.kanbanCard}>
+                <div key={task.id} className={`${styles.kanbanCard} ${styles.statusDeferred}`}>
                   <div className={styles.cardHeader}>
                     <span className={styles.cardType}>{getTaskTypeLabel(task.type)}</span>
                     <span className={`${styles.statusBadge} ${styles.statusDeferred}`}>

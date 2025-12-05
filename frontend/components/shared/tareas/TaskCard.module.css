@@ -2,122 +2,151 @@
   background: var(--surface-primary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 12px 16px;
   transition: all 0.2s ease;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
+  cursor: pointer;
 }
 
 .taskCard:hover {
-  box-shadow: var(--shadow-sm);
-  border-color: var(--azure);
+  background: var(--bg-hover);
+  border-color: var(--border-hover, var(--border-primary));
+}
+
+/* Status-based styling */
+.taskCard.statusPending {
+  border-left: 3px solid var(--warning);
+}
+
+.taskCard.statusInProgress {
+  border-left: 3px solid var(--azure);
+}
+
+.taskCard.statusCompleted {
+  border-left: 3px solid var(--success);
+  opacity: 0.7;
+}
+
+.taskCard.statusCompleted .taskTitle {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.taskCard.statusCompleted .taskDescription {
+  color: var(--text-tertiary);
 }
 
 .taskCard.overdue {
-  border-left: 4px solid var(--danger);
-  background: rgba(239, 68, 68, 0.02);
+  border-left-color: var(--danger);
+  background: rgba(239, 68, 68, 0.03);
 }
 
-.cardHeader {
+/* Checkbox */
+.checkboxWrapper {
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  flex-wrap: wrap;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.badges {
+.checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.checkbox:disabled {
+  cursor: not-allowed;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-primary);
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
-.priorityBadge {
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.checkbox:checked + .checkmark {
+  background: var(--success);
+  border-color: var(--success);
 }
 
-.priorityCritical {
-  background: var(--danger-bg);
-  color: var(--danger);
+.checkbox:checked + .checkmark::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
 }
 
-.priorityHigh {
-  background: var(--warning-bg);
-  color: var(--warning);
+.checkbox:focus + .checkmark {
+  outline: 2px solid var(--azure);
+  outline-offset: 2px;
 }
 
-.priorityMedium {
-  background: rgba(24, 128, 234, 0.1);
-  color: var(--azure);
+.checkbox:disabled + .checkmark {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.priorityLow {
-  background: var(--success-bg);
-  color: var(--success);
-}
-
-.typeBadge {
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 500;
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-primary);
-}
-
-.statusSelect {
-  padding: 6px 10px;
-  font-size: 0.875rem;
-  min-width: 140px;
+.taskContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
 }
 
 .taskTitle {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 500;
   color: var(--text-primary);
   margin: 0;
   line-height: 1.4;
+  transition: all 0.2s ease;
 }
 
 .taskDescription {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-secondary);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.cardMeta {
+.taskMeta {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-primary);
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 0.75rem;
 }
 
-.metaItem {
-  display: flex;
-  gap: 8px;
-  font-size: 0.875rem;
-}
-
-.metaLabel {
-  color: var(--text-tertiary);
+.clientName {
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
-.metaValue {
-  color: var(--text-secondary);
-}
-
 .dueDate {
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
 }
 
 .overdueDate {
@@ -125,25 +154,321 @@
   font-weight: 600;
 }
 
-.completedDate {
-  color: var(--success);
-  font-weight: 500;
-}
-
-.tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  padding-top: 8px;
+/* Comments Section */
+.commentsSection {
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-primary);
 }
 
-.tag {
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
+.commentsHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.commentsCount {
   font-size: 0.75rem;
-  background: var(--bg-secondary);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.commentItem {
+  background: var(--bg-hover);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  gap: 8px;
+}
+
+.commentHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.commentAuthor {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.commentDate {
+  font-size: 0.6875rem;
   color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.deleteCommentButton {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.deleteCommentButton:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--danger);
+  opacity: 1;
+}
+
+.deleteCommentButton:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.deleteCommentButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.deleteCommentButton svg {
+  width: 14px;
+  height: 14px;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--text-tertiary);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.commentContent {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.moreComments {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  font-style: italic;
+  padding-left: 12px;
+}
+
+/* Add Comment Button */
+.addCommentButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: transparent;
   border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.addCommentButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.addCommentButton:active {
+  transform: scale(0.98);
+}
+
+.addCommentButton svg {
+  flex-shrink: 0;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+[data-theme="dark"] .modalOverlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modalContent {
+  background: var(--surface-primary);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+[data-theme="dark"] .modalContent {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modalCloseButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.modalCloseButton:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.commentForm {
+  padding: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.commentTextarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.2s ease;
+}
+
+.commentTextarea:focus {
+  outline: none;
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.commentTextarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.cancelButton {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submitButton {
+  background: var(--azure);
+  color: white;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--azure-dark, #2563eb);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 

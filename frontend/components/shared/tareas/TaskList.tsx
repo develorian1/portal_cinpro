@@ -8,6 +8,8 @@ interface TaskListProps {
   title: string;
   tasks: Tarea[];
   onStatusChange: (taskId: string, newStatus: TareaStatus) => void;
+  onCommentAdd?: (taskId: string, comment: string) => Promise<void>;
+  onCommentDelete?: (taskId: string, commentId: string) => Promise<void>;
   permissions: TaskPermissions;
   isLoading?: boolean;
 }
@@ -16,6 +18,8 @@ export default function TaskList({
   title,
   tasks,
   onStatusChange,
+  onCommentAdd,
+  onCommentDelete,
   permissions,
   isLoading = false,
 }: TaskListProps) {
@@ -54,6 +58,8 @@ export default function TaskList({
               key={task.id}
               task={task}
               onStatusChange={(newStatus) => onStatusChange(task.id, newStatus)}
+              onCommentAdd={onCommentAdd}
+              onCommentDelete={onCommentDelete}
               canUpdateStatus={canUpdate}
               showAssigner={title === 'Asignadas por Superior'}
             />

@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, forwardRef } from 'react';
 import { ProfileType } from '@/types/profile';
 import { getNavItemsForProfile } from '@/config/navigation';
 import { useNavigation } from '@/contexts/NavigationContext';
+import { isNavItemActive } from '@/constants/navigation';
 import Tooltip from '@/components/shared/Tooltip';
 import styles from './Sidebar.module.css';
 
@@ -65,27 +66,18 @@ const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar({
     if (subItems) {
       return subItems.some((subItem) => activeItem === subItem.id);
     }
-    // Special case: mark finanzas as active when any finanzas sub-page is active
+    // Use the helper function from navigation constants for consistent checking
+    // This handles all finanzas sub-items generically (finanzas-*)
     if (itemId === 'finanzas') {
-      return activeItem === 'finanzas-receivables' ||
-        activeItem === 'finanzas-payables' ||
-        activeItem === 'finanzas-reports';
+      return isNavItemActive(activeItem, itemId);
     }
     // Special case: mark estadisticas as active when any estadisticas sub-page is active
     if (itemId === 'estadisticas') {
-      return activeItem === 'estadisticas-empleados' ||
-        activeItem === 'estadisticas-clientes' ||
-        activeItem === 'estadisticas-equipos' ||
-        activeItem === 'estadisticas-finanzas' ||
-        activeItem === 'estadisticas-onboarding' ||
-        activeItem === 'estadisticas-collection' ||
-        activeItem === 'estadisticas-support';
+      return isNavItemActive(activeItem, itemId);
     }
     // Special case: mark usuarios as active when any usuarios sub-page is active
     if (itemId === 'usuarios') {
-      return activeItem === 'usuarios-auxiliares' ||
-        activeItem === 'usuarios-admins' ||
-        activeItem === 'usuarios-jefes';
+      return isNavItemActive(activeItem, itemId);
     }
     // Special case: mark client-contabilidades as active when any contabilidades sub-page is active
     if (itemId === 'client-contabilidades') {

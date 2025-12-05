@@ -21,30 +21,51 @@ interface TaskCardProps {
   onStart: (taskId: string) => void;
 }
 
-const priorityConfig = {
-  high: { label: 'Alta', color: 'danger' },
-  medium: { label: 'Media', color: 'warning' },
-  low: { label: 'Baja', color: 'success' },
-} as const;
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-MX', {
+    month: 'short',
+    day: 'numeric',
+  });
+};
 
 export default function TaskCard({ task, onStart }: TaskCardProps) {
-  const { label, color } = priorityConfig[task.priority];
+  const isCompleted = task.status === 'completed';
+
+  // Get status-based class
+  const getStatusClass = (status: Task['status']): string => {
+    switch (status) {
+      case 'pending':
+        return styles.statusPending;
+      case 'in-progress':
+        return styles.statusInProgress;
+      case 'completed':
+        return styles.statusCompleted;
+      default:
+        return '';
+    }
+  };
 
   return (
-    <div className={styles.taskCard}>
-      <span className={`${styles.priorityBadge} ${styles[color]}`}>{label}</span>
-      <div className={styles.taskInfo}>
-        <span className={styles.clientName}>{task.client}</span>
-        <span className={styles.taskDescription}>{task.description}</span>
-        <span className={styles.dueDate}>{new Date(task.dueDate).toLocaleDateString()}</span>
+    <div className={`${styles.taskCard} ${getStatusClass(task.status)}`}>
+      <label className={styles.checkboxWrapper}>
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          disabled
+          className={styles.checkbox}
+          aria-label={`Tarea ${isCompleted ? 'completada' : 'pendiente'}`}
+        />
+        <span className={styles.checkmark}></span>
+      </label>
+
+      <div className={styles.taskContent} onClick={() => !isCompleted && onStart(task.id)}>
+        <div className={styles.taskHeader}>
+          <span className={styles.clientName}>{task.client}</span>
+          <span className={styles.dueDate}>{formatDate(task.dueDate)}</span>
+        </div>
+        <p className={styles.taskDescription}>{task.description}</p>
       </div>
-      <button
-        className={styles.startButton}
-        onClick={() => onStart(task.id)}
-        aria-label={`Iniciar tarea para ${task.client}`}
-      >
-        Iniciar
-      </button>
     </div>
   );
 }

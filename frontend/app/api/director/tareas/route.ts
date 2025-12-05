@@ -17,11 +17,66 @@ export async function GET() {
 export async function PATCH(request: Request) {
   try {
     const payload = await request.json();
-    const { taskId, status } = payload;
+    const { taskId, status, action, comment, commentId } = payload;
 
-    if (!taskId || !status) {
+    if (!taskId) {
       return NextResponse.json(
-        { error: 'taskId and status are required' },
+        { error: 'taskId is required' },
+        { status: 400 }
+      );
+    }
+
+    // Handle comment deletion
+    if (action === 'deleteComment') {
+      if (!commentId) {
+        return NextResponse.json(
+          { error: 'commentId is required for deleteComment action' },
+          { status: 400 }
+        );
+      }
+
+      // TODO: Implement actual comment deletion logic with backend
+      // For now, just return success
+      return NextResponse.json({ 
+        success: true, 
+        taskId, 
+        commentId 
+      });
+    }
+
+    // Handle comment addition
+    if (action === 'addComment') {
+      if (!comment) {
+        return NextResponse.json(
+          { error: 'comment is required for addComment action' },
+          { status: 400 }
+        );
+      }
+
+      // TODO: Get actual user info from session/auth
+      // For now, use values from request
+      const authorName = payload.authorName || 'Usuario';
+      const newComment = {
+        id: `comment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        content: comment,
+        authorId: 'current-user-id', // TODO: Get from session
+        authorName: authorName,
+        createdAt: new Date().toISOString(),
+      };
+
+      // TODO: Implement actual comment addition logic with backend
+      // For now, just return the comment
+      return NextResponse.json({ 
+        success: true, 
+        taskId, 
+        comment: newComment 
+      });
+    }
+
+    // Handle status update
+    if (!status) {
+      return NextResponse.json(
+        { error: 'status is required for status update' },
         { status: 400 }
       );
     }

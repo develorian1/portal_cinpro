@@ -1,0 +1,462 @@
+/* Professional Accounting Firm Register */
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-primary);
+}
+
+/* Blue Background Panel */
+.backgroundPanel {
+  position: relative;
+  background: linear-gradient(165deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  overflow: hidden;
+  padding: 48px;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 200px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.backgroundPanel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(255, 255, 255, 0.015) 40px,
+    rgba(255, 255, 255, 0.015) 80px
+  );
+  pointer-events: none;
+}
+
+.backgroundPanel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* White Form Panel */
+.formPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: var(--bg-primary);
+  position: relative;
+}
+
+.mobileLogoContainer {
+  display: none;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 32px;
+}
+
+.mobileLogo {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.formHeader {
+  margin-bottom: 40px;
+}
+
+.welcomeText {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:hover {
+  border-color: var(--border-secondary);
+}
+
+.input:focus {
+  background: var(--bg-primary);
+  border-color: var(--azure);
+  box-shadow: 0 0 0 3px rgba(24, 128, 234, 0.08);
+}
+
+[data-theme="dark"] .input:focus {
+  box-shadow: 0 0 0 3px rgba(77, 163, 247, 0.15);
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08) !important;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px;
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.passwordToggle:hover {
+  color: var(--text-primary);
+}
+
+.errorMessage {
+  font-size: 0.75rem;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.errorMessage::before {
+  content: '!';
+  width: 14px;
+  height: 14px;
+  background: var(--danger);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--azure);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.submitButton:hover {
+  background: var(--azure-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(24, 128, 234, 0.5);
+}
+
+.submitButton:hover::before {
+  left: 100%;
+}
+
+[data-theme="dark"] .submitButton:hover {
+  background: var(--azure-light);
+  box-shadow: 0 8px 20px -8px rgba(77, 163, 247, 0.4);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: var(--border-primary);
+}
+
+.dividerText {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.devNote {
+  padding: 16px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--azure);
+}
+
+.devNoteText {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.devNoteText strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.formFooter {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-primary);
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.footerLink {
+  color: var(--azure);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  
+  .backgroundPanel {
+    display: none;
+  }
+  
+  .formPanel {
+    min-height: 100vh;
+    padding: 32px 24px;
+    flex-direction: column;
+  }
+  
+  .mobileLogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .formPanel {
+    padding: 24px 16px;
+  }
+  
+  .formWrapper {
+    max-width: 100%;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .formHeader {
+    margin-bottom: 28px;
+  }
+  
+  .welcomeText {
+    font-size: 0.8125rem;
+  }
+  
+  .subtitle {
+    font-size: 0.875rem;
+  }
+  
+  .input {
+    padding: 14px 14px 14px 44px;
+    font-size: 0.9rem;
+  }
+  
+  .submitButton {
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .form {
+    gap: 20px;
+  }
+  
+  .formGroup {
+    gap: 6px;
+  }
+  
+  .devNote {
+    padding: 12px;
+  }
+  
+  .devNoteText {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+  
+  .formFooter {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+  
+  .footerText {
+    font-size: 0.8125rem;
+  }
+  
+  .mobileLogoContainer {
+    margin-bottom: 24px;
+  }
+  
+  .mobileLogo {
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formPanel {
+    padding: 20px 12px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .formHeader {
+    margin-bottom: 24px;
+  }
+  
+  .mobileLogo {
+    max-height: 45px;
+  }
+}

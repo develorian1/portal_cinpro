@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation';
+import Login from '@/components/Auth/Login/Login';
 
 export default function HomePage() {
-  // Redirect to director route by default
-  redirect('/director');
+  return <Login />;
 }
